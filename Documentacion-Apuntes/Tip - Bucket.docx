@@ -1,0 +1,66 @@
+
+bucket 1
+13 de mayo - 8 de Junio
+
+Creacion del repositorio en git, agregado de librerias basicas, etc.
+
+-Pantallas, solo la parte del cliente, vistas
+-principal, con menu y links a las otras pantallas. 
+--Pantalla de Cursos.
+--pantalla del Curso Especifico.
+--mini server para mostrar algunos datos.
+
+
+Bucket 2
+10 de junio - 13 de julio
+--Creado del Cursos
+---validacion y test de las pantallas anteriores.
+
+
+-Pantalla de estudiantes.
+--muestra de listado de estudiantes.
+--agregado de estudiantes a un curso, selecciona uno que este en el instituto o sino lo crea.
+--informacion personal de un estudiante.
+---validacion y test de las pantallas
+
+Bucket 3
+5 de agosto- 7 de septiembre
+
+SERVIDOR EN JAVA CON SPRING.
+Implementacion del mismo 
+imprimir listado de alumnos en PDF.
+
+
+
+Bucket 4
+10 de septiembre - 11 de octubre
+
+Borrado de un alumno a un curso
+agregar de calificacion a un alumno.
+Agregar pago a un alumno.
+Agregar telefonos al alumno.
+Integracion con travis.
+
+
+Bucket 5
+14 de octubre- 15 de noviembre
+
+Mandar mail con la confirmacion del pago o comunicaciones.
+Reinicio de cursos a principio de año.
+Login
+
+
+
+Necesitamos comenzar a delinear el plan en 5 etapas para cada uno de los tip. Quiero que completen para cada uno de los tips que entregables van a estar listos al terminar la etapa, cosas concretas que puedan mostrar hechas.  
+
+Deberá definir de forma clara el conjunto minimo de entregables necesarios para dar por terminada cada fase de desarrollo. Algunos entregables se desarrollan a lo largo de varias tareas, lo que quiero es la lista del entregable. Luego solo armaremos las tareas de la primera etapa.
+ 
+  * Los entregables nos proveen de un conjunto de componentes que formarán el producto una vez finalizado el desarrollo. 
+  * Los medios para medir el progreso y la calidad del producto en desarrollo. Tengo que definir la forma que me voy a dar cuenta que fue alcanzado dicho entregable. Ejemplo: Puede ser test de aceptacion
+  * Los materiales necesarios para la siguiente etapa
+  Piensen como que estoy pagando y los entregables son el compromiso tangible de lo que voy a ver y la liberacion de pago es contra estos entregables,.....Tienen que hacer un esfuerzo de armar cosas con visibilidad y valor para el usuario.
+
+Es para que vayan pensando, espero que cada uno haya podido avanzar de manera importante estos 15 dias en las pruebas de concepto tecnicas definidas que les va a permitir definir el plan con mas asertividad. 
+
+Pude haber una lista de cosas futuras, que quedan mas alla de las 5 etapas. 
+
