@@ -1,7 +1,7 @@
 import Home from "views/Home.jsx";
-import UserProfile from "views/UserProfile.jsx";
-import TableList from "views/TableList.jsx";
-import Typography from "views/Typography.jsx";
+import Courses from "views/Courses.jsx";
+import Students from "views/Students.jsx";
+import Abouts from "views/Abouts.jsx";
 import Icons from "views/Icons.jsx";
 import Maps from "views/Maps.jsx";
 import Notifications from "views/Notifications.jsx";
@@ -10,30 +10,30 @@ import Upgrade from "views/Upgrade.jsx";
 const dashboardRoutes = [
   {
     path: "/home",
-    name: "Home",
-    icon: "pe-7s-graph",
+    name: "Index",
+    icon: "pe-7s-note2",
     component: Home,
     layout: "/admin"
   },
   {
-    path: "/user",
+    path: "/courses",
     name: "Courses",
     icon: "pe-7s-notebook",
-    component: UserProfile,
+    component: Courses,
     layout: "/admin"
   },
   {
-    path: "/table",
+    path: "/students",
     name: "Students",
     icon: "pe-7s-users",
-    component: TableList,
+    component: Students,
     layout: "/admin"
   },
   {
-    path: "/typography",
-    name: "Abouts us",
+    path: "/abouts",
+    name: "Abouts Us",
     icon: "pe-7s-info",
-    component: Typography,
+    component: Abouts,
     layout: "/admin"
   },
   // {

@@ -1,6 +1,6 @@
 {
-  "short_name": "LBDR",
-  "name": "Light Bootstrap Dashboard React by Creative Tim",
+  "short_name": "CarApp",
+  "name": "A simple test application for react express mongoose",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#212529"
 }
