@@ -1,11 +1,14 @@
 import Home from "views/Home.jsx";
 import Courses from "views/Courses.jsx";
+import NewCourse from "views/NewCourse";
 import Students from "views/Students.jsx";
 import Abouts from "views/Abouts.jsx";
 import Icons from "views/Icons.jsx";
 import Maps from "views/Maps.jsx";
 import Notifications from "views/Notifications.jsx";
 import Upgrade from "views/Upgrade.jsx";
+import { Route, Switch, Redirect } from "react-router-dom";
+
 
 const dashboardRoutes = [
   {
@@ -36,13 +39,13 @@ const dashboardRoutes = [
     component: Abouts,
     layout: "/admin"
   },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "pe-7s-science",
-  //   component: Icons,
-  //   layout: "/admin"
-  // },
+  {
+    redirect: "/newCourse",
+    name: "NewCourse",
+    //icon: "pe-7s-science",
+    component: NewCourse,
+    layout: "/admin"
+  }
   // {
   //   path: "/maps",
   //   name: "Maps",
@@ -57,14 +60,6 @@ const dashboardRoutes = [
   //   component: Notifications,
   //   layout: "/admin"
   // },
-  {
-    upgrade: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "pe-7s-rocket",
-    component: Upgrade,
-    layout: "/admin"
-  }
 ];
 
 export default dashboardRoutes;

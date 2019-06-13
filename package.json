@@ -1,19 +1,21 @@
 {
-  "name": "carapp",
+  "name": "instituto",
   "version": "1.0.0",
-  "description": "A simple test application for react express mongoose",
-  "author": "",
+  "description": "Tip Final de la Tecnicatura en programacion informatica",
+  "author": "Santiago De Andrea",
   "license": "GPL",
   "scripts": {
-    "postinstall": "cd client; npm install;",
-    "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "client": "cd client; npm run start",
-    "server": "cd server; npm run dev"
+    "server": "cd ./server && npm run dev",
+    "client": "cd ./client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "npm run dev",
+    "postinstall": "cd client && npm install && cd ../server && npm install"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^3.5.0"
   },
-  "dependencies": {
-    "simple-react-validator": "0.0.8"
+  "dependencies": {},
+  "engines": {
+    "node": "10.9.0"
   }
 }

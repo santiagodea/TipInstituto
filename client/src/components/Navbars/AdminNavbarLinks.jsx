@@ -35,14 +35,14 @@ class AdminNavbarLinks extends Component {
             <p className="hidden-lg hidden-md">Search</p>
           </NavItem>
         </Nav>
-        <Nav pullRight>
+        {/* <Nav pullRight>
           <NavItem eventKey={1} href="#">
             Account
           </NavItem>
           <NavItem eventKey={3} href="#">
             Log out
           </NavItem>
-        </Nav>
+        </Nav> */}
       </div>
     );
   }

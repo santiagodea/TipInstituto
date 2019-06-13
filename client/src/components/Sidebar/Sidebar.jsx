@@ -51,7 +51,6 @@ class Sidebar extends Component {
             className="simple-text logo-normal"
           >
           </a>
-         
             English Language Centre
           </a>
         </div>
@@ -62,12 +61,6 @@ class Sidebar extends Component {
               if (!prop.redirect)
                 return (
                   <li
-                    className={
-                      prop.upgrade
-                        ? "active active-pro"
-                        : this.activeRoute(prop.layout + prop.path)
-                    }
-                    key={key}
                   >
                     <NavLink
                       to={prop.layout + prop.path}

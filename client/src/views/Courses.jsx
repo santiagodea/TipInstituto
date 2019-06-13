@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
 
+
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
@@ -19,7 +20,18 @@ import {
 } from "variables/Variables.jsx";
 import { createTypeQueryNode } from "typescript";
 
+import NewCourse from "views/NewCourse";
+
+import { NavLink } from "react-router-dom";
+const { Link } = require("react-router-dom");
+
 class Courses extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nuevocursoActivo: false
+  }
+}
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -42,12 +54,13 @@ class Courses extends Component {
                 //statsIcon={<i className="fa fa-refresh" />}
                 statsIconText={turno}
               />
-            </Col>
+          </Col>
       </div>
     )
   }
 
-  render() {
+  mostrarCursos(){
+    if(!this.state.nuevocursoActivo){
     return (
       <div className="content">
         <Grid fluid>
@@ -72,9 +85,36 @@ class Courses extends Component {
             </Col>
           </Row>
         </Grid>
+        <a class="btn btn-fill btn-warning" onClick={() => this.accionOnClick()}>New Course</a>
       </div>
     );
+    }
+  }
+
+  accionOnClick(){
+    this.setState({
+      nuevocursoActivo: true
+    });
+  }
+
+  mostrarNuevoCurso(){
+    if(this.state.nuevocursoActivo){
+    return(
+      <div>
+        <NewCourse/>
+      </div>
+    )
   }
 }
+
+  render() {
+    return    (
+      <div>
+        {this.mostrarCursos()}
+        {this.mostrarNuevoCurso()}
+      </div>
+    )  
+}
+  }
 
 export default Courses;

@@ -55,20 +55,16 @@ class Home extends Component {
           </Row>
           <Row>
             <Col md={8}>
-              
             </Col>
             <Col md={4}>
-            
             </Col>
           </Row>
 
           <Row>
             <Col md={6}>
-              
             </Col>
 
             <Col md={6}>
-              
             </Col>
           </Row>
         </Grid>
