@@ -7,10 +7,12 @@ import {
   ControlLabel,
   FormControl
 } from "react-bootstrap";
-
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
+
+
+const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
 
 class NewCourse
  extends Component {
@@ -55,6 +57,15 @@ class NewCourse
       </option>
     ));
   }
+
+  confirmar(){
+
+  }
+
+  cancelar(){
+    this.props.onCancel(); 
+  }
+
 
   render() {
     return (
@@ -103,25 +114,32 @@ class NewCourse
                           {this.desplegar(this.state.turnos)}
                       </select>
                     </div>
-                    <div className="col-md-5">
-                    <label htmlFor="turno"> Teacher: </label>
-                      <select
-                          label= "turno"
-                          value={this.state.turnos}
-                          className="form-control"
-                          //onChange={this.manejarSeleccion.bind(this,this.state.turnos)}
-                          id="turno"
-                        >
-                          {this.desplegar(this.state.turnos)}
-                      </select>
-                      </div>
-                    <Button bsStyle="info" pullRight fill type="submit">
-                      Save
-                    </Button>
+                    <FormInputs
+                      ncols={["col-md-5"]}
+                      properties={[
+                        {
+                          label: "Teacher",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "name",
+                          value: this.state.profesor,
+                          onChange: event => this.setState({profesor: event.target.value}),
+                          defaultValue: "Teacher",
+                          disabled: false
+                        }
+                      ]}
+                    />
                     <div className="clearfix" />
                   </form>
                 }
               />
+              <AceptarYCancelar
+                      acceptText={"Guardar Cursada"}
+                      cancelText={"Cancelar"}
+                      cancelar={() => this.cancelar()}
+                      aceptar={() => this.confirmar()}
+                  >
+                  </AceptarYCancelar>
             </Col>
             <Col md={4}>
             </Col>
