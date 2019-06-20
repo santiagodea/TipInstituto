@@ -3,11 +3,6 @@ import Courses from "views/Courses.jsx";
 import NewCourse from "views/NewCourse";
 import Students from "views/Students.jsx";
 import Abouts from "views/Abouts.jsx";
-import Icons from "views/Icons.jsx";
-import Maps from "views/Maps.jsx";
-import Notifications from "views/Notifications.jsx";
-import Upgrade from "views/Upgrade.jsx";
-import { Route, Switch, Redirect } from "react-router-dom";
 
 
 const dashboardRoutes = [

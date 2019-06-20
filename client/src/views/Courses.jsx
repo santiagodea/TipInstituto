@@ -1,29 +1,13 @@
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
-
-
-import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
-import { Tasks } from "components/Tasks/Tasks.jsx";
-import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar
-} from "variables/Variables.jsx";
-import { createTypeQueryNode } from "typescript";
-
 import NewCourse from "views/NewCourse";
 import OneCourse from "views/OneCourse";
-import { NavLink } from "react-router-dom";
-const { Link } = require("react-router-dom");
+
+const log = require('chalk');
+ 
+
+
 
 class Courses extends Component {
   constructor(props) {
@@ -41,6 +25,11 @@ class Courses extends Component {
       cursos: []
   }
 }
+
+componentDidMount() {
+  this.cargarCursos();
+}
+
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -77,12 +66,36 @@ class Courses extends Component {
       turno: "Evening",
       profesor: "Maria"
     }
-    var cursos_aux =  [curso1,curso2,curso3,curso4];
+    var curso8 = {
+      nombre: "Pre-Kinder",
+      nivel: 1,
+      turno: "Morning",
+      profesor: "Ana"
+  }
+  var curso5 = {
+    nombre: "Kinder",
+    nivel: 1,
+    turno: "Afternoon",
+    profesor: "Juan"
+  }
+  var curso6 = {
+    nombre: "Kids",
+    nivel: 2,
+    turno: "Afternoon",
+    profesor: "Ana"
+  }
+  var curso7 = {
+    nombre: "Teens",
+    nivel: 1,
+    turno: "Evening",
+    profesor: "Maria"
+  }
+    var cursos_aux =  [curso1,curso2,curso3,curso4, curso5, curso6, curso7, curso8];
 
     this.setState({cursos: cursos_aux}); // AGREGAR VARIOS CURSOS A LA COLLECCION
   }
 
-  tarjetaCursos(nombre, nivel, turno){
+  tarjetaCursos(nombre, nivel, turno, profesor){
     return(
       <div onClick={() => this.activarMostrarUnCurso(nombre, nivel, turno)} style={{cursor: "pointer"}}>
         <Col lg={3} sm={6}>
@@ -92,7 +105,7 @@ class Courses extends Component {
                   statsText={nombre}
                   statsValue={nivel}
                   //statsIcon={<i className="fa fa-refresh" />}
-                  statsIconText={turno}
+                  statsIconText={turno + " - " + profesor}
                 />
               </div>
           </Col>
@@ -109,13 +122,15 @@ class Courses extends Component {
   }
 
   mostrarCursos(){
+    console.log("CURSOS" + this.state.cursos.length)
     if(this.state.tarjetaDeCursos){
     return (
       <div className="content">
         <Grid fluid>
           <Row>
-            {this.tarjetaCursos("Pre Kinder", 0, "Late Shift")}
-            {this.tarjetaCursos("Kinder", 1, "Shift Tomorrow")}
+
+            {this.state.cursos.map(c => this.tarjetaCursos(c.nombre, c.nivel, c.turno, c.profesor))}
+
           </Row>
           <Row>
             <Col md={8}>
