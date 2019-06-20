@@ -9,23 +9,23 @@ import {
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
 
 class OneCourse
- extends Component {
+  extends Component {
 
   constructor(props) {
     super(props);
     this._curso = this.props.curso;
     this.state = {
-      nombre:  "",
-      nivel:  "",
-      turno:  "",
-      profesor:  "",
+      nombre: "",
+      nivel: "",
+      turno: "",
+      profesor: "",
       formErrors: {},
-      niveles: [1,2,3,4,5],
-      turnos:["maniana","tarde","noche"]
+      niveles: [1, 2, 3, 4, 5],
+      turnos: ["maniana", "tarde", "noche"]
     };
   }
 
-  llenarCurso(curso){
+  llenarCurso(curso) {
     this.setState({
       _curso: curso,
       id: curso._id,
@@ -52,12 +52,12 @@ class OneCourse
     ));
   }
 
-  confirmar(){
+  confirmar() {
 
   }
 
-  cancelar(){
-    this.props.onCancel(); 
+  cancelar() {
+    this.props.onCancel();
   }
 
 
@@ -68,12 +68,12 @@ class OneCourse
           <Row>
             <Col md={8}>
               <AceptarYCancelar
-                      acceptText={"Guardar Cursada"}
-                      cancelText={"Cancelar"}
-                      cancelar={() => this.cancelar()}
-                      aceptar={() => this.confirmar()}
-                  >
-                  </AceptarYCancelar>
+                acceptText={"Guardar Cursada"}
+                cancelText={"Cancelar"}
+                cancelar={() => this.cancelar()}
+                aceptar={() => this.confirmar()}
+              >
+              </AceptarYCancelar>
             </Col>
             <Col md={4}>
             </Col>

@@ -5,7 +5,7 @@ import NewCourse from "views/NewCourse";
 import OneCourse from "views/OneCourse";
 
 const log = require('chalk');
- 
+
 
 
 
@@ -23,12 +23,12 @@ class Courses extends Component {
       nuevocursoActivo: false,
       activarUnCurso: false,
       cursos: []
+    }
   }
-}
 
-componentDidMount() {
-  this.cargarCursos();
-}
+  componentDidMount() {
+    this.cargarCursos();
+  }
 
   createLegend(json) {
     var legend = [];
@@ -41,79 +41,79 @@ componentDidMount() {
     return legend;
   }
 
-  cargarCursos(){
+  cargarCursos() {
     var curso1 = {
-        nombre: "Pre-Kinder",
-        nivel: 1,
-        turno: "Morning",
-        profesor: "Ana"
+      nombre: "Pre-Kinder",
+      nivel: 1,
+      turno: "Morning",
+      profesor: "Ana"
     }
     var curso2 = {
-      nombre: "Kinder",
-      nivel: 1,
+      nombre: "Pre-Kinder",
+      nivel: 2,
       turno: "Afternoon",
       profesor: "Juan"
     }
     var curso3 = {
       nombre: "Kids",
-      nivel: 2,
+      nivel: 3,
       turno: "Afternoon",
       profesor: "Ana"
     }
     var curso4 = {
+      nombre: "Kids",
+      nivel: 2,
+      turno: "Evening",
+      profesor: "Maria"
+    }
+    var curso5 = {
       nombre: "Teens",
+      nivel: 1,
+      turno: "Afternoon",
+      profesor: "Juan"
+    }
+    var curso6 = {
+      nombre: "Teens",
+      nivel: 2,
+      turno: "Afternoon",
+      profesor: "Ana"
+    }
+    var curso7 = {
+      nombre: "Advanced",
       nivel: 1,
       turno: "Evening",
       profesor: "Maria"
     }
     var curso8 = {
-      nombre: "Pre-Kinder",
-      nivel: 1,
+      nombre: "Advanced",
+      nivel: 2,
       turno: "Morning",
       profesor: "Ana"
-  }
-  var curso5 = {
-    nombre: "Kinder",
-    nivel: 1,
-    turno: "Afternoon",
-    profesor: "Juan"
-  }
-  var curso6 = {
-    nombre: "Kids",
-    nivel: 2,
-    turno: "Afternoon",
-    profesor: "Ana"
-  }
-  var curso7 = {
-    nombre: "Teens",
-    nivel: 1,
-    turno: "Evening",
-    profesor: "Maria"
-  }
-    var cursos_aux =  [curso1,curso2,curso3,curso4, curso5, curso6, curso7, curso8];
+    }
+    var cursos_aux = [curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8];
 
-    this.setState({cursos: cursos_aux}); // AGREGAR VARIOS CURSOS A LA COLLECCION
+    this.setState({ cursos: cursos_aux }); // AGREGAR VARIOS CURSOS A LA COLLECCION
   }
 
-  tarjetaCursos(nombre, nivel, turno, profesor){
-    return(
-      <div onClick={() => this.activarMostrarUnCurso(nombre, nivel, turno)} style={{cursor: "pointer"}}>
+  tarjetaCursos(nombre, nivel, turno, profesor) {
+    return (
+      <div onClick={() => this.activarMostrarUnCurso(nombre, nivel, turno)} style={{ cursor: "pointer" }}>
         <Col lg={3} sm={6}>
-            <div>
-                <StatsCard
-                  //bigIcon={<i className="pe-7s-cash text-danger" />}
-                  statsText={nombre}
-                  statsValue={nivel}
-                  //statsIcon={<i className="fa fa-refresh" />}
-                  statsIconText={turno + " - " + profesor}
-                />
-              </div>
-          </Col>
+          <div>
+            <StatsCard
+              //bigIcon={<i className="pe-7s-cash text-danger" />}
+              statsText={nombre}
+              statsValue={nivel}
+              //statsIcon={<i className="fa fa-refresh" />}
+              statsIconText={turno + " - " + profesor}
+            />
+          </div>
+        </Col>
       </div>
     )
   }
 
-  activarMostrarUnCurso(nombre, nivel, turno){
+  activarMostrarUnCurso(nombre, nivel, turno) {
     this.setState({
       tarjetaDeCursos: false,
       nuevocursoActivo: false,
@@ -121,87 +121,74 @@ componentDidMount() {
     });
   }
 
-  mostrarCursos(){
+  mostrarCursos() {
     console.log("CURSOS" + this.state.cursos.length)
-    if(this.state.tarjetaDeCursos){
-    return (
-      <div className="content">
-        <Grid fluid>
-          <Row>
+    if (this.state.tarjetaDeCursos) {
+      return (
+        <div className="content">
+          <Grid fluid>
+            <Row>
 
-            {this.state.cursos.map(c => this.tarjetaCursos(c.nombre, c.nivel, c.turno, c.profesor))}
+              {this.state.cursos.map(c => this.tarjetaCursos(c.nombre, c.nivel, c.turno, c.profesor))}
 
-          </Row>
-          <Row>
-            <Col md={8}>
-            </Col>
-            <Col md={4}>
-            </Col>
-          </Row>
+            </Row>
 
-          <Row>
-            <Col md={6}>
-            </Col>
-
-            <Col md={6}>
-            </Col>
-          </Row>
-        </Grid>
-        <a class="btn btn-fill btn-warning" onClick={() => this.accionOnClick()}>New Course</a>
-      </div>
-    );
-  }
+          </Grid>
+          <a class="btn btn-fill btn-warning btn-block" onClick={() => this.accionOnClick()}>New Course</a>
+        </div>
+      );
+    }
   }
 
-  accionOnClick(){
+  accionOnClick() {
     this.setState({
       tarjetaDeCursos: false,
       nuevocursoActivo: true
     });
   }
 
-  mostrarNuevoCurso(){
-    if(this.state.nuevocursoActivo){
-    return(
-      <div>
-        <NewCourse
-         onCancel={() => this.cancelarNuevoCurso()}
-         />
-      </div>
-    )
+  mostrarNuevoCurso() {
+    if (this.state.nuevocursoActivo) {
+      return (
+        <div>
+          <NewCourse
+            onCancel={() => this.cancelarNuevoCurso()}
+          />
+        </div>
+      )
+    }
   }
-}
 
-mostrarUnCurso(){
-  if(this.state.activarUnCurso){
-    return(
-      <div>
-        <OneCourse
-         onCancel={() => this.cancelarNuevoCurso()}
-         />
-      </div>
-    )
+  mostrarUnCurso() {
+    if (this.state.activarUnCurso) {
+      return (
+        <div>
+          <OneCourse
+            onCancel={() => this.cancelarNuevoCurso()}
+          />
+        </div>
+      )
+    }
   }
-}
 
-cancelarNuevoCurso(){
-  this.setState({
-    tarjetaDeCursos: true,
-    nuevocursoActivo: false,
-    activarUnCurso: false
-  });
-}
-tarjetasOUnCurso(){
-  console.log("LOG" + this.state.tarjetaDeCursos)
-  if (this.state.tarjetaDeCursos) {
-    return this.mostrarCursos();
-  } else {
-    return this.mostrarUnCurso();
+  cancelarNuevoCurso() {
+    this.setState({
+      tarjetaDeCursos: true,
+      nuevocursoActivo: false,
+      activarUnCurso: false
+    });
   }
-}
+  tarjetasOUnCurso() {
+    console.log("LOG" + this.state.tarjetaDeCursos)
+    if (this.state.tarjetaDeCursos) {
+      return this.mostrarCursos();
+    } else {
+      return this.mostrarUnCurso();
+    }
+  }
 
   render() {
-    return    (
+    return (
       <div>
         {this.tarjetasOUnCurso()}
 
@@ -211,7 +198,7 @@ tarjetasOUnCurso(){
 
       </div>
     )
-}
+  }
 }
 
 export default Courses;

@@ -15,23 +15,23 @@ import Button from "components/CustomButton/CustomButton.jsx";
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
 
 class NewCourse
- extends Component {
+  extends Component {
 
   constructor(props) {
     super(props);
     this._curso = this.props.curso;
     this.state = {
-      nombre:  "",
-      nivel:  "",
-      turno:  "",
-      profesor:  "",
+      nombre: "",
+      nivel: "",
+      turno: "",
+      profesor: "",
       formErrors: {},
-      niveles: [1,2,3,4,5],
-      turnos:["maniana","tarde","noche"]
+      niveles: [1, 2, 3, 4, 5],
+      turnos: ["maniana", "tarde", "noche"]
     };
   }
 
-  llenarCurso(curso){
+  llenarCurso(curso) {
     this.setState({
       _curso: curso,
       id: curso._id,
@@ -58,12 +58,12 @@ class NewCourse
     ));
   }
 
-  confirmar(){
+  confirmar() {
 
   }
 
-  cancelar(){
-    this.props.onCancel(); 
+  cancelar() {
+    this.props.onCancel();
   }
 
 
@@ -84,34 +84,34 @@ class NewCourse
                           label: "Name",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "name",
+                          placeholder: "Name Course",
                           value: this.state.nombre,
-                          onChange: event => this.setState({nombre: event.target.value}),
+                          onChange: event => this.setState({ nombre: event.target.value }),
                           defaultValue: "Course name",
                           disabled: false
                         }
                       ]}
                     />
                     <div className="col-md-5">
-                    <label htmlFor="level"> Level: </label>
+                      <label htmlFor="level"> Level: </label>
                       <select
-                          label= "nivel"
-                          className="form-control"
-                          onChange={this.manejarSeleccionNivel.bind(this)}
-                          id="niveles"
-                        >
-                          {this.desplegar(this.state.niveles)}
+                        label="nivel"
+                        className="form-control"
+                        onChange={this.manejarSeleccionNivel.bind(this)}
+                        id="niveles"
+                      >
+                        {this.desplegar(this.state.niveles)}
                       </select>
                     </div>
                     <div className="col-md-5">
-                    <label htmlFor="turno"> Duty: </label>
+                      <label htmlFor="turno"> Duty: </label>
                       <select
-                          label= "turno"
-                          className="form-control"
-                          onChange={this.manejarSeleccionTurnos.bind(this)}
-                          id="turno"
-                        >
-                          {this.desplegar(this.state.turnos)}
+                        label="turno"
+                        className="form-control"
+                        onChange={this.manejarSeleccionTurnos.bind(this)}
+                        id="turno"
+                      >
+                        {this.desplegar(this.state.turnos)}
                       </select>
                     </div>
                     <FormInputs
@@ -121,9 +121,9 @@ class NewCourse
                           label: "Teacher",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "name",
+                          placeholder: "Name Teacher",
                           value: this.state.profesor,
-                          onChange: event => this.setState({profesor: event.target.value}),
+                          onChange: event => this.setState({ profesor: event.target.value }),
                           defaultValue: "Teacher",
                           disabled: false
                         }
@@ -134,12 +134,12 @@ class NewCourse
                 }
               />
               <AceptarYCancelar
-                      acceptText={"Guardar Cursada"}
-                      cancelText={"Cancelar"}
-                      cancelar={() => this.cancelar()}
-                      aceptar={() => this.confirmar()}
-                  >
-                  </AceptarYCancelar>
+                acceptText={"Guardar Cursada"}
+                cancelText={"Cancelar"}
+                cancelar={() => this.cancelar()}
+                aceptar={() => this.confirmar()}
+              >
+              </AceptarYCancelar>
             </Col>
             <Col md={4}>
             </Col>
