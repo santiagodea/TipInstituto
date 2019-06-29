@@ -19,6 +19,7 @@ class Courses extends Component {
       profesor: ""
     };
     this.state = {
+      cursoSeleccionado: null,
       tarjetaDeCursos: true,
       nuevocursoActivo: false,
       activarUnCurso: false,
@@ -95,17 +96,17 @@ class Courses extends Component {
     this.setState({ cursos: cursos_aux }); // AGREGAR VARIOS CURSOS A LA COLLECCION
   }
 
-  tarjetaCursos(nombre, nivel, turno, profesor) {
+  tarjetaCursos(curso) {
     return (
-      <div onClick={() => this.activarMostrarUnCurso(nombre, nivel, turno)} style={{ cursor: "pointer" }}>
+      <div onClick={() => this.activarMostrarUnCurso(curso)} style={{ cursor: "pointer" }}>
         <Col lg={3} sm={6}>
           <div>
             <StatsCard
               //bigIcon={<i className="pe-7s-cash text-danger" />}
-              statsText={nombre}
-              statsValue={nivel}
+              statsText={curso.nombre}
+              statsValue={curso.nivel}
               //statsIcon={<i className="fa fa-refresh" />}
-              statsIconText={turno + " - " + profesor}
+              statsIconText={curso.turno + " - " + curso.profesor}
             />
           </div>
         </Col>
@@ -113,8 +114,9 @@ class Courses extends Component {
     )
   }
 
-  activarMostrarUnCurso(nombre, nivel, turno) {
+  activarMostrarUnCurso(curso) {
     this.setState({
+      cursoSeleccionado: curso,
       tarjetaDeCursos: false,
       nuevocursoActivo: false,
       activarUnCurso: true
@@ -129,7 +131,7 @@ class Courses extends Component {
           <Grid fluid>
             <Row>
 
-              {this.state.cursos.map(c => this.tarjetaCursos(c.nombre, c.nivel, c.turno, c.profesor))}
+              {this.state.cursos.map(c => this.tarjetaCursos(c))}
 
             </Row>
 
@@ -164,6 +166,7 @@ class Courses extends Component {
       return (
         <div>
           <OneCourse
+            curso={this.state.cursoSeleccionado}
             onCancel={() => this.cancelarNuevoCurso()}
           />
         </div>
@@ -191,8 +194,6 @@ class Courses extends Component {
     return (
       <div>
         {this.tarjetasOUnCurso()}
-
-        {this.mostrarUnCurso()}
 
         {this.mostrarNuevoCurso()}
 
