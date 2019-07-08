@@ -15,7 +15,7 @@ const thArray = ["Surname", "Name", " "];
           <tr id="infoAlum" key={alumno._dni}>
             <td>{alumno.apellido}</td>
             <td>{alumno.nombre}</td>
-            <td width="100%">{this.props.children}</td>
+            <td >{this.props.children}</td>
           </tr>
         );
       }
@@ -101,7 +101,10 @@ class OneCourse
   botones(estudiante) {
     return (
 
-      <div class="btn-group">
+      <div class="btn-group" 
+      style={{ marginRight: "10px",
+               padding: "10px",
+              textAlign: "center"}}>
         {this.botonDetalle(estudiante)}
         {this.botonNota(estudiante)}
         {this.botonEliminar(estudiante)}
@@ -141,6 +144,7 @@ class OneCourse
           <button
             className={"btn btn-fill " + clasesAdicionales}
             style={{ marginRight: "10px",
+                    paddingRight: "120px",
                     textAlign: "center"}}
             onClick={() => accion(alert)}
           >
@@ -157,12 +161,19 @@ class OneCourse
   imprimirListado(){
 
   }
-  agregarNota(){
+  agregarNota(estudiante){
 
   }
 
   cancelar() {
     this.props.onCancel();
+  }
+
+  eliminarAlumno(estudiante, alert){
+
+  }
+  mostrarDatosAlumno(estudiante){
+
   }
 
 
