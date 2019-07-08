@@ -9,7 +9,7 @@ class AceptarYCancelar extends React.Component {
         <div className="col-md-2 mt-2 mt-md-0">
           <button
             id="cancelar"
-            className="btn btn-danger col-12"
+            className="btn btn-fill btn-danger col-12"
             onClick={() => this.props.cancelar()}
           >
             {this.props.cancelText}
@@ -20,7 +20,7 @@ class AceptarYCancelar extends React.Component {
             {alert => (
               <button
                 id="aceptar"
-                className="btn btn-primary col-12"
+                className="btn btn-fill btn-primary col-12"
                 onClick={() => this.props.aceptar(alert)}
                 disabled={this.props.disabled}
               >

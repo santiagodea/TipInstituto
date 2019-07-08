@@ -2,23 +2,30 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 
+const { Alert } = require("react-alert");
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
-const thArray = ["ID", "Name", "Salary", "Country", "City"];
-    const tdArray = [
-      ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-      ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-      ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-      ["4", "Philip Chaney", "$38,735", "Korea, South", "Overland Park"],
-      ["5", "Doris Greene", "$63,542", "Malawi", "Feldkirchen in Kärnten"],
-      ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
-    ];
+const thArray = ["Surname", "Name", " "];
+
+
+    class FilaAlumno extends React.Component {
+      /** --- Link para Info del Alumno ---  */
+      render() {
+        const alumno = this.props.alumno;
+        return (
+          <tr id="infoAlum" key={alumno._dni}>
+            <td>{alumno.apellido}</td>
+            <td>{alumno.nombre}</td>
+            <td width="100%">{this.props.children}</td>
+          </tr>
+        );
+      }
+    }
 
 class OneCourse
   extends Component {
 
   constructor(props) {
     super(props);
-    
     this.curso = this.props.curso;
     this.state = {
       nombre: "",
@@ -27,7 +34,8 @@ class OneCourse
       profesor: "",
       formErrors: {},
       niveles: [1, 2, 3, 4, 5],
-      turnos: ["maniana", "tarde", "noche"]
+      turnos: ["maniana", "tarde", "noche"],
+      listaDeAlumnos: []
     };
   }
 
@@ -37,6 +45,40 @@ class OneCourse
   }
 
   llenarCurso(curso) {
+    var a1 = {
+      nombre: "Lucas",
+      apellido: "Pratto",
+    }
+    var a2 = {
+      nombre: "Leonardo",
+      apellido: "Ponzio",
+    }
+    var a3 = {
+      nombre: "Pity",
+      apellido: "Martinez",
+    }
+    var a4 = {
+      nombre: "Javier",
+      apellido: "Pinola",
+    }
+    var a5 = {
+      nombre: "Juan Fernando",
+      apellido: "Quintero",
+    }
+    var a6 = {
+      nombre: "Enzo",
+      apellido: "Perez",
+    }
+    var a7 = {
+      nombre: "Franco",
+      apellido: "Armani",
+    }
+    var a8 = {
+      nombre: "Lucas",
+      apellido: "Martinez Quarta",
+    }
+    var alumnos_aux = [a1, a2, a3, a4, a5, a6, a7, a8];
+
     this.setState({
       curso: curso,
       id: curso.id,
@@ -44,6 +86,7 @@ class OneCourse
       nivel: curso.nivel,
       turno: curso.turno,
       profesor: curso.profesor,
+      listaDeAlumnos: alumnos_aux
     });
   }
 
@@ -54,16 +97,67 @@ class OneCourse
     this.setState({ nivel: event.target.value })
   }
 
+  /** ---   Botones   --- */
+  botones(estudiante) {
+    return (
 
-  desplegar(collect) {
-    return collect.map(c => (
-      <option key={c} value={c}>
-        {c}
-      </option>
-    ));
+      <div class="btn-group">
+        {this.botonDetalle(estudiante)}
+        {this.botonNota(estudiante)}
+        {this.botonEliminar(estudiante)}
+      </div>
+    );
+  }
+  botonDetalle(estudiante) {
+    return this.botonStandard(
+      "Info ",
+      () => this.mostrarDatosAlumno(estudiante),
+      "btn-primary",
+      "fa-info"
+    );
   }
 
-  confirmar() {
+  botonEliminar(estudiante) {
+    return this.botonStandard(
+      "Delete",
+      alert => this.eliminarAlumno(estudiante, alert),
+      "btn-danger",
+      "fa-close"
+    );
+  }
+
+  botonNota(estudiante) {
+    return this.botonStandard(
+      "Add Qualification",
+      () => this.agregarNota(estudiante),
+      "btn-success",
+      "fa-plus"
+    );
+  }
+  botonStandard(label, accion, clasesAdicionales, glyphIcon) {
+    return (
+      <Alert>
+        {alert => (
+          <button
+            className={"btn btn-fill " + clasesAdicionales}
+            style={{ marginRight: "10px",
+                    textAlign: "center"}}
+            onClick={() => accion(alert)}
+          >
+            <span className={"fa " + glyphIcon}> {label} </span>
+          </button>
+        )}
+      </Alert>
+    );
+  }
+
+  agregarEstudiante() {
+
+  }
+  imprimirListado(){
+
+  }
+  agregarNota(){
 
   }
 
@@ -102,15 +196,9 @@ class OneCourse
                       </tr>
                     </thead>
                     <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
+                       {this.state.listaDeAlumnos.map(alum => (
+                          <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
+                        ))}
                     </tbody>
                   </Table>
                 }
@@ -118,12 +206,16 @@ class OneCourse
 
 
             </div>{" "}
-            <AceptarYCancelar
-              acceptText={"Aceptar"}
-              cancelText={"Volver"}
-              cancelar={() => this.cancelar()}
-              aceptar={() => this.confirmar}
-            />{" "}
+
+            <div class="col-xs-6 col-md-4">
+              <a class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Back</a>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <a class="btn btn-fill btn-success" onClick={() => this.agregarEstudiante()}>Add Student</a>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <a class="btn btn-fill btn-primary" onClick={() => this.imprimirListado()}>Print List</a>
+            </div>
           </div>{" "}
         </div>{" "}
       </div>
