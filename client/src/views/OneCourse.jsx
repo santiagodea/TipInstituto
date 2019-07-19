@@ -103,7 +103,6 @@ class OneCourse
 
       <div class="btn-group" 
       style={{ marginRight: "10px",
-               padding: "10px",
               textAlign: "center"}}>
         {this.botonDetalle(estudiante)}
         {this.botonNota(estudiante)}
@@ -115,7 +114,7 @@ class OneCourse
     return this.botonStandard(
       "Info ",
       () => this.mostrarDatosAlumno(estudiante),
-      "btn-primary",
+      "btn-primary btn-xs",
       "fa-info"
     );
   }
@@ -124,7 +123,7 @@ class OneCourse
     return this.botonStandard(
       "Delete",
       alert => this.eliminarAlumno(estudiante, alert),
-      "btn-danger",
+      "btn-danger btn-xs",
       "fa-close"
     );
   }
@@ -133,7 +132,7 @@ class OneCourse
     return this.botonStandard(
       "Add Qualification",
       () => this.agregarNota(estudiante),
-      "btn-success",
+      "btn-success btn-xs",
       "fa-plus"
     );
   }
@@ -143,8 +142,8 @@ class OneCourse
         {alert => (
           <button
             className={"btn btn-fill " + clasesAdicionales}
-            style={{ marginRight: "10px",
-                    paddingRight: "120px",
+            style={{ marginRight: "5px",
+                    paddingRight: "100px",
                     textAlign: "center"}}
             onClick={() => accion(alert)}
           >
