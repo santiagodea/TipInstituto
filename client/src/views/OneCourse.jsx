@@ -13,18 +13,18 @@ const thArray = ["Surname", "Name", " "];
 
 
 class FilaAlumno extends React.Component {
-      /** --- Link para Info del Alumno ---  */
-      render() {
-        const alumno = this.props.alumno;
-        return (
-          <tr id="infoAlum" key={alumno._dni}>
-            <td>{alumno.apellido}</td>
-            <td>{alumno.nombre}</td>
-            <td >{this.props.children}</td>
-          </tr>
-        );
-      }
-    }
+  /** --- Link para Info del Alumno ---  */
+  render() {
+    const alumno = this.props.alumno;
+    return (
+      <tr id="infoAlum" key={alumno._dni}>
+        <td>{alumno.apellido}</td>
+        <td>{alumno.nombre}</td>
+        <td >{this.props.children}</td>
+      </tr>
+    );
+  }
+}
 
 class OneCourse extends Component {
 
@@ -41,7 +41,8 @@ class OneCourse extends Component {
       turnos: ["maniana", "tarde", "noche"],
       listaDeAlumnos: [],
       mostrarPanelDeAbajo: false,
-      alumnoActual: null
+      alumnoActual: null,
+      agregaNota: false
     };
   }
 
@@ -106,9 +107,11 @@ class OneCourse extends Component {
   botones(estudiante) {
     return (
 
-      <div class="btn-group" 
-      style={{ marginRight: "10px",
-              textAlign: "center"}}>
+      <div class="btn-group"
+        style={{
+          marginRight: "10px",
+          textAlign: "center"
+        }}>
         {this.botonDetalle(estudiante)}
         {this.botonNota(estudiante)}
         {this.botonEliminar(estudiante)}
@@ -135,7 +138,7 @@ class OneCourse extends Component {
 
   botonNota(estudiante) {
     return this.botonStandard(
-      "Add Qualification",
+      "Add Mark",
       () => this.agregarNota(estudiante),
       "btn-success btn-xs",
       "fa-plus"
@@ -147,9 +150,11 @@ class OneCourse extends Component {
         {alert => (
           <button
             className={"btn btn-fill " + clasesAdicionales}
-            style={{ marginRight: "5px",
-                    paddingRight: "100px",
-                    textAlign: "center"}}
+            style={{
+              marginRight: "5px",
+              paddingRight: "100px",
+              textAlign: "center"
+            }}
             onClick={() => accion(alert)}
           >
             <span className={"fa " + glyphIcon}> {label} </span>
@@ -162,29 +167,33 @@ class OneCourse extends Component {
   agregarEstudiante() {
 
   }
-  imprimirListado(){
+  imprimirListado() {
 
   }
-  agregarNota(estudiante){
-
+  agregarNota(estudiante) {
+    this.setState({
+      mostrarPanelDeAbajo: true,
+      alumnoActual: estudiante,
+      agregarNota : true
+    });
   }
 
   cancelar() {
     this.props.onCancel();
   }
 
-  eliminarAlumno(estudiante, alert){
+  eliminarAlumno(estudiante, alert) {
 
   }
-  mostrarDatosAlumno(estudiante){
+  mostrarDatosAlumno(estudiante) {
     this.setState({
-       mostrarPanelDeAbajo: true,
-       alumnoActual: estudiante });
-       window.scrollTo(0, 30000);
+      mostrarPanelDeAbajo: true,
+      alumnoActual: estudiante,
+      agregarNota : false
+    });
   }
   cerrarInfoAlumno() {
     this.setState({ mostrarPanelDeAbajo: false });
-    window.scrollTo(0, 1);
   }
 
 
@@ -197,6 +206,7 @@ class OneCourse extends Component {
           <InfoAlumno
             data={this.state.alumnoActual}
             screen={() => this.cerrarInfoAlumno()}
+            agregarNota={this.state.agregarNota}
           />
         </div>
       );
@@ -218,30 +228,37 @@ class OneCourse extends Component {
                 <div class="col-xs-6 col-md-4"><h4>Duty: <b> {this.state.turno}</b></h4></div>
                 <div class="col-xs-6 col-md-4"><h4>Teacher: <b> {this.state.profesor} </b></h4></div>
               </div>
-              <Card
-                title="List of students"
-                ctTableFullWidth
-                ctTableResponsive
-                content={
-                  <Table striped hover>
-                    <thead>
-                      <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                       {this.state.listaDeAlumnos.map(alum => (
-                          <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
-                        ))}
-                    </tbody>
 
-                  </Table>
-                }
-              />
-              {panelDeAbajo}
+              <div class="row">
+                <div class="col-md-8">
+                  <Card
+                    title="List of students"
+                    ctTableFullWidth
+                    ctTableResponsive
+                    content={
+                      <Table striped hover>
+                        <thead>
+                          <tr>
+                            {thArray.map((prop, key) => {
+                              return <th key={key}>{prop}</th>;
+                            })}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.state.listaDeAlumnos.map(alum => (
+                            <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
+                          ))}
+                        </tbody>
 
+                      </Table>
+                    }
+                  />
+                </div>
+
+                <div class="col-md-4">
+                  {panelDeAbajo}
+                </div>
+              </div>
 
             </div>{" "}
 
