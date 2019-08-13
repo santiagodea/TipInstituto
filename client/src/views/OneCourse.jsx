@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 
+
+//const infoAlumno = require("views/InfoAlumno");
+import InfoAlumno from "views/InfoAlumno";
+
 const { Alert } = require("react-alert");
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
 const thArray = ["Surname", "Name", " "];
 
 
-    class FilaAlumno extends React.Component {
+
+class FilaAlumno extends React.Component {
       /** --- Link para Info del Alumno ---  */
       render() {
         const alumno = this.props.alumno;
@@ -21,8 +26,7 @@ const thArray = ["Surname", "Name", " "];
       }
     }
 
-class OneCourse
-  extends Component {
+class OneCourse extends Component {
 
   constructor(props) {
     super(props);
@@ -35,13 +39,14 @@ class OneCourse
       formErrors: {},
       niveles: [1, 2, 3, 4, 5],
       turnos: ["maniana", "tarde", "noche"],
-      listaDeAlumnos: []
+      listaDeAlumnos: [],
+      mostrarPanelDeAbajo: false,
+      alumnoActual: null
     };
   }
 
   componentDidMount() {
     this.llenarCurso(this.curso)
-    console.log(this.curso)
   }
 
   llenarCurso(curso) {
@@ -172,11 +177,32 @@ class OneCourse
 
   }
   mostrarDatosAlumno(estudiante){
-
+    this.setState({
+       mostrarPanelDeAbajo: true,
+       alumnoActual: estudiante });
+       window.scrollTo(0, 30000);
+  }
+  cerrarInfoAlumno() {
+    this.setState({ mostrarPanelDeAbajo: false });
+    window.scrollTo(0, 1);
   }
 
 
   render() {
+    let panelDeAbajo = null;
+    if (this.state.mostrarPanelDeAbajo) {
+      // acá le paso el Alumno a la pantalla de InfoPersona
+      panelDeAbajo = (
+        <div id="InfoAlumno">
+          <InfoAlumno
+            data={this.state.alumnoActual}
+            screen={() => this.cerrarInfoAlumno()}
+          />
+        </div>
+      );
+    }
+
+
     return (
       <div>
         <div className="card mb-8 mt-2">
@@ -210,9 +236,11 @@ class OneCourse
                           <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
                         ))}
                     </tbody>
+
                   </Table>
                 }
               />
+              {panelDeAbajo}
 
 
             </div>{" "}

@@ -124,7 +124,6 @@ class Courses extends Component {
   }
 
   mostrarCursos() {
-    console.log("CURSOS" + this.state.cursos.length)
     if (this.state.tarjetaDeCursos) {
       return (
         <div className="content">
@@ -182,7 +181,6 @@ class Courses extends Component {
     });
   }
   tarjetasOUnCurso() {
-    console.log("LOG" + this.state.tarjetaDeCursos)
     if (this.state.tarjetaDeCursos) {
       return this.mostrarCursos();
     } else {
