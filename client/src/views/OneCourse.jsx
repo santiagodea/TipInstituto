@@ -40,7 +40,7 @@ class OneCourse extends Component {
       niveles: [1, 2, 3, 4, 5],
       turnos: ["maniana", "tarde", "noche"],
       listaDeAlumnos: [],
-      mostrarPanelDeAbajo: false,
+      mostrarPanelDeAlumno: false,
       alumnoActual: null,
       agregaNota: false
     };
@@ -170,13 +170,6 @@ class OneCourse extends Component {
   imprimirListado() {
 
   }
-  agregarNota(estudiante) {
-    this.setState({
-      mostrarPanelDeAbajo: true,
-      alumnoActual: estudiante,
-      agregarNota : true
-    });
-  }
 
   cancelar() {
     this.props.onCancel();
@@ -187,29 +180,51 @@ class OneCourse extends Component {
   }
   mostrarDatosAlumno(estudiante) {
     this.setState({
-      mostrarPanelDeAbajo: true,
+      mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
-      agregarNota : false
+      agregarNota: false
+    });
+  }
+  agregarNota(estudiante) {
+    this.setState({
+      mostrarPanelDeAlumno: true,
+      alumnoActual: estudiante,
+      agregarNota: true
     });
   }
   cerrarInfoAlumno() {
-    this.setState({ mostrarPanelDeAbajo: false });
+    this.setState({
+      mostrarPanelDeAlumno: false,
+      agregarNota: false
+    });
   }
-
 
   render() {
     let panelDeAbajo = null;
-    if (this.state.mostrarPanelDeAbajo) {
+    if (this.state.mostrarPanelDeAlumno) {
       // acá le paso el Alumno a la pantalla de InfoPersona
-      panelDeAbajo = (
-        <div id="InfoAlumno">
-          <InfoAlumno
-            data={this.state.alumnoActual}
-            screen={() => this.cerrarInfoAlumno()}
-            agregarNota={this.state.agregarNota}
-          />
-        </div>
-      );
+      if (this.state.agregarNota) {
+        panelDeAbajo = (
+          <div id="InfoAlumno">
+            <InfoAlumno
+              data={this.state.alumnoActual}
+              screen={() => this.cerrarInfoAlumno()}
+              agregarNota={this.state.agregarNota}
+            />
+          </div>
+        );
+      }
+      else {
+        panelDeAbajo = (
+          <div id="InfoAlumno">
+            <InfoAlumno
+              data={this.state.alumnoActual}
+              screen={() => this.cerrarInfoAlumno()}
+              agregarNota={this.state.agregarNota}
+            />
+          </div>
+        );
+      }
     }
 
 

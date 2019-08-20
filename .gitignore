@@ -3,3 +3,6 @@ client/node_modules
 server/node_modules
 *.DS_Store
 in elc/node_modules
+server_Spring/target
+server_Spring/.classpath
+
