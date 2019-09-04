@@ -2,11 +2,14 @@ package ar.com.ciu.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -16,7 +19,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "payment")
 public class Payment {
 
-	// atributos
+	//ATRIBUTOS
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "nativoDeBaseDeDatos")
 	@GenericGenerator(name = "nativoDeBaseDeDatos", strategy = "native")
@@ -33,10 +36,80 @@ public class Payment {
 	@Type(type = "integer")
 	private Long amount;
 	
-	
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "student_id")
 	private Student student;
 
+	
+	//CONSTRUCTORES
 	public Payment() {
 		super();
 	}
+
+	//HASHCODE AND EQUALS
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Payment))
+			return false;
+		Payment other = (Payment) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	//SETTERS AND GETTERS
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public LocalDate getDate_payment() {
+		return date_payment;
+	}
+
+	public void setDate_payment(LocalDate date_payment) {
+		this.date_payment = date_payment;
+	}
+
+	public Long getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+	
 }

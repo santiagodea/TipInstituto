@@ -14,7 +14,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "student")
 public class Student {
 
-	// atributos
+	//ATRIBUTOS
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "nativoDeBaseDeDatos")
 	@GenericGenerator(name = "nativoDeBaseDeDatos", strategy = "native")

@@ -1,7 +1,5 @@
 package ar.com.ciu.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "course")
 public class Course {
 
-	// atributos
+	//ATRIBUTOS
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "nativoDeBaseDeDatos")
 	@GenericGenerator(name = "nativoDeBaseDeDatos", strategy = "native")
