@@ -1,0 +1,5 @@
+Como yo no conozco la arquitectura que propone Swing
+(que parece incluir controllers, DTO, servicios y repositorios),
+te pido que hagas una lista de tareas necesarias para tener andando la persistencia de cursos hasta la API.
+O sea, qué clases tenés que tocar o agregar,
+y de qué se encarga cada una. Así puedo tener una idea del avance, y de qué mirar.

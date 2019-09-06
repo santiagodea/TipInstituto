@@ -5,11 +5,10 @@
   "author": "Santiago De Andrea",
   "license": "GPL",
   "scripts": {
-    "server": "cd ./server && npm run dev",
     "client": "cd ./client && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run client\"",
     "start": "npm run dev",
-    "postinstall": "cd client && npm install && cd ../server && npm install"
+    "postinstall": "cd client && npm install"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
@@ -17,5 +16,13 @@
   "dependencies": {},
   "engines": {
     "node": "10.9.0"
+  },
+  "comemnts":{
+    "serverAnt": "cd ./server && npm run dev",
+    "clientAnt": "cd ./client && npm start",
+    "devAnt": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "startAnt": "npm run dev",
+    "postinstallAnt": "cd client && npm install && cd ../server && npm install"
   }
+
 }
