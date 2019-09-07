@@ -1,4 +1,4 @@
-# TIP - Tecnicatura En Programacion Informatica - UNQ - CIU(General Belgrano)
+# TIP - Tecnicatura En Programacion Informatica - UNQ - CIU(General Belgrano) 👨‍💻
 
 _El proyecto consite en el desarrollo de un sistema para la administracion de un instituto, en el cual se deben poder visualizar/agregar y modificar cursos, inscribir alumnos a los cursos y poder registrar en un alumnos tanto las calificaciones como los pagos mensuales._
 
@@ -18,11 +18,14 @@ git npm install
 
 ## Deployment 📦
 
+```
+... ??
 
+```
 
 ## Construido con 🛠️
 
-## SERVER
+## SERVER 💾
 
 ```
 Por ahora funcionando desde Eclipse
@@ -34,7 +37,7 @@ Por ahora funcionando desde Eclipse
 * [Spring]()
 * [Maven]()
 
-## CLIENTE
+## CLIENTE 💻
 
 ```
 npm start
@@ -42,7 +45,7 @@ npm start
 ```
 _http://localhost:3000_
 
-#### Tecnologias
+#### Tecnologias 📲
 * [JavaScript](https://www.javascript.com/)
 * [React](https://es.reactjs.org/)
 * [Bootstrap](https://getbootstrap.com/)
@@ -50,8 +53,8 @@ _http://localhost:3000_
 * [CSS](https://www.w3schools.com/css/)
 * [NodeJS](https://nodejs.org/es/)
 
-#### Librerias
-* [Light Bootstrap Dashboard React](https://www.creative-tim.com/product/light-bootstrap-dashboard-react)_(FREE BOOTSTRAP REACT ADMIN TEMPLATE)_
+#### Librerias 📚
+* [Light Bootstrap Dashboard React](https://www.creative-tim.com/product/light-bootstrap-dashboard-react)_  (FREE BOOTSTRAP REACT ADMIN TEMPLATE)_
 * [Axios](https://www.npmjs.com/package/axios)
 * [Express](https://www.npmjs.com/package/express)
 * [Alert](https://www.npmjs.com/package/react-alert)
@@ -61,10 +64,10 @@ _http://localhost:3000_
 
 ## Autor ✒️
 
-* **Santiago De Andrea** - [santiagodea](https://github.com/santiagodea)
+* **Santiago De Andrea** - [santiagodea](https://github.com/santiagodea) 😎
 
 ## Licencia 📄
 
 Este proyecto es realizado para la presentacion del trabajo final correspondiente a la carrera Tecnicatura en Programacion Informatica.
-* [**CIU**](https://www.facebook.com/centrointer.universitario)
-* [**UNQ**](http://www.unq.edu.ar/)
+* [**CIU**](https://www.facebook.com/centrointer.universitario) 🏫
+* [**UNQ**](http://www.unq.edu.ar/) 🎓
