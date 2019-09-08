@@ -27,15 +27,17 @@ git npm install
 
 ## SERVER 💾
 
+_Instalar Spring Tool en Eclipse_
 ```
+
 Por ahora funcionando desde Eclipse
 
 ```
 
 * [Java](https://www.java.com/es/) con [Eclipse](https://www.eclipse.org)
-* [Hibernate]()
-* [Spring]()
-* [Maven]()
+* [Hibernate](https://hibernate.org/)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Maven](https://maven.apache.org/)
 
 ## CLIENTE 💻
 
@@ -54,7 +56,8 @@ _http://localhost:3000_
 * [NodeJS](https://nodejs.org/es/)
 
 #### Librerias 📚
-* [Light Bootstrap Dashboard React](https://www.creative-tim.com/product/light-bootstrap-dashboard-react)_  (FREE BOOTSTRAP REACT ADMIN TEMPLATE)_
+* [Light Bootstrap Dashboard React](https://www.creative-tim.com/product/light-bootstrap-dashboard-react)
+_(FREE BOOTSTRAP REACT ADMIN TEMPLATE)_
 * [Axios](https://www.npmjs.com/package/axios)
 * [Express](https://www.npmjs.com/package/express)
 * [Alert](https://www.npmjs.com/package/react-alert)
