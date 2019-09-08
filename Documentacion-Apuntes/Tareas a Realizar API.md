@@ -13,7 +13,7 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
 * refinado del modelo.              ❌
 * creado del repository             ✔
 * creado del service                ✔
-*    * agregado de funciones        ❌
+    * agregado de funciones        ❌
         * implementar funciones     ❌
 * creado del controller             ✔
     * agregado de funciones         ❌
