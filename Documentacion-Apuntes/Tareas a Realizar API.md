@@ -17,10 +17,13 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
 * creado del service                ✔
     * agregado de funciones        ❌
         * implementar funciones    ❌
+
+* CREADO DE TEST, pegandole directamente a los service  ❌
+
 * creado del controller            ✔
     * agregado de funciones        ❌
         * implementar funciones    ❌
-* CREADO DE TEST, pegandole directamente a los controllers  ❌
+
 
 
 * Agregado en el frontend de las clases necesarias para poder pegarle a la API ❌
