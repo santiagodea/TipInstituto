@@ -40,6 +40,12 @@ public class Mark {
 	public Mark() {
 		super();
 	}
+	
+	public Mark(Integer calification, String unit, LocalDate date, StudentCourse studentCourse) {
+		super();
+		this.calification = calification;
+		this.unit = unit;
+	}
 
 	//HASHCODE AND EQUALS
 	@Override

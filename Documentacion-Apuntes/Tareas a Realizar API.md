@@ -10,16 +10,17 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
 
 
 # Tareas a realizar:
-* refinado del modelo.              ❌
+* refinado del modelo.              ✔
 * creado del repository             ✔
+* * Creado de DTOs                  ✔
+    * creadode funciones e implementacion...  ❌
 * creado del service                ✔
     * agregado de funciones        ❌
-        * implementar funciones     ❌
-* creado del controller             ✔
-    * agregado de funciones         ❌
-        * implementar funciones     ❌
+        * implementar funciones    ❌
+* creado del controller            ✔
+    * agregado de funciones        ❌
+        * implementar funciones    ❌
 * CREADO DE TEST, pegandole directamente a los controllers  ❌
-* Creado de DTOs                    ✔
-    * creadode funciones e implementacion...  ❌
+
 
 * Agregado en el frontend de las clases necesarias para poder pegarle a la API ❌

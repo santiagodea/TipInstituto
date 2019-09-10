@@ -45,6 +45,13 @@ public class Payment {
 	public Payment() {
 		super();
 	}
+	public Payment(String month, Long amount, LocalDate date_payment, Student student) {
+		super();
+		this.month = month;
+		this.amount = amount;
+		this.date_payment = date_payment;
+		this.student = student;
+	}
 
 	//HASHCODE AND EQUALS
 	@Override

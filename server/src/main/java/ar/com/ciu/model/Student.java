@@ -49,6 +49,16 @@ public class Student {
 	public Student() {
 		super();
 	}
+	
+	public Student(Integer dni, String surname, String name, String mail, Integer tel_principal, Integer tel_secundario) {
+		super();
+		this.dni = dni;
+		this.surname = surname;
+		this.name = name;
+		this.mail = mail;
+		this.tel_principal = tel_principal;
+		this.tel_secundario = tel_secundario;
+	}
 
 	//HASHCODE AND EQUALS
 	@Override

@@ -27,9 +27,6 @@ public class StudentCourse {
 	@Type(type = "integer")
 	private Integer year;
 	
-	@OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Mark> marks;
-	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "course_id")
 	private Student student;
@@ -38,8 +35,18 @@ public class StudentCourse {
 	@JoinColumn(name = "course_id")
 	private Course course;
 	
+	@OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Mark> marks;
+	
+	//CONSTRUCTORES
 	public StudentCourse() {
 		super();
+	}
+	public StudentCourse(Integer year, Student student, Course course) {
+		super();
+		this.year = year;
+		this.student = student;
+		this.course = course;
 	}
 
 	//HASHCODE AND EQUALS
@@ -105,6 +112,10 @@ public class StudentCourse {
 
 	public void setMarks(List<Mark> marks) {
 		this.marks = marks;
+	}
+	
+	public void addMark(Mark mark) {
+		this.marks.add(mark);
 	}
 	
 }

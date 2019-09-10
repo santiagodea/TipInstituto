@@ -30,7 +30,7 @@ public class Course {
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
-	private String duty;
+	private String shift;
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
@@ -42,6 +42,22 @@ public class Course {
 	// CONSTRUCTORES
 	public Course() {
 		super();
+	}
+	public Course(String name, String level, String shift, String teacher,Long hour) {
+		super();
+		this.shift = shift;
+		this.hour = hour;
+		this.name = name;
+		this.level = level;
+		this.hour = hour;
+	}
+	public Course(String name, String level, String duty, Long hour) {
+		super();
+		this.shift = duty;
+		this.hour = hour;
+		this.name = name;
+		this.level = level;
+		this.hour = hour;
 	}
 	
 	//HASHCODE AND EQUALS
@@ -93,12 +109,12 @@ public class Course {
 		this.level = level;
 	}
 
-	public String getDuty() {
-		return duty;
+	public String getShift() {
+		return shift;
 	}
 
-	public void setDuty(String duty) {
-		this.duty = duty;
+	public void setShift(String shift) {
+		this.shift = shift;
 	}
 
 	public String getTeacher() {
