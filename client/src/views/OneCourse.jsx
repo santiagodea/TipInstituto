@@ -5,6 +5,7 @@ import Card from "components/Card/Card.jsx";
 
 //const infoAlumno = require("views/InfoAlumno");
 import InfoAlumno from "views/InfoAlumno";
+import AddMark from "views/AddMark";
 
 const { Alert } = require("react-alert");
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
@@ -205,8 +206,8 @@ class OneCourse extends Component {
       // acá le paso el Alumno a la pantalla de InfoPersona
       if (this.state.agregarNota) {
         panelDeAbajo = (
-          <div id="InfoAlumno">
-            <InfoAlumno
+          <div id="AddMark">
+            <AddMark
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}

@@ -1,40 +1,16 @@
 import Card from "components/Card/Card.jsx";
-import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-
-
 const React = require('react')
 const { Alert } = require("react-alert");
-
-
-
 
 class InfoAlumno extends React.Component {
     constructor(props) {
         super(props)
         this.screen = this.props.screen    // con esto seteo la pantalla padre
-        this.state = {
-            agregarNota: this.props.agregarNota,
-            mark: 0,
-            unit: [1, 2, 3, 4, 5, 7, 8, 9, 10],
-            unitSelect: 0
-        }
     }
 
     alum() {
         return this.props.data
     }
-
-    manejarSeleccionUnit(event) {
-        this.setState({ unitSelect: event.target.value })
-    }
-    desplegar(collect) {
-        return collect.map(c => (
-            <option key={c} value={c}>
-                {c}
-            </option>
-        ));
-    }
-
 
     recuadroInfoAlumno() {
         const anchoLabel = 5
@@ -63,20 +39,17 @@ class InfoAlumno extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        {this.panelNota()}
 
                         <div className="card-bg-info" style={{
                             marginTop: "20px", marginLeft: "30px", marginBottom: "20px"
                         }}>
                             {this.botonStandard(
-                                "Cerrar ",
+                                "Close ",
                                 this.screen,
-                                "btn-primary btn",
+                                "btn-primary btn-xs",
                                 "fa-"
-                            )
-                            }
+                            )}
                         </div>
                     </div>
                 }
@@ -94,47 +67,6 @@ class InfoAlumno extends React.Component {
         )
     }
 
-    panelNota() {
-        if (this.state.agregarNota) {
-            return (
-                <div class="row" style={{ margin: "6px" }}>
-                    <div class="col-xs-6">
-                        <FormInputs
-                            ncols={["col-md-12"]}
-                            properties={[
-                                {
-                                    label: "Mark",
-                                    type: "text",
-                                    bsClass: "form-control",
-                                    placeholder: "10",
-                                    value: this.state.mark,
-                                    onChange: event => this.setState({ mark: event.target.value }),
-                                    defaultValue: "0",
-                                    disabled: false
-                                }
-                            ]}
-                        />
-                    </div>
-                    <div class="col-xs-6">
-                        
-                            <label htmlFor="unit"> Unit: </label>
-                            <select
-                                label="unit"
-                                className="form-control"
-                                onChange={this.manejarSeleccionUnit.bind(this)}
-                                id="units"
-                            >
-                                {this.desplegar(this.state.unit)}
-                            </select>
-                        
-                    </div>
-                </div>
-
-
-
-            )
-        }
-    }
 
     // Botón -  parámetros Label , Acción, Clases Adicionales, Icono (GlypIcon)
     botonStandard(label, accion, clasesAdicionales, glyphIcon) {

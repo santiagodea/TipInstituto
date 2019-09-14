@@ -4,7 +4,7 @@ _El proyecto consite en el desarrollo de un sistema para la administracion de un
 
 ### Pre-requisitos 📋
 
-_Java, npm, Eclipse_
+_Java, npm, Eclipse_, MySQL
 
 
 ### Instalación 🔧
@@ -12,7 +12,7 @@ _Java, npm, Eclipse_
 ```
 git clone https://github.com/santiagodea/TipInstituto
 cd TipInstituto
-git npm install
+npm install
 
 ```
 
@@ -26,14 +26,27 @@ git npm install
 ## Construido con 🛠️
 
 ## SERVER 💾
+_Como esta en desarrollo podremos correrlo desde Eclipse_
+_Instalar Spring Tool en Eclipse desde: Help – Eclipse Marketplace… - buscar: Spring Tools 4_
+_luego importar el proyecto en Eclipse desde File - import..._
 
-_Instalar Spring Tool en Eclipse_
+Se utilizara [MySql](https://dev.mysql.com/downloads/installer/) para persistir los datos.
+
+para crear la base de datos correr los siguientes comandos:
+
+```
+-- creo el schema
+CREATE DATABASE `Tip-instituto` DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+-- selecciono schema
+use 'Tip-instituto`;
+
 ```
 
-Por ahora funcionando desde Eclipse
+Luego en el archivo : \server\src\main\resources\application.properties corregir el **username** y la **password** que correspondan.
 
-```
 
+* [MySql](https://dev.mysql.com/downloads/installer/)
 * [Java](https://www.java.com/es/) con [Eclipse](https://www.eclipse.org)
 * [Hibernate](https://hibernate.org/)
 * [Spring Boot](https://spring.io/projects/spring-boot)
@@ -65,12 +78,20 @@ _(FREE BOOTSTRAP REACT ADMIN TEMPLATE)_
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 * etc...
 
+## Issues 📝
+
+* [Trello](https://trello.com/b/OBJgheWj/tip)
+
 ## Autor ✒️
 
 * **Santiago De Andrea** - [santiagodea](https://github.com/santiagodea) 😎
+
 
 ## Licencia 📄
 
 Este proyecto es realizado para la presentacion del trabajo final correspondiente a la carrera Tecnicatura en Programacion Informatica.
 * [**CIU**](https://www.facebook.com/centrointer.universitario) 🏫
 * [**UNQ**](http://www.unq.edu.ar/) 🎓
+
+
+
