@@ -2,8 +2,11 @@ package ar.com.ciu.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import ar.com.ciu.dto.MarkDTO;
 
+@Service
 public class MarkServiceImpl implements MarkService {
 
 	@Override

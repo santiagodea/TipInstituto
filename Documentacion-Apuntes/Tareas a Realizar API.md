@@ -13,12 +13,14 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
 * refinado del modelo.              ✔
 * creado del repository             ✔
 * * Creado de DTOs                  ✔
-    * creadode funciones e implementacion...  ❌
-* creado del service                ✔
-    * agregado de funciones        ❌
-        * implementar funciones    ❌
+    * creadode funciones e implementacion...  ✔
 
-* CREADO DE TEST, pegandole directamente a los service  ❌
+PARA UN CURSO:
+* creado del service                ✔ 
+    * agregado de funciones         ✔
+        * implementar funciones     ✔
+
+* CREADO DE TEST, pegandole directamente a los service ✔ 
 
 * creado del controller            ✔
     * agregado de funciones        ❌

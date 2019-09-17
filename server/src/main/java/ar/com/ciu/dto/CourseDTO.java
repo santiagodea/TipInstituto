@@ -10,13 +10,13 @@ public class CourseDTO {
 	private String level;
 	private String shift;
 	private String teacher;
-	private Long hour;
+	private Integer hour;
 
 	public CourseDTO() {
 		super();
 	}
 
-	public CourseDTO(String name, String level, String shift, String teacher, Long hour) {
+	public CourseDTO(String name, String level, String shift, String teacher, Integer hour) {
 		super();
 		this.name = name;
 		this.level = level;
@@ -70,11 +70,11 @@ public class CourseDTO {
 		this.teacher = teacher;
 	}
 
-	public Long getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
-	public void setHour(Long hour) {
+	public void setHour(Integer hour) {
 		this.hour = hour;
 	}
 

@@ -4,37 +4,37 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ar.com.ciu.dto.StudentDTO;
+import ar.com.ciu.dto.StudentCourseDTO;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentCourseServiceImpl implements StudentCourseService {
 
 	@Override
-	public StudentDTO create(StudentDTO studentDTO) {
+	public StudentCourseDTO create(StudentCourseDTO studentCourseDTO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public StudentDTO finById(Long idStudent) {
+	public StudentCourseDTO finById(Long idStudentCourse) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<StudentDTO> findAll() {
+	public List<StudentCourseDTO> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public StudentDTO update(StudentDTO studentDTO) {
+	public StudentCourseDTO update(StudentCourseDTO studentCourseDTO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void delete(Long idStudent) {
+	public void delete(Long idStudentCourse) {
 		// TODO Auto-generated method stub
 
 	}

@@ -1,4 +1,4 @@
-package ar.com.ciu.instituto;
+package ar.com.ciu;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

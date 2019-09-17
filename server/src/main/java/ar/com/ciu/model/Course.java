@@ -37,27 +37,20 @@ public class Course {
 	private String teacher;
 	
 	@Type(type = "integer")
-	private Long hour;
+	private Integer hour;
 
 	// CONSTRUCTORES
 	public Course() {
 		super();
 	}
-	public Course(String name, String level, String shift, String teacher,Long hour) {
+	public Course(String name, String level, String shift, String teacher, Integer hour) {
 		super();
+		this.name = name;
+		this.level = level;
 		this.shift = shift;
+		this.teacher = teacher;
 		this.hour = hour;
-		this.name = name;
-		this.level = level;
-		this.hour = hour;
-	}
-	public Course(String name, String level, String duty, Long hour) {
-		super();
-		this.shift = duty;
-		this.hour = hour;
-		this.name = name;
-		this.level = level;
-		this.hour = hour;
+		
 	}
 	
 	//HASHCODE AND EQUALS
@@ -125,11 +118,11 @@ public class Course {
 		this.teacher = teacher;
 	}
 
-	public Long getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
-	public void setHour(Long hour) {
+	public void setHour(Integer hour) {
 		this.hour = hour;
 	}
 	
