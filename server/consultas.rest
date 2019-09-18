@@ -1,4 +1,4 @@
-POST https://localhost:8080/course HTTP/1.1
+POST http://localhost:8080/course HTTP/1.1
 content-type: application/json
 
 {
@@ -6,15 +6,13 @@ content-type: application/json
     "level": "One",
     "shift": "Morning",
     "teacher": "Ana",
-    "hour": "10",
+    "hour": "10"
 }
+ ###
 
+ GET  http://localhost:8080/course/findAll HTTP/1.1
 
-Course("principiante", "uno", "maniana", "jose",10);
-
-# GET https://example.com/comments/1 HTTP/1.1
-
-# ###
+ ###
 
 # GET https://example.com/topics/1 HTTP/1.1
 
