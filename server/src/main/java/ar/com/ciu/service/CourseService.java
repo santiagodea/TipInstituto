@@ -11,7 +11,7 @@ public interface CourseService {
 	
 	public Course create(Course course);
 
-	public CourseDTO finById(Long idCourse);
+	public CourseDTO findById(Long idCourse);
 
 	public List<CourseDTO> findAll();
 

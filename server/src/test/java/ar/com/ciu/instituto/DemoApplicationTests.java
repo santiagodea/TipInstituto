@@ -10,9 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ar.com.ciu.InstitutoApplication;
 import ar.com.ciu.model.Course;
 import ar.com.ciu.service.CourseService;
-import ar.com.ciu.service.MarkService;
-import ar.com.ciu.service.PaymentService;
-import ar.com.ciu.service.StudentService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InstitutoApplication.class)
@@ -22,14 +19,14 @@ public class DemoApplicationTests {
 	@Autowired
 	private CourseService courseService;
 	
-	@Autowired
-	private MarkService markService;
-	
-	@Autowired
-	private PaymentService paymentService;
-	
-	@Autowired
-	private StudentService studentService;
+//	@Autowired
+//	private MarkService markService;
+//	
+//	@Autowired
+//	private PaymentService paymentService;
+//	
+//	@Autowired
+//	private StudentService studentService;
 	
 	
 	@Test
@@ -41,6 +38,13 @@ public class DemoApplicationTests {
 		
 		cursoA = this.courseService.create(cursoA);
 		Assert.assertNotNull(cursoA.getId());
+		cursoB = this.courseService.create(cursoA);
+		Assert.assertNotNull(cursoB.getId());
+		cursoC = this.courseService.create(cursoA);
+		Assert.assertNotNull(cursoC.getId());
+		cursoD = this.courseService.create(cursoA);
+		Assert.assertNotNull(cursoD.getId());
+		
 	}
 
 	

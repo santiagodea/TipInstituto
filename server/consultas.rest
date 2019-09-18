@@ -1,0 +1,21 @@
+POST https://localhost:8080/course HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Kinder",
+    "level": "One",
+    "shift": "Morning",
+    "teacher": "Ana",
+    "hour": "10",
+}
+
+
+Course("principiante", "uno", "maniana", "jose",10);
+
+# GET https://example.com/comments/1 HTTP/1.1
+
+# ###
+
+# GET https://example.com/topics/1 HTTP/1.1
+
+###

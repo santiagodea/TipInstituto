@@ -34,6 +34,10 @@ Se utilizara [MySql](https://dev.mysql.com/downloads/installer/) para persistir 
 
 para crear la base de datos correr los siguientes comandos:
 
+Creo un usuario para la base de datos.
+
+Luego en el archivo : \server\src\main\resources\application.properties corregir el **username** y la **password** que correspondan.
+
 ```
 -- creo el schema
 CREATE DATABASE `Tip-instituto` DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci;
@@ -43,7 +47,9 @@ use 'Tip-instituto`;
 
 ```
 
-Luego en el archivo : \server\src\main\resources\application.properties corregir el **username** y la **password** que correspondan.
+hay un test para probar el creado y la consulta en la base.
+
+para acceder a la base desde un JSON hay que correr el InstitutoApplication.java
 
 
 * [MySql](https://dev.mysql.com/downloads/installer/)

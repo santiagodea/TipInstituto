@@ -15,17 +15,20 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
 * * Creado de DTOs                  ✔
     * creadode funciones e implementacion...  ✔
 
-PARA UN CURSO:
-* creado del service                ✔ 
+**PARA UN CURSO:**
+* creado del service                ✔
     * agregado de funciones         ✔
         * implementar funciones     ✔
 
-* CREADO DE TEST, pegandole directamente a los service ✔ 
+* CREADO DE TEST, pegandole directamente a los service ✔
 
 * creado del controller            ✔
-    * agregado de funciones        ❌
-        * implementar funciones    ❌
+    * agregado de funciones        ✔
+        * implementar funciones    ✔
 
 
 
 * Agregado en el frontend de las clases necesarias para poder pegarle a la API ❌
+
+
+Continuar con el resto de los objetos de modelo.
