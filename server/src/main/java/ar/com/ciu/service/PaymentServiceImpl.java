@@ -1,51 +1,75 @@
 package ar.com.ciu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.ciu.dto.PaymentDTO;
 import ar.com.ciu.model.Payment;
+import ar.com.ciu.model.Student;
+import ar.com.ciu.repository.PaymentRepository;
+import ar.com.ciu.repository.StudentRepository;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-	
+
+	// ATRIBUTOS
+	@Autowired
+	private PaymentRepository paymentRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
 	@Override
 	public Payment create(Payment payment) {
-		// TODO Auto-generated method stub
-		return null;
+		paymentRepository.save(payment);
+		return payment;
 	}
 
 	@Override
 	public PaymentDTO create(PaymentDTO paymentDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Student student = this.studentRepository.findById(paymentDTO.getIdStudent()).orElse(null);
+		Payment payment = new Payment(paymentDTO.getMonth(), paymentDTO.getAmount(), paymentDTO.getDate_payment(),
+				student);
+		this.paymentRepository.save(payment);
+		return new PaymentDTO(payment);
 	}
 
 	@Override
 	public PaymentDTO findById(Long idPayment) {
-		// TODO Auto-generated method stub
-		return null;
+		Payment payment = this.paymentRepository.findById(idPayment).orElse(null);
+		PaymentDTO paymentDto = null;
+		if (payment != null) {
+			paymentDto = new PaymentDTO(payment);
+		}
+		return paymentDto;
 	}
 
 	@Override
 	public List<PaymentDTO> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Payment> payments = (List<Payment>) this.paymentRepository.findAll();
+		List<PaymentDTO> paymentsDTO = new ArrayList<PaymentDTO>();
+		payments.stream().forEach(pay -> paymentsDTO.add(new PaymentDTO(pay)));
+		return paymentsDTO;
 	}
 
 	@Override
 	public PaymentDTO update(PaymentDTO paymentDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Payment payment = this.paymentRepository.findById(paymentDTO.getId()).get();
+		Student student = this.studentRepository.findById(paymentDTO.getIdStudent()).orElse(null);
+		payment.setAmount(paymentDTO.getAmount());
+		payment.setDate_payment(paymentDTO.getDate_payment());
+		payment.setMonth(paymentDTO.getMonth());
+		payment.setStudent(student);
+
+		payment = this.paymentRepository.save(payment);
+		return paymentDTO;
 	}
 
 	@Override
 	public void delete(Long idPayment) {
-		// TODO Auto-generated method stub
-
+		this.paymentRepository.deleteById(idPayment);
 	}
-
-
-
 }

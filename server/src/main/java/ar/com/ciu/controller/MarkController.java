@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ciu.dto.MarkDTO;
-import ar.com.ciu.dto.StudentDTO;
 import ar.com.ciu.service.MarkService;
-import ar.com.ciu.service.StudentService;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
