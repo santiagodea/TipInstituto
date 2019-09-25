@@ -5,9 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ar.com.ciu.dto.PaymentDTO;
+import ar.com.ciu.model.Payment;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
+	
+	@Override
+	public Payment create(Payment payment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public PaymentDTO create(PaymentDTO paymentDTO) {
@@ -16,7 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public PaymentDTO finById(Long idPayment) {
+	public PaymentDTO findById(Long idPayment) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,5 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
 		// TODO Auto-generated method stub
 
 	}
+
+
 
 }

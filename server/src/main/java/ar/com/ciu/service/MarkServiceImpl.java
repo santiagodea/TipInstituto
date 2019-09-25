@@ -31,7 +31,6 @@ public class MarkServiceImpl implements MarkService {
 	@Override
 	public MarkDTO create(MarkDTO markDTO) {
 		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
-		;
 		Mark mark = new Mark(markDTO.getCalification(), markDTO.getUnit(), markDTO.getDate(), st);
 		this.markRepository.save(mark);
 		return new MarkDTO(mark);
@@ -51,7 +50,7 @@ public class MarkServiceImpl implements MarkService {
 	public List<MarkDTO> findAll() {
 		List<Mark> marks = (List<Mark>) this.markRepository.findAll();
 		List<MarkDTO> marksDTO = new ArrayList<MarkDTO>();
-		marks.stream().forEach(aut -> marksDTO.add(new MarkDTO(aut)));
+		marks.stream().forEach(mark -> marksDTO.add(new MarkDTO(mark)));
 		return marksDTO;
 	}
 

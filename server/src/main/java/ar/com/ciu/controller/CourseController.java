@@ -41,11 +41,11 @@ public class CourseController {
 
 	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
 	public ResponseEntity<List<CourseDTO>> findAll() throws NotFoundException {
-		List<CourseDTO> courseDTO = this.courseService.findAll();
-		if (courseDTO == null) {
+		List<CourseDTO> coursesDTO = this.courseService.findAll();
+		if (coursesDTO == null) {
 			throw new NotFoundException();
 		}
-		return new ResponseEntity<List<CourseDTO>>(courseDTO, HttpStatus.OK);
+		return new ResponseEntity<List<CourseDTO>>(coursesDTO, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(NotFoundException.class)

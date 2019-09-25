@@ -43,7 +43,7 @@ public class CourseServiceImpl implements CourseService {
 	public List<CourseDTO> findAll() {
 		List<Course> courses = (List<Course>) this.courseRepository.findAll();
 		List<CourseDTO> coursesDTO = new ArrayList<CourseDTO>();
-		courses.stream().forEach(aut -> coursesDTO.add(new CourseDTO(aut)));
+		courses.stream().forEach(cou -> coursesDTO.add(new CourseDTO(cou)));
 		return coursesDTO;
 	}
 

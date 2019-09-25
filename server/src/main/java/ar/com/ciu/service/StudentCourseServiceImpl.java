@@ -5,9 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ar.com.ciu.dto.StudentCourseDTO;
+import ar.com.ciu.model.StudentCourse;
 
 @Service
 public class StudentCourseServiceImpl implements StudentCourseService {
+	
+	@Override
+	public StudentCourse create(StudentCourse studentCourse) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public StudentCourseDTO create(StudentCourseDTO studentCourseDTO) {
@@ -16,7 +23,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	}
 
 	@Override
-	public StudentCourseDTO finById(Long idStudentCourse) {
+	public StudentCourseDTO findById(Long idStudentCourse) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,5 +45,6 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }

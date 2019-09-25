@@ -3,11 +3,15 @@ package ar.com.ciu.service;
 import java.util.List;
 
 import ar.com.ciu.dto.StudentCourseDTO;
+import ar.com.ciu.model.StudentCourse;
 
 public interface StudentCourseService {
+	
+	public StudentCourse create(StudentCourse studentCourse);
+	
 	public StudentCourseDTO create(StudentCourseDTO studentCourseDTO);
 
-	public StudentCourseDTO finById(Long idStudentCourse);
+	public StudentCourseDTO findById(Long idStudentCourse);
 
 	public List<StudentCourseDTO> findAll();
 
