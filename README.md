@@ -87,6 +87,7 @@ _(FREE BOOTSTRAP REACT ADMIN TEMPLATE)_
 ## Issues 📝
 
 * [Trello](https://trello.com/b/OBJgheWj/tip)
+* [Tareas a realizar y/o pendientes](https://github.com/santiagodea/TipInstituto/blob/master/Documentacion-Apuntes/Tareas%20a%20Realizar%20API.md)
 
 ## Autor ✒️
 
