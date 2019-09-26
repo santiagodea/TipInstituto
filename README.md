@@ -50,13 +50,16 @@ use 'Tip-instituto`;
 hay un test para probar el creado y la consulta en la base.
 
 para acceder a la base desde un JSON hay que correr el InstitutoApplication.java
+y consultar desde http://localhost:8080
 
 
 * [MySql](https://dev.mysql.com/downloads/installer/)
+* [MySql Workbench](https://www.mysql.com/products/workbench/)
 * [Java](https://www.java.com/es/) con [Eclipse](https://www.eclipse.org)
 * [Hibernate](https://hibernate.org/)
 * [Spring Boot](https://spring.io/projects/spring-boot)
 * [Maven](https://maven.apache.org/)
+* [REST Client, para VSC](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) para hacer consultas REST tipo [POSTMAN](https://www.getpostman.com/)
 
 ## CLIENTE 💻
 
