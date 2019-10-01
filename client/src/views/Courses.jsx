@@ -3,11 +3,8 @@ import { Grid, Row, Col } from "react-bootstrap";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import NewCourse from "views/NewCourse";
 import OneCourse from "views/OneCourse";
-
+const axios = require("axios");
 const log = require('chalk');
-
-
-
 
 class Courses extends Component {
   constructor(props) {
@@ -27,9 +24,12 @@ class Courses extends Component {
     }
   }
 
-  componentDidMount() {
-    this.cargarCursos();
-  }
+    componentDidMount() {
+      this.getDataCourse();
+    }
+    recargado(){
+      this.getDataCourse();
+    }
 
   createLegend(json) {
     var legend = [];
@@ -42,58 +42,21 @@ class Courses extends Component {
     return legend;
   }
 
-  cargarCursos() {
-    var curso1 = {
-      nombre: "Pre-Kinder",
-      nivel: 1,
-      turno: "Morning",
-      profesor: "Ana"
-    }
-    var curso2 = {
-      nombre: "Pre-Kinder",
-      nivel: 2,
-      turno: "Afternoon",
-      profesor: "Juan"
-    }
-    var curso3 = {
-      nombre: "Kids",
-      nivel: 3,
-      turno: "Afternoon",
-      profesor: "Ana"
-    }
-    var curso4 = {
-      nombre: "Kids",
-      nivel: 2,
-      turno: "Evening",
-      profesor: "Maria"
-    }
-    var curso5 = {
-      nombre: "Teens",
-      nivel: 1,
-      turno: "Afternoon",
-      profesor: "Juan"
-    }
-    var curso6 = {
-      nombre: "Teens",
-      nivel: 2,
-      turno: "Afternoon",
-      profesor: "Ana"
-    }
-    var curso7 = {
-      nombre: "Advanced",
-      nivel: 1,
-      turno: "Evening",
-      profesor: "Maria"
-    }
-    var curso8 = {
-      nombre: "Advanced",
-      nivel: 2,
-      turno: "Morning",
-      profesor: "Ana"
-    }
-    var cursos_aux = [curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8];
-
-    this.setState({ cursos: cursos_aux }); // AGREGAR VARIOS CURSOS A LA COLLECCION
+  getDataCourse() {
+    let self = this;
+    return axios
+      .get("/course/findAll")
+      .then(function (response) {
+        console.log(response.data[0]);
+        const listCourses = response.data;
+        self.setState({
+          cursos: listCourses
+        })
+        return Promise.resolve(listCourses);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   tarjetaCursos(curso) {
@@ -103,10 +66,10 @@ class Courses extends Component {
           <div>
             <StatsCard
               //bigIcon={<i className="pe-7s-cash text-danger" />}
-              statsText={curso.nombre}
-              statsValue={curso.nivel}
+              statsText={curso.name}
+              statsValue={curso.level}
               //statsIcon={<i className="fa fa-refresh" />}
-              statsIconText={curso.turno + " - " + curso.profesor}
+              statsIconText={curso.shift + " - " + curso.teacher}
             />
           </div>
         </Col>
@@ -154,6 +117,7 @@ class Courses extends Component {
         <div>
           <NewCourse
             onCancel={() => this.cancelarNuevoCurso()}
+            recargado={() => this.recargado()}
           />
         </div>
       )

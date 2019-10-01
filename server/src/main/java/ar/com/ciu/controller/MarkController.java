@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.com.ciu.dto.MarkDTO;
 import ar.com.ciu.service.MarkService;
 
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/mark")
+@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
 public class MarkController {
 	@Autowired
 	private MarkService markService;

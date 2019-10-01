@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-import Button from "components/CustomButton/CustomButton.jsx";
 const axios = require("axios");
 
 
@@ -49,6 +48,7 @@ class NewCourse
   }
 
   guardarCurso(alert) {
+    let self = this;
     const course = {
       name: this.state.name,
       level: this.state.level,
@@ -59,23 +59,22 @@ class NewCourse
     axios
       .post("/course", course)
       .then(function (res) {
-        alert.success("The new Course was successfully created.");
+        console.log("The new Course was successfully created.");
+        self.props.recargado();
       })
-      .then(() => this.cancelarAgregado())
       .catch(function (error) {
-        console.log(course)
-        console.log(error);
-        //alert.error("ERROR - " + error.response.data.message);
+        console.log("ERROR - " + error);
       });
+      self.props.onCancel();
   }
 
   cancelarAgregado() {
     this.props.onCancel();
   }
+
   cancelar() {
     this.props.onCancel();
   }
-
 
   manejarSeleccionTurnos(event) {
     this.setState({ shift: event.target.value });

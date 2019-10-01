@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.service.StudentCourseService;
 
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/studentCourse")
+@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
 public class StudentCourseController {
 	@Autowired
 	private StudentCourseService studentCourseService;

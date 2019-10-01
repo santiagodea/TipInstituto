@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.com.ciu.dto.PaymentDTO;
 import ar.com.ciu.service.PaymentService;
 
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/payment")
+@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
 public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
