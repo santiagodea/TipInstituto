@@ -26,7 +26,7 @@ public class CourseDTO {
 	}
 
 	public CourseDTO(Course course) {
-		this(course.getName(), course.getLevel(), course.getShift(), course.getTeacher(), course.getHour());
+		this(course.getName(), course.getLevel(), course.getShift(), course.getTeacher(), course.getStartTime());
 		this.id = course.getId();
 	}
 

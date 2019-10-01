@@ -38,11 +38,11 @@ public class Student {
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
-	private Integer tel_principal;
+	private String tel_principal;
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
-	private Integer tel_secundario;
+	private String tel_secundario;
 	
 	
 	//CONSTRUCTORES
@@ -50,7 +50,7 @@ public class Student {
 		super();
 	}
 	
-	public Student(Integer dni, String surname, String name, String mail, Integer tel_principal, Integer tel_secundario) {
+	public Student(Integer dni, String surname, String name, String mail, String tel_principal, String tel_secundario) {
 		super();
 		this.dni = dni;
 		this.surname = surname;
@@ -135,22 +135,22 @@ public class Student {
 	}
 
 
-	public Integer getTel_principal() {
+	public String getTel_principal() {
 		return tel_principal;
 	}
 
 
-	public void setTel_principal(Integer tel_principal) {
+	public void setTel_principal(String tel_principal) {
 		this.tel_principal = tel_principal;
 	}
 
 
-	public Integer getTel_secundario() {
+	public String getTel_secundario() {
 		return tel_secundario;
 	}
 
 
-	public void setTel_secundario(Integer tel_secundario) {
+	public void setTel_secundario(String tel_secundario) {
 		this.tel_secundario = tel_secundario;
 	}
 	

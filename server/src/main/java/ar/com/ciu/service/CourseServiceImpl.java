@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public CourseDTO update(CourseDTO courseDTO) {
 		Course course = this.courseRepository.findById(courseDTO.getId()).get();
-		course.setHour(courseDTO.getHour());
+		course.setStartTime(courseDTO.getHour());
 		course.setLevel(courseDTO.getLevel());
 		course.setName(courseDTO.getName());
 		course.setShift(courseDTO.getShift());

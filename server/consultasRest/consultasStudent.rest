@@ -1,0 +1,38 @@
+# # # # ### agrego un curso
+# POST http://localhost:8080/student HTTP/1.1
+# content-type: application/json
+
+# {
+#     "dni": "39126758",
+#     "surname": "One",
+#     "name": "juan",
+#     "mail": "rodriguez",
+#     "tel_principal": "2241567895",
+#     "tel_secundario": "454298"
+# }
+
+### consultos todos los cursos que tengo
+#   GET  http://localhost:8080/student/findAll HTTP/1.1
+
+
+### consulto un curso especifico
+# GET http://localhost:8080/student/findById/1 HTTP/1.1
+
+
+# ###  borro un curso por un id :(
+#   DELETE  http://localhost:8080/student/delete/1
+
+### update de un curso
+
+#  PUT http://localhost:8080/student/update HTTP/1.1
+#  content-type: application/json
+
+# {
+#     "id": "1",
+#     "dni": "39126758",
+#     "surname": "One",
+#     "name": "Juan Roberto",
+#      "mail": "Rodriguez",
+#      "tel_principal": "2241567895",
+#      "tel_secundario": "454298"
+# }

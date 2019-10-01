@@ -28,7 +28,7 @@ public class Mark {
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
-	private String unit;
+	private String unit; //es la "unidad" que se evalua por la cuals e le pone la nota unidad 1/unidad 2/etc, tema1/tema2/tema3, o una referencia...
 	
 	@Column(nullable = false)
 	private LocalDate date;

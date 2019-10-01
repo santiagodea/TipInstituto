@@ -30,14 +30,14 @@ public class Course {
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
-	private String shift;
+	private String shift; // es el turno en el cual se dicta el curso, maniana/tarde/noche
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
 	private String teacher;
 	
 	@Type(type = "integer")
-	private Integer hour;
+	private Integer startTime; // es la hora de comienzo del curso antes era hour
 
 	// CONSTRUCTORES
 	public Course() {
@@ -49,7 +49,7 @@ public class Course {
 		this.level = level;
 		this.shift = shift;
 		this.teacher = teacher;
-		this.hour = hour;
+		this.startTime = hour;
 		
 	}
 	
@@ -118,15 +118,12 @@ public class Course {
 		this.teacher = teacher;
 	}
 
-	public Integer getHour() {
-		return hour;
+	public Integer getStartTime() {
+		return startTime;
 	}
 
-	public void setHour(Integer hour) {
-		this.hour = hour;
+	public void setStartTime(Integer hour) {
+		this.startTime = hour;
 	}
-	
-	
-
-	
+		
 }
