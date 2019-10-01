@@ -27,17 +27,16 @@ npm install
 
 ## SERVER 💾
 _Como esta en desarrollo podremos correrlo desde Eclipse_
+
 _Instalar Spring Tool en Eclipse desde: Help – Eclipse Marketplace… - buscar: Spring Tools 4_
 _luego importar el proyecto en Eclipse desde File - import..._
 
-Se utilizara [MySql](https://dev.mysql.com/downloads/installer/) para persistir los datos.
+#### Si se utilizara [MySql](https://dev.mysql.com/downloads/installer/) para persistir los datos.
+
+* [MySql](https://dev.mysql.com/downloads/installer/)
+* [MySql Workbench](https://www.mysql.com/products/workbench/)
 
 para crear la base de datos correr los siguientes comandos:
-
-Creo un usuario para la base de datos.
-
-Luego en el archivo : \server\src\main\resources\application.properties corregir el **username** y la **password** que correspondan.
-
 ```
 -- creo el schema
 CREATE DATABASE `Tip-instituto` DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci;
@@ -46,6 +45,28 @@ CREATE DATABASE `Tip-instituto` DEFAULT CHARACTER SET latin1 COLLATE latin1_span
 use 'Tip-instituto`;
 
 ```
+Creo un usuario para la base de datos.
+Luego en el archivo : \server\src\main\resources\application.properties corregir el **username** y la **password** que correspondan.
+
+#### Si desea usar [PostgreSQL](https://www.postgresql.org/):
+Se deben configurar los archivos: 
+**application.properties** reemplazando las lineas 3,4 y 5 por las siguientes:
+```
+spring.datasource.platform=postgres
+spring.datasource.driverClassName=org.postgresql.Driver 
+spring.datasource.url=jdbc:postgresql://localhost:5432/mydatabase
+```
+
+
+y **pom.xml** reemplazando las lineas 33,34,35,36 y 37 por las siguientes:
+```
+<dependency>
+<groupId>org.postgresql</groupId>
+<artifactId>postgresql</artifactId>
+<scope>runtime</scope>
+</dependency>
+```
+
 
 hay un test para probar el creado y la consulta en la base.
 
@@ -53,13 +74,13 @@ para acceder a la base desde un JSON hay que correr el InstitutoApplication.java
 y consultar desde http://localhost:8080
 
 
-* [MySql](https://dev.mysql.com/downloads/installer/)
-* [MySql Workbench](https://www.mysql.com/products/workbench/)
+
 * [Java](https://www.java.com/es/) con [Eclipse](https://www.eclipse.org)
 * [Hibernate](https://hibernate.org/)
 * [Spring Boot](https://spring.io/projects/spring-boot)
 * [Maven](https://maven.apache.org/)
 * [REST Client, para VSC](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) para hacer consultas REST tipo [POSTMAN](https://www.getpostman.com/)
+* [Travis CI](https://travis-ci.org/santiagodea/TipInstituto) Integracion continua mas test automaticos, PROXIMAMENTE...
 
 ## CLIENTE 💻
 

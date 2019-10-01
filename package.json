@@ -13,16 +13,17 @@
   "devDependencies": {
     "concurrently": "^3.5.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
   "engines": {
     "node": "10.9.0"
   },
-  "comemnts":{
+  "comemnts": {
     "serverAnt": "cd ./server && npm run dev",
     "clientAnt": "cd ./client && npm start",
     "devAnt": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "startAnt": "npm run dev",
     "postinstallAnt": "cd client && npm install && cd ../server && npm install"
   }
-
 }
