@@ -10,6 +10,7 @@ import {
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
+const axios = require("axios");
 
 
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
@@ -21,13 +22,18 @@ class NewCourse
     super(props);
     this._curso = this.props.curso;
     this.state = {
-      nombre: "",
-      nivel: "",
-      turno: "",
-      profesor: "",
+      name: "",
+      level: 1,
+      shift: "tomorrow",
+      teacher: "",
+      startTime: 8.00,
       formErrors: {},
       niveles: [1, 2, 3, 4, 5],
-      turnos: ["maniana", "tarde", "noche"]
+      turnos: ["tomorrow", "afternoon", "night"],
+      //la idea es dependiendo del turno que ponga desplegar una lista con posibles horarios de entrada al cuerso.
+      horariosMan: [8.00, 8.30, 9.00, 9.30, 10.00, 10.30, 11.00, 11.30, 12.00, 12.30],
+      horariosTar: [13.00, 13.30, 14.00, 14.30, 15.00, 16.30, 17.00, 17.30, 18.00, 18.30, 19.00, 19.30],
+      horariosNoch: [20.00, 20.30, 21.00, 21.30, 22.00, 22.30, 23.00, 23.30]
     };
   }
 
@@ -35,18 +41,50 @@ class NewCourse
     this.setState({
       _curso: curso,
       id: curso._id,
-      nombre: curso._nombre,
-      nivel: curso._nivel,
-      turno: curso._turno,
-      profesor: curso._profesor,
+      name: curso._name,
+      level: curso._level,
+      shift: curso._shift,
+      teacher: curso._teacher,
     });
   }
 
+  guardarCurso(alert) {
+    const course = {
+      name: this.state.name,
+      level: this.state.level,
+      shift: this.state.shift,
+      teacher: this.state.teacher,
+      startTime: this.state.startTime
+    };
+    axios
+      .post("/course", course)
+      .then(function (res) {
+        alert.success("The new Course was successfully created.");
+      })
+      .then(() => this.cancelarAgregado())
+      .catch(function (error) {
+        console.log(course)
+        console.log(error);
+        //alert.error("ERROR - " + error.response.data.message);
+      });
+  }
+
+  cancelarAgregado() {
+    this.props.onCancel();
+  }
+  cancelar() {
+    this.props.onCancel();
+  }
+
+
   manejarSeleccionTurnos(event) {
-    this.setState({ turno: event.target.value });
+    this.setState({ shift: event.target.value });
   }
   manejarSeleccionNivel(event) {
-    this.setState({ nivel: event.target.value })
+    this.setState({ level: event.target.value })
+  }
+  manejarSeleccionHorarios(event) {
+    this.setState({ startTime: event.target.value });
   }
 
 
@@ -58,14 +96,17 @@ class NewCourse
     ));
   }
 
-  confirmar() {
-
+  desplegarHoras(string) {
+    let collect = [];
+    if (string == "tomorrow"){collect = this.state.horariosMan}
+    else if (string == "afternoon"){collect = this.state.horariosTar}
+    else {{collect = this.state.horariosNoch}}
+    return collect.map(c => (
+      <option key={c} value={c}>
+        {c}
+      </option>
+    ));
   }
-
-  cancelar() {
-    this.props.onCancel();
-  }
-
 
   render() {
     return (
@@ -86,8 +127,8 @@ class NewCourse
                           bsClass: "form-control",
                           placeholder: "Name Course",
                           value: this.state.nombre,
-                          onChange: event => this.setState({ nombre: event.target.value }),
-                          defaultValue: "Course name",
+                          onChange: event => this.setState({ name: event.target.value }),
+                          defaultValue: " ",
                           disabled: false
                         }
                       ]}
@@ -98,6 +139,7 @@ class NewCourse
                         label="nivel"
                         className="form-control"
                         onChange={this.manejarSeleccionNivel.bind(this)}
+                        defaultValue="1"
                         id="niveles"
                       >
                         {this.desplegar(this.state.niveles)}
@@ -114,30 +156,43 @@ class NewCourse
                         {this.desplegar(this.state.turnos)}
                       </select>
                     </div>
-                    <FormInputs
-                      ncols={["col-md-5"]}
-                      properties={[
-                        {
-                          label: "Teacher",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Name Teacher",
-                          value: this.state.profesor,
-                          onChange: event => this.setState({ profesor: event.target.value }),
-                          defaultValue: "Teacher",
-                          disabled: false
-                        }
-                      ]}
-                    />
+                    <div className="col-md-8">
+                      <FormInputs
+                        ncols={["col-md-10"]}
+                        properties={[
+                          {
+                            label: "Teacher",
+                            type: "text",
+                            bsClass: "form-control",
+                            placeholder: "Name Teacher",
+                            value: this.state.profesor,
+                            onChange: event => this.setState({ teacher: event.target.value }),
+                            defaultValue: "",
+                            disabled: false
+                          }
+                        ]}
+                      />
+                    </div>
+                    <div className="col-md-2">
+                      <label htmlFor="turno"> Start Time: </label>
+                      <select
+                        label="starttime"
+                        className="form-control"
+                        onChange={this.manejarSeleccionHorarios.bind(this)}
+                        id="starttime"
+                      >
+                        {this.desplegarHoras(this.state.shift)}
+                      </select>
+                    </div>
                     <div className="clearfix" />
                   </form>
                 }
               />
               <AceptarYCancelar
-                acceptText={"Guardar Cursada"}
-                cancelText={"Cancelar"}
+                acceptText={"Save Course"}
+                cancelText={"Calcel"}
                 cancelar={() => this.cancelar()}
-                aceptar={() => this.confirmar()}
+                aceptar={() => this.guardarCurso()}
               >
               </AceptarYCancelar>
             </Col>
@@ -151,3 +206,5 @@ class NewCourse
 }
 
 export default NewCourse;
+
+//export  default EditCourse;
