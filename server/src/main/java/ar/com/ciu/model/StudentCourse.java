@@ -11,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-@Entity
+@Entity(name = "StudentCourse")
+@Table(name = "studentCourse")
 public class StudentCourse {
 
 	
@@ -30,7 +32,7 @@ public class StudentCourse {
 	private Integer year;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "stude_id")
+	@JoinColumn(name = "student_id")
 	private Student student;
 	 
 	@OneToOne(cascade=CascadeType.ALL)

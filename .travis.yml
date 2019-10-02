@@ -7,5 +7,6 @@ apt:
 packages:
 - oracle-java9-installer
 before_install:
-- chmod +x ./server/mvnw
-- ./server/mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+
+# - chmod +x ./mvnw
+# - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar

@@ -45,6 +45,8 @@ public class Mark {
 		super();
 		this.calification = calification;
 		this.unit = unit;
+		this.date = date;
+		this.studentCourse = studentCourse;
 	}
 
 	//HASHCODE AND EQUALS
