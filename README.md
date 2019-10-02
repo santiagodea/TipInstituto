@@ -80,7 +80,8 @@ y consultar desde http://localhost:8080
 * [Spring Boot](https://spring.io/projects/spring-boot)
 * [Maven](https://maven.apache.org/)
 * [REST Client, para VSC](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) para hacer consultas REST tipo [POSTMAN](https://www.getpostman.com/)
-* [Travis CI](https://travis-ci.org/santiagodea/TipInstituto) Integracion continua mas test automaticos, PROXIMAMENTE...
+
+  * [Travis CI](https://travis-ci.org/santiagodea/TipInstituto) Integracion continua mas test automaticos, PROXIMAMENTE...
 
 ## CLIENTE 💻
 

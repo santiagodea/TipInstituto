@@ -24,14 +24,14 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
     * agregado de funciones        ✔
         * implementar funciones    ✔
 
-* Agregado en el frontend de las clases necesarias para poder pegarle a la API ❌
+* Agregado en el frontend de las clases necesarias para poder pegarle a la API ✔
 
 **PARA EL RESTOD DE LAS CLASES (student, mark, payment, SC):**
 * creado e implementados DTOs ✔
 * creado e implementado Services ✔
 * creado e implentado Controllers ✔
 
-* CREADO DE TEST, pegandole directamente a los service para student ❌
+* CREADO DE TEST, pegandole directamente a los service para student (hice algunas consultas  rest)✔
 * CREADO DE TEST, pegandole directamente a los service para mark ❌
 * CREADO DE TEST, pegandole directamente a los service para payment ❌
 * CREADO DE TEST, pegandole directamente a los service para studentCourse ❌
