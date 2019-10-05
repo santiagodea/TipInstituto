@@ -1,5 +1,6 @@
 package ar.com.ciu.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,16 +21,16 @@ public class StudentCourseDTO {
 		super();
 	}
 
-	public StudentCourseDTO(Integer year, Long idStudent, Long idCourse, List<Long> idMarks) {
+	public StudentCourseDTO(Integer year, Long idStudent, Long idCourse) {
 		super();
 		this.year = year;
 		this.idStudent = idStudent;
 		this.idCourse = idCourse;
-		this.idMarks = idMarks;
+		this.idMarks = new ArrayList<Long>();
 	}
 
 	public StudentCourseDTO(StudentCourse sc) {
-		this(sc.getYear(), sc.getStudent().getId(), sc.getCourse().getId(), convertMarkToidMark(sc.getMarks()));
+		this(sc.getYear(), sc.getStudent().getId(), sc.getCourse().getId());
 		this.id = sc.getId();
 	}
 	
@@ -75,6 +76,10 @@ public class StudentCourseDTO {
 
 	public void setIdMarks(List<Long> idMarks) {
 		this.idMarks = idMarks;
+	}
+	
+	public void addIdMark(Long idMark) {
+		this.idMarks.add(idMark);
 	}
 	
 }

@@ -1,7 +1,5 @@
 package ar.com.ciu.instituto;
 
-import java.time.LocalDate;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-
 import ar.com.ciu.InstitutoApplication;
+import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.model.Course;
-import ar.com.ciu.model.Mark;
 import ar.com.ciu.model.Student;
 import ar.com.ciu.model.StudentCourse;
 import ar.com.ciu.service.CourseService;
@@ -78,20 +74,25 @@ public class DemoApplicationTests {
 		Assert.assertNotNull(estudiante5.getId());
 		
 		StudentCourse sc1 = new StudentCourse(2019, estudiante1, cursoA);
+		StudentCourseDTO sc1DTO = new StudentCourseDTO(sc1);
 		StudentCourse sc2 = new StudentCourse(2019, estudiante2, cursoA);
+		StudentCourseDTO sc2DTO = new StudentCourseDTO(sc2);
 		StudentCourse sc3 = new StudentCourse(2019, estudiante3, cursoB);
+		StudentCourseDTO sc3DTO = new StudentCourseDTO(sc3);
 		StudentCourse sc4 = new StudentCourse(2019, estudiante4, cursoB);
+		StudentCourseDTO sc4DTO = new StudentCourseDTO(sc4);
 		StudentCourse sc5 = new StudentCourse(2019, estudiante5, cursoB);
+		StudentCourseDTO sc5DTO = new StudentCourseDTO(sc5);
 		
-		sc1 = this.studentCourseService.create(sc1);
-		Assert.assertNotNull(sc1.getId());
-//		sc2 = this.studentCourseService.create(sc2);
-//		Assert.assertNotNull(sc2.getId());
-//		sc3 = this.studentCourseService.create(sc3);
-//		Assert.assertNotNull(sc3.getId());
-//		sc4 = this.studentCourseService.create(sc4);
-//		Assert.assertNotNull(sc4.getId());
-//		sc5 = this.studentCourseService.create(sc5);
-//		Assert.assertNotNull(sc5.getId());
+		sc1DTO = this.studentCourseService.create(sc1DTO);
+		Assert.assertNotNull(sc1DTO.getId());
+		sc2DTO = this.studentCourseService.create(sc2DTO);
+		Assert.assertNotNull(sc2DTO.getId());
+		sc3DTO = this.studentCourseService.create(sc3DTO);
+		Assert.assertNotNull(sc3DTO.getId());
+		sc4DTO = this.studentCourseService.create(sc4DTO);
+		Assert.assertNotNull(sc4DTO.getId());
+		sc5DTO = this.studentCourseService.create(sc5DTO);
+		Assert.assertNotNull(sc5DTO.getId());
 	}
 }
