@@ -1,5 +1,8 @@
-# ### agrego un curso
-POST http://localhost:8080/course HTTP/1.1
+@url = http://localhost:8080/course
+
+# agrego un curso
+###
+POST {{url}} HTTP/1.1
 content-type: application/json
 
 {
@@ -10,28 +13,28 @@ content-type: application/json
     "hour": "10"
 }
 
+# consultos todos los cursos que tengo
+###
+GET  {{url}}/findAll HTTP/1.1
 
-### consultos todos los cursos que tengo
- GET  http://localhost:8080/course/findAll HTTP/1.1
+# consulto un curso especifico
+###
+GET {{url}}/findById/3 HTTP/1.1
 
+#  borro un curso por un id :(
+###
+DELETE  {{url}}/delete/1
 
-### consulto un curso especifico
-# GET http://localhost:8080/course/findById/3 HTTP/1.1
+# update de un curso
+###
+PUT {{url}}/update HTTP/1.1
+content-type: application/json
 
-
-# ###  borro un curso por un id :(
-#  DELETE  http://localhost:8080/course/delete/1
-
-### update de un curso
-
-# PUT http://localhost:8080/course/update HTTP/1.1
-# content-type: application/json
-
-# {
-#     "id" : "1",
-#     "name": "Kinder",
-#     "level": "One",
-#     "shift": "Morning",
-#     "teacher": "Ana MAria",
-#     "hour": "10"
-# }
+{
+    "id" : "1",
+    "name": "Kinder",
+    "level": "One",
+    "shift": "Morning",
+    "teacher": "Ana MAria",
+    "hour": "10"
+}

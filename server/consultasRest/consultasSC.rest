@@ -1,0 +1,36 @@
+@url = http://localhost:8080/studentCourse
+
+# agrego una relacion student/course
+###
+POST {{url}} HTTP/1.1
+content-type: application/json
+
+{
+    "year": "2019",
+    "idStudent": "3",
+    "idCourse": "3"
+}
+
+# consultos todos los studentCourse que tengo
+###
+GET  {{url}}/findAll HTTP/1.1
+
+# consulto un student/course especifico
+###
+GET {{url}}/findById/3 HTTP/1.1
+
+#  borro un student/course por un id :(
+###
+DELETE  {{url}}/delete/1
+
+# update de un student/course
+###
+PUT {{url}}/update HTTP/1.1
+content-type: application/json
+
+{
+    "id": 6,
+    "year": 2018,
+    "idStudent": 3,
+    "idCourse": 3
+}

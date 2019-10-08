@@ -1,10 +1,5 @@
 package ar.com.ciu.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import ar.com.ciu.model.Mark;
 import ar.com.ciu.model.StudentCourse;
 
 public class StudentCourseDTO {
@@ -14,7 +9,7 @@ public class StudentCourseDTO {
 	private Integer year;
 	private Long idStudent;
 	private Long idCourse;
-	private List<Long> idMarks;
+	//private List<Long> idMarks;
 
 	// CONSTRUCTORES
 	public StudentCourseDTO() {
@@ -26,7 +21,7 @@ public class StudentCourseDTO {
 		this.year = year;
 		this.idStudent = idStudent;
 		this.idCourse = idCourse;
-		this.idMarks = new ArrayList<Long>();
+		//this.idMarks = new ArrayList<Long>();
 	}
 
 	public StudentCourseDTO(StudentCourse sc) {
@@ -34,9 +29,9 @@ public class StudentCourseDTO {
 		this.id = sc.getId();
 	}
 	
-	public static List<Long> convertMarkToidMark(List<Mark> marks) {
-		return marks.stream().map(m -> m.getId()).collect(Collectors.toList());
-	}
+//	public static List<Long> convertMarkToidMark(List<Mark> marks) {
+//		return marks.stream().map(m -> m.getId()).collect(Collectors.toList());
+//	}
 
 	public Long getId() {
 		return id;
@@ -70,16 +65,16 @@ public class StudentCourseDTO {
 		this.idCourse = idCourse;
 	}
 
-	public List<Long> getIdMarks() {
-		return idMarks;
-	}
-
-	public void setIdMarks(List<Long> idMarks) {
-		this.idMarks = idMarks;
-	}
-	
-	public void addIdMark(Long idMark) {
-		this.idMarks.add(idMark);
-	}
+//	public List<Long> getIdMarks() {
+//		return idMarks;
+//	}
+//
+//	public void setIdMarks(List<Long> idMarks) {
+//		this.idMarks = idMarks;
+//	}
+//	
+//	public void addIdMark(Long idMark) {
+//		this.idMarks.add(idMark);
+//	}
 	
 }

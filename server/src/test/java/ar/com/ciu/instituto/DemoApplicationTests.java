@@ -7,11 +7,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ar.com.ciu.InstitutoApplication;
-import ar.com.ciu.dto.MarkDTO;
-import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.model.Course;
 import ar.com.ciu.model.Mark;
 import ar.com.ciu.model.Payment;
@@ -25,7 +24,7 @@ import ar.com.ciu.service.StudentService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InstitutoApplication.class)
-//@TestPropertySource(locations="classpath:test.properties")
+@TestPropertySource(locations="classpath:test.properties")
 public class DemoApplicationTests {
 
 	@Autowired

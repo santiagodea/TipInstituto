@@ -37,7 +37,7 @@ public class Payment {
 	private double amount;
 	
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "studentId")
 	private Student student;
 
 	

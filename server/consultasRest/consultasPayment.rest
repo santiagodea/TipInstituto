@@ -1,0 +1,38 @@
+@url = http://localhost:8080/payment
+
+# agrego una pago
+###
+POST {{url}} HTTP/1.1
+content-type: application/json
+
+{
+    "calification": 9,
+    "unit": "unidad 7",
+    "date": "2019-10-07",
+    "idStudentCourse": 4
+}
+
+# consultos todos los pago que tengo
+###
+GET  {{url}}/findAll HTTP/1.1
+
+# consulto un pago especifico
+###
+GET {{url}}/findById/3 HTTP/1.1
+
+#  borro un pago por un id :(
+###
+DELETE  {{url}}/delete/1
+
+# update de un pago
+###
+PUT {{url}}/update HTTP/1.1
+content-type: application/json
+
+{
+    "id": 3,
+    "calification": 10,
+    "unit": "unidad XX",
+    "date": "2019-10-08",
+    "idStudentCourse": 1
+}

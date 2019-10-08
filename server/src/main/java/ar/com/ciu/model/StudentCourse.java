@@ -1,7 +1,5 @@
 package ar.com.ciu.model;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,15 +29,15 @@ public class StudentCourse {
 	private Integer year;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "student_id")
+	@JoinColumn(name = "studentId")
 	private Student student;
 	 
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "course_id")
+	@JoinColumn(name = "courseId")
 	private Course course;
 	
-	@OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Mark> marks;
+//	@OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Mark> marks;
 	
 	//CONSTRUCTORES
 	public StudentCourse() {
@@ -110,16 +107,16 @@ public class StudentCourse {
 		this.year = year;
 	}
 
-	public List<Mark> getMarks() {
-		return marks;
-	}
-
-	public void setMarks(List<Mark> marks) {
-		this.marks = marks;
-	}
-	
-	public void addMark(Mark mark) {
-		this.marks.add(mark);
-	}
+//	public List<Mark> getMarks() {
+//		return marks;
+//	}
+//
+//	public void setMarks(List<Mark> marks) {
+//		this.marks = marks;
+//	}
+//	
+//	public void addMark(Mark mark) {
+//		this.marks.add(mark);
+//	}
 	
 }
