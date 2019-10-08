@@ -10,14 +10,14 @@ public class PaymentDTO {
 	private Long id;
 	private String month;
 	private LocalDate date_payment;
-	private Long amount;
+	private double amount;
 	private Long idStudent;
 
 	public PaymentDTO() {
 		super();
 	}
 
-	public PaymentDTO(String month, LocalDate date, Long amount, Long idStudent) {
+	public PaymentDTO(String month, LocalDate date, double amount, Long idStudent) {
 		super();
 		this.month = month;
 		this.date_payment = date;
@@ -55,11 +55,11 @@ public class PaymentDTO {
 		this.date_payment = date_payment;
 	}
 
-	public Long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

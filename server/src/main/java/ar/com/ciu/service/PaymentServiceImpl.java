@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.ciu.dto.PaymentDTO;
 import ar.com.ciu.model.Payment;
@@ -23,16 +24,19 @@ public class PaymentServiceImpl implements PaymentService {
 	private StudentRepository studentRepository;
 
 	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public Payment create(Payment payment) {
-		paymentRepository.save(payment);
-		return payment;
+		Student student = this.studentRepository.findById(payment.getStudent().getId()).orElse(null);
+		Payment payment1 = new Payment(payment.getMonth(), payment.getAmount(), payment.getDate_payment(),student);
+		paymentRepository.save(payment1);
+		return payment1;
 	}
 
 	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public PaymentDTO create(PaymentDTO paymentDTO) {
 		Student student = this.studentRepository.findById(paymentDTO.getIdStudent()).orElse(null);
-		Payment payment = new Payment(paymentDTO.getMonth(), paymentDTO.getAmount(), paymentDTO.getDate_payment(),
-				student);
+		Payment payment = new Payment(paymentDTO.getMonth(), paymentDTO.getAmount(), paymentDTO.getDate_payment(),student);
 		this.paymentRepository.save(payment);
 		return new PaymentDTO(payment);
 	}

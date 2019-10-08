@@ -1,5 +1,7 @@
 package ar.com.ciu.instituto;
 
+import java.time.LocalDate;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ar.com.ciu.InstitutoApplication;
+import ar.com.ciu.dto.MarkDTO;
 import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.model.Course;
+import ar.com.ciu.model.Mark;
+import ar.com.ciu.model.Payment;
 import ar.com.ciu.model.Student;
 import ar.com.ciu.model.StudentCourse;
 import ar.com.ciu.service.CourseService;
@@ -41,6 +46,8 @@ public class DemoApplicationTests {
 	
 	@Test
 	public void testA() {
+		
+		LocalDate hoy = LocalDate.now();
 				
 		Course cursoA = new Course("principiante", "uno", "maniana", "jose",10);
 		Course cursoB = new Course("adulto", "uno", "maniana", "maria",11);
@@ -73,26 +80,59 @@ public class DemoApplicationTests {
 		estudiante5 = this.studentService.create(estudiante5);
 		Assert.assertNotNull(estudiante5.getId());
 		
-		StudentCourse sc1 = new StudentCourse(2019, estudiante1, cursoA);
-		StudentCourseDTO sc1DTO = new StudentCourseDTO(sc1);
+		StudentCourse sc1 = new StudentCourse(2019, estudiante1, cursoA);			
 		StudentCourse sc2 = new StudentCourse(2019, estudiante2, cursoA);
-		StudentCourseDTO sc2DTO = new StudentCourseDTO(sc2);
 		StudentCourse sc3 = new StudentCourse(2019, estudiante3, cursoB);
-		StudentCourseDTO sc3DTO = new StudentCourseDTO(sc3);
 		StudentCourse sc4 = new StudentCourse(2019, estudiante4, cursoB);
-		StudentCourseDTO sc4DTO = new StudentCourseDTO(sc4);
 		StudentCourse sc5 = new StudentCourse(2019, estudiante5, cursoB);
-		StudentCourseDTO sc5DTO = new StudentCourseDTO(sc5);
 		
-		sc1DTO = this.studentCourseService.create(sc1DTO);
-		Assert.assertNotNull(sc1DTO.getId());
-		sc2DTO = this.studentCourseService.create(sc2DTO);
-		Assert.assertNotNull(sc2DTO.getId());
-		sc3DTO = this.studentCourseService.create(sc3DTO);
-		Assert.assertNotNull(sc3DTO.getId());
-		sc4DTO = this.studentCourseService.create(sc4DTO);
-		Assert.assertNotNull(sc4DTO.getId());
-		sc5DTO = this.studentCourseService.create(sc5DTO);
-		Assert.assertNotNull(sc5DTO.getId());
+		sc1 = this.studentCourseService.create(sc1);
+		Assert.assertNotNull(sc1.getId());
+		sc2 = this.studentCourseService.create(sc2);
+		Assert.assertNotNull(sc2.getId());
+		sc3 = this.studentCourseService.create(sc3);
+		Assert.assertNotNull(sc3.getId());
+		sc4 = this.studentCourseService.create(sc4);
+		Assert.assertNotNull(sc4.getId());
+		sc5 = this.studentCourseService.create(sc5);
+		Assert.assertNotNull(sc5.getId());
+		
+		Mark marka1 = new Mark(10, "unidad 1", hoy, sc1);
+		Mark marka12 = new Mark(9, "unidad 2", hoy, sc1);
+		Mark marka13 = new Mark(9.5, "unidad 3", hoy, sc1);
+		Mark marka2 = new Mark(5, "unidad 1", hoy, sc2);
+		
+		marka1 = this.markService.create(marka1);
+		Assert.assertNotNull(marka1.getId());
+		marka12 = this.markService.create(marka12);
+		Assert.assertNotNull(marka12.getId());
+		marka13 = this.markService.create(marka13);
+		Assert.assertNotNull(marka13.getId());
+		marka2 = this.markService.create(marka2);
+		Assert.assertNotNull(marka2.getId());
+		
+		Payment pago1 = new Payment("Enero", 300.00, hoy, estudiante1);
+		Payment pago2 = new Payment("Febrero", 300.00, hoy, estudiante1);
+		Payment pago3 = new Payment("Marzo", 400.00, hoy, estudiante1);
+		Payment pago4 = new Payment("Abril", 400.00, hoy, estudiante1);
+		Payment pago11 = new Payment("Enero", 300.00, hoy, estudiante2);
+		Payment pago12 = new Payment("Febrero", 300.00, hoy, estudiante2);
+		Payment pago13 = new Payment("Marzo", 400.00, hoy, estudiante2);
+		
+		pago1 = this.paymentService.create(pago1);
+		Assert.assertNotNull(pago1.getId());
+		pago2 = this.paymentService.create(pago2);
+		Assert.assertNotNull(pago2.getId());
+		pago3 = this.paymentService.create(pago3);
+		Assert.assertNotNull(pago3.getId());
+		pago4 = this.paymentService.create(pago4);
+		Assert.assertNotNull(pago4.getId());
+		pago11 = this.paymentService.create(pago11);
+		Assert.assertNotNull(pago11.getId());
+		pago12 = this.paymentService.create(pago12);
+		Assert.assertNotNull(pago12.getId());
+		pago13 = this.paymentService.create(pago13);
+		Assert.assertNotNull(pago13.getId());
+		
 	}
 }

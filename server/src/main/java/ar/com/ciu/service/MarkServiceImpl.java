@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.ciu.dto.MarkDTO;
 import ar.com.ciu.model.Mark;
@@ -23,12 +24,16 @@ public class MarkServiceImpl implements MarkService {
 	private StudentCourseRepository scRepository;
 
 	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public Mark create(Mark mark) {
-		markRepository.save(mark);
-		return mark;
+		StudentCourse st = this.scRepository.findById(mark.getStudentCourse().getId()).orElse(null);
+		Mark mark1 = new Mark(mark.getCalification(), mark.getUnit(), mark.getDate(), st);
+		markRepository.save(mark1);
+		return mark1;
 	}
 
 	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public MarkDTO create(MarkDTO markDTO) {
 		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
 		Mark mark = new Mark(markDTO.getCalification(), markDTO.getUnit(), markDTO.getDate(), st);
@@ -55,6 +60,7 @@ public class MarkServiceImpl implements MarkService {
 	}
 
 	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public MarkDTO update(MarkDTO markDTO) {
 		Mark mark = this.markRepository.findById(markDTO.getId()).get();
 		mark.setCalification(markDTO.getCalification());

@@ -23,8 +23,8 @@ public class Mark {
 	@GenericGenerator(name = "nativoDeBaseDeDatos", strategy = "native")
 	private Long id;
 	
-	@Type(type = "integer")
-	private Integer calification;
+	@Type(type = "double")
+	private double calification;
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
@@ -41,9 +41,9 @@ public class Mark {
 		super();
 	}
 	
-	public Mark(Integer calification, String unit, LocalDate date, StudentCourse studentCourse) {
+	public Mark(double c, String unit, LocalDate date, StudentCourse studentCourse) {
 		super();
-		this.calification = calification;
+		this.calification = c;
 		this.unit = unit;
 		this.date = date;
 		this.studentCourse = studentCourse;
@@ -82,11 +82,11 @@ public class Mark {
 		this.id = id;
 	}
 
-	public Integer getCalification() {
+	public double getCalification() {
 		return calification;
 	}
 
-	public void setCalification(Integer calification) {
+	public void setCalification(double calification) {
 		this.calification = calification;
 	}
 

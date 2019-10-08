@@ -33,8 +33,8 @@ public class Payment {
 	private LocalDate date_payment;
 	
 	@Column(nullable = false)
-	@Type(type = "integer")
-	private Long amount;
+	@Type(type = "double")
+	private double amount;
 	
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "student_id")
@@ -45,7 +45,7 @@ public class Payment {
 	public Payment() {
 		super();
 	}
-	public Payment(String month, Long amount, LocalDate date_payment, Student student) {
+	public Payment(String month, double amount, LocalDate date_payment, Student student) {
 		super();
 		this.month = month;
 		this.amount = amount;
@@ -102,11 +102,11 @@ public class Payment {
 		this.date_payment = date_payment;
 	}
 
-	public Long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

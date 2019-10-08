@@ -6,7 +6,7 @@ import ar.com.ciu.model.Mark;
 
 public class MarkDTO {
 	private Long id;
-	private Integer calification;
+	private double calification;
 	private String unit;
 	private LocalDate date;
 	private Long idStudentCourse;
@@ -16,7 +16,7 @@ public class MarkDTO {
 		super();
 	}
 
-	public MarkDTO(Integer cal, String unit, LocalDate date, Long idStudentCourse) {
+	public MarkDTO(double cal, String unit, LocalDate date, Long idStudentCourse) {
 		super();
 		this.calification = cal;
 		this.unit = unit;
@@ -38,11 +38,11 @@ public class MarkDTO {
 		this.id = id;
 	}
 
-	public Integer getCalification() {
+	public double getCalification() {
 		return calification;
 	}
 
-	public void setCalification(Integer calification) {
+	public void setCalification(double calification) {
 		this.calification = calification;
 	}
 

@@ -28,8 +28,11 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
 	public StudentCourse create(StudentCourse studentCourse) {
-		this.studentCourseRepository.save(studentCourse);
-		return studentCourse;
+		Student student = this.studentRepository.findById(studentCourse.getStudent().getId()).orElse(null);
+		Course course = this.courseRepository.findById(studentCourse.getCourse().getId()).orElse(null);
+		StudentCourse sc = new StudentCourse(studentCourse.getYear(), student, course);
+		this.studentCourseRepository.save(sc);
+		return sc;
 	}
 
 	@Override
@@ -61,6 +64,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	}
 
 	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public StudentCourseDTO update(StudentCourseDTO studentCourseDTO) {
 		StudentCourse studentCourse = this.studentCourseRepository.findById(studentCourseDTO.getId()).get();
 		Student student = this.studentRepository.findById(studentCourseDTO.getIdStudent()).orElse(null);
