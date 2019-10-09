@@ -5,7 +5,7 @@ deploy:
   provider: heroku
   api-key:
     secure: $HEROKU_API_KEY
-  app: TipInstituto
+  app: tipinstituto
 
 # - chmod +x ./mvnw
 # - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
