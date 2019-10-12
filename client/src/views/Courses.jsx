@@ -24,12 +24,12 @@ class Courses extends Component {
     }
   }
 
-    componentDidMount() {
-      this.getDataCourse();
-    }
-    recargado(){
-      this.getDataCourse();
-    }
+  componentDidMount() {
+    this.getDataCourse();
+  }
+  recargado() {
+    this.getDataCourse();
+  }
 
   createLegend(json) {
     var legend = [];
@@ -47,7 +47,6 @@ class Courses extends Component {
     return axios
       .get("/course/findAll")
       .then(function (response) {
-        console.log(response.data[0]);
         const listCourses = response.data;
         self.setState({
           cursos: listCourses
@@ -92,11 +91,8 @@ class Courses extends Component {
         <div className="content">
           <Grid fluid>
             <Row>
-
               {this.state.cursos.map(c => this.tarjetaCursos(c))}
-
             </Row>
-
           </Grid>
           <a class="btn btn-fill btn-warning btn-block" onClick={() => this.accionOnClick()}>New Course</a>
         </div>
@@ -156,7 +152,6 @@ class Courses extends Component {
     return (
       <div>
         {this.tarjetasOUnCurso()}
-
         {this.mostrarNuevoCurso()}
 
       </div>
