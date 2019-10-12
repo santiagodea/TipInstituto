@@ -30,7 +30,7 @@ content-type: application/json
 
 {
     "id": 6,
-    "year": 2018,
+    "year": 2017,
     "idStudent": 3,
     "idCourse": 3
 }

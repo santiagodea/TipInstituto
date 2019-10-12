@@ -6,10 +6,10 @@ POST {{url}} HTTP/1.1
 content-type: application/json
 
 {
-    "calification": 9,
-    "unit": "unidad 7",
-    "date": "2019-10-07",
-    "idStudentCourse": 4
+  "month": "Enero",
+  "date_payment": "2019-10-12",
+  "amount": 100.0,
+  "idStudent": 5
 }
 
 # consultos todos los pago que tengo
@@ -30,9 +30,9 @@ PUT {{url}}/update HTTP/1.1
 content-type: application/json
 
 {
-    "id": 3,
-    "calification": 10,
-    "unit": "unidad XX",
-    "date": "2019-10-08",
-    "idStudentCourse": 1
+  "id": 8,
+  "month": "Enero",
+  "date_payment": "2019-10-12",
+  "amount": 150.0,
+  "idStudent": 5
 }
