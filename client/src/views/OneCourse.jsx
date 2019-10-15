@@ -6,11 +6,11 @@ import Card from "components/Card/Card.jsx";
 //const infoAlumno = require("views/InfoAlumno");
 import InfoAlumno from "views/InfoAlumno";
 import AddMark from "views/AddMark";
+const axios = require("axios");
 
 const { Alert } = require("react-alert");
 const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
 const thArray = ["Surname", "Name", " "];
-
 
 
 class FilaAlumno extends React.Component {
@@ -19,8 +19,8 @@ class FilaAlumno extends React.Component {
     const alumno = this.props.alumno;
     return (
       <tr id="infoAlum" key={alumno._dni}>
-        <td>{alumno.apellido}</td>
-        <td>{alumno.nombre}</td>
+        <td>{alumno.surname}</td>
+        <td>{alumno.name}</td>
         <td >{this.props.children}</td>
       </tr>
     );
@@ -40,7 +40,7 @@ class OneCourse extends Component {
       formErrors: {},
       niveles: [1, 2, 3, 4, 5],
       turnos: ["maniana", "tarde", "noche"],
-      listaDeAlumnos: [],
+      students: [],
       mostrarPanelDeAlumno: false,
       alumnoActual: null,
       agregaNota: false
@@ -49,51 +49,40 @@ class OneCourse extends Component {
 
   componentDidMount() {
     this.llenarCurso(this.curso)
+    console.log(this.curso)
+    this.getDataCourse();
+  }
+
+  getDataCourse() {
+    let self = this;
+    return axios
+      .get("/studentCourse/findByIdWithStudent/" + this.curso.id)
+      .then(function (response) {
+        console.log(response.data);
+        const listaDeS = response.data.studentListDTO;
+        self.setState({
+          students: listaDeS
+        })
+        return Promise.resolve(listaDeS);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  recargado() {
+    this.getDataCourse();
   }
 
   llenarCurso(curso) {
-    var a1 = {
-      nombre: "Lucas",
-      apellido: "Pratto",
-    }
-    var a2 = {
-      nombre: "Leonardo",
-      apellido: "Ponzio",
-    }
-    var a3 = {
-      nombre: "Pity",
-      apellido: "Martinez",
-    }
-    var a4 = {
-      nombre: "Javier",
-      apellido: "Pinola",
-    }
-    var a5 = {
-      nombre: "Juan Fernando",
-      apellido: "Quintero",
-    }
-    var a6 = {
-      nombre: "Enzo",
-      apellido: "Perez",
-    }
-    var a7 = {
-      nombre: "Franco",
-      apellido: "Armani",
-    }
-    var a8 = {
-      nombre: "Lucas",
-      apellido: "Martinez Quarta",
-    }
-    var alumnos_aux = [a1, a2, a3, a4, a5, a6, a7, a8];
-
     this.setState({
       curso: curso,
       id: curso.id,
-      nombre: curso.nombre,
-      nivel: curso.nivel,
-      turno: curso.turno,
-      profesor: curso.profesor,
-      listaDeAlumnos: alumnos_aux
+      nombre: curso.name,
+      nivel: curso.level,
+      turno: curso.shift,
+      profesor: curso.teacher
     });
   }
 
@@ -261,7 +250,7 @@ class OneCourse extends Component {
                           </tr>
                         </thead>
                         <tbody>
-                          {this.state.listaDeAlumnos.map(alum => (
+                          {this.state.students.map(alum => (
                             <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
                           ))}
                         </tbody>
