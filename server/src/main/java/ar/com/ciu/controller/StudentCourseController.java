@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.ciu.dto.CourseWithStudentsDTO;
 import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.service.StudentCourseService;
 
@@ -64,5 +65,14 @@ public class StudentCourseController {
 	public ResponseEntity<Void> delete(@PathVariable("id") long id) throws NotFoundException {
 		this.studentCourseService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/findByIdWithStudent/{id}", method = RequestMethod.GET)
+	public ResponseEntity<CourseWithStudentsDTO> findByIdWithStudent(@PathVariable("id") long id) throws NotFoundException {
+		CourseWithStudentsDTO courseWithStudentsDTO = this.studentCourseService.findByIdWithStudents(id);
+		if (courseWithStudentsDTO == null) {
+			throw new NotFoundException();
+		}
+		return new ResponseEntity<CourseWithStudentsDTO>(courseWithStudentsDTO, HttpStatus.OK);
 	}
 }

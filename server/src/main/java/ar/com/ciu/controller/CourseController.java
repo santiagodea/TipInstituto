@@ -64,5 +64,5 @@ public class CourseController {
 		this.courseService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
-
+	
 }

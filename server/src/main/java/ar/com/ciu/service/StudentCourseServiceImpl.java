@@ -2,11 +2,13 @@ package ar.com.ciu.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.com.ciu.dto.CourseWithStudentsDTO;
 import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.model.Course;
 import ar.com.ciu.model.Student;
@@ -24,6 +26,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	private StudentRepository studentRepository;
 	@Autowired
 	private CourseRepository courseRepository;
+	
 
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
@@ -54,7 +57,17 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 		}
 		return studentCourseDto;
 	}
-
+	
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
+	public CourseWithStudentsDTO findByIdWithStudents(Long idCourse) {
+		Course course = this.courseRepository.findById(idCourse).orElse(null);
+		List<StudentCourse> listStudentCourse = this.studentCourseRepository.findByIdCourse(idCourse);
+		List<Student> listStudent = listStudentCourse.stream().map(sc -> sc.getStudent()).collect(Collectors.toList());
+		CourseWithStudentsDTO csDTO = new CourseWithStudentsDTO(course, listStudent);
+		return csDTO;
+	}
+	
 	@Override
 	public List<StudentCourseDTO> findAll() {
 		List<StudentCourse> studentCourses = (List<StudentCourse>) this.studentCourseRepository.findAll();
