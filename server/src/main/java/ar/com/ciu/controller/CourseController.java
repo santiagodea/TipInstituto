@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ciu.dto.CourseDTO;
+import ar.com.ciu.dto.CourseWithStudentsDTO;
 import ar.com.ciu.service.CourseService;
+import ar.com.ciu.service.StudentCourseService;
 
 @RestController
 @RequestMapping("/course")
@@ -23,6 +25,9 @@ import ar.com.ciu.service.CourseService;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private StudentCourseService studentCourseService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<CourseDTO> create(@RequestBody CourseDTO courseDTO) {
@@ -63,6 +68,15 @@ public class CourseController {
 	public ResponseEntity<Void> delete(@PathVariable("id") long id) throws NotFoundException {
 		this.courseService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/findByIdWithStudents/{id}", method = RequestMethod.GET)
+	public ResponseEntity<CourseWithStudentsDTO> findByIdWithStudent(@PathVariable("id") long id) throws NotFoundException {
+		CourseWithStudentsDTO courseWithStudentsDTO = this.studentCourseService.findByIdWithStudents(id);
+		if (courseWithStudentsDTO == null) {
+			throw new NotFoundException();
+		}
+		return new ResponseEntity<CourseWithStudentsDTO>(courseWithStudentsDTO, HttpStatus.OK);
 	}
 	
 }

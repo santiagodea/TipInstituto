@@ -5,7 +5,9 @@ import Card from "components/Card/Card.jsx";
 
 //const infoAlumno = require("views/InfoAlumno");
 import InfoAlumno from "views/InfoAlumno";
+import NewStudent from "views/NewStudent";
 import AddMark from "views/AddMark";
+//import { addListener } from "cluster";
 const axios = require("axios");
 
 const { Alert } = require("react-alert");
@@ -43,20 +45,21 @@ class OneCourse extends Component {
       students: [],
       mostrarPanelDeAlumno: false,
       alumnoActual: null,
-      agregaNota: false
+      agregaNota: false,
+      panelAlumnos:true,
+      panelNuevoAlumno:false
     };
   }
 
   componentDidMount() {
-    this.llenarCurso(this.curso)
-    console.log(this.curso)
+    this.llenarCurso(this.curso);
     this.getDataCourse();
   }
 
   getDataCourse() {
     let self = this;
     return axios
-      .get("/studentCourse/findByIdWithStudent/" + this.curso.id)
+      .get("/course/findByIdWithStudents/" + this.curso.id)
       .then(function (response) {
         console.log(response.data);
         const listaDeS = response.data.studentListDTO;
@@ -82,7 +85,9 @@ class OneCourse extends Component {
       nombre: curso.name,
       nivel: curso.level,
       turno: curso.shift,
-      profesor: curso.teacher
+      profesor: curso.teacher,
+      panelAlumnos: true,
+      panelNuevoAlumno: false
     });
   }
 
@@ -155,8 +160,79 @@ class OneCourse extends Component {
   }
 
   agregarEstudiante() {
+    this.setState({
+      panelAlumnos: false,
+      panelNuevoAlumno: true
+    });
+  }
+  cancelarNuevoAlumno() {
+    this.setState({
+      panelAlumnos:true,
+      panelNuevoAlumno: false
+    });
+  }
+  mostrarNuevoStudent() {
+    if (this.state.panelNuevoAlumno) {
+      return (
+        <div>
+          <NewStudent
+            onCancel={() => this.cancelarNuevoAlumno()}
+            recargado={() => this.recargado()}
+          />
+        </div>
+      )
+    }
+  }
+  mostrarAlumnos(panelInfo) {
+   // if (this.state.tarjetaDeCursos) {
+      return (
+        <div class="row">
+          <div class="col-md-8">
+            <Card
+              title="List of students"
+              ctTableFullWidth
+              ctTableResponsive
+              content={
+                <Table striped hover>
+                  <thead>
+                    <tr>
+                      {thArray.map((prop, key) => {
+                        return <th key={key}>{prop}</th>;
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.students.map(alum => (
+                      <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
+                    ))}
+                  </tbody>
+                </Table>
+            }
+            />
+          </div>
+
+          <div class="col-md-4">
+            {panelInfo }
+          </div>
+        </div>
+      );
+   // }
+  }
+
+
+  alumnosONuevoAlumno(panelInfo) {
+    if (this.state.panelAlumnos) {
+      return this.mostrarAlumnos(panelInfo);
+    } else {
+      return this.mostrarNuevoStudent();
+    }
+  }
+
+  mostrarListado() {
 
   }
+
+
   imprimirListado() {
 
   }
@@ -190,11 +266,11 @@ class OneCourse extends Component {
   }
 
   render() {
-    let panelDeAbajo = null;
+    let panelInfo = null;
     if (this.state.mostrarPanelDeAlumno) {
       // acá le paso el Alumno a la pantalla de InfoPersona
       if (this.state.agregarNota) {
-        panelDeAbajo = (
+        panelInfo = (
           <div id="AddMark">
             <AddMark
               data={this.state.alumnoActual}
@@ -205,7 +281,7 @@ class OneCourse extends Component {
         );
       }
       else {
-        panelDeAbajo = (
+        panelInfo = (
           <div id="InfoAlumno">
             <InfoAlumno
               data={this.state.alumnoActual}
@@ -216,7 +292,6 @@ class OneCourse extends Component {
         );
       }
     }
-
 
     return (
       <div>
@@ -234,36 +309,7 @@ class OneCourse extends Component {
                 <div class="col-xs-6 col-md-4"><h4>Teacher: <b> {this.state.profesor} </b></h4></div>
               </div>
 
-              <div class="row">
-                <div class="col-md-8">
-                  <Card
-                    title="List of students"
-                    ctTableFullWidth
-                    ctTableResponsive
-                    content={
-                      <Table striped hover>
-                        <thead>
-                          <tr>
-                            {thArray.map((prop, key) => {
-                              return <th key={key}>{prop}</th>;
-                            })}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {this.state.students.map(alum => (
-                            <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
-                          ))}
-                        </tbody>
-
-                      </Table>
-                    }
-                  />
-                </div>
-
-                <div class="col-md-4">
-                  {panelDeAbajo}
-                </div>
-              </div>
+              {this.alumnosONuevoAlumno(panelInfo)}
 
             </div>{" "}
 

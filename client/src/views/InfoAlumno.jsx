@@ -29,8 +29,8 @@ class InfoAlumno extends React.Component {
                             }}>
                                 <div className="row">
                                     <div className="card-body ">
-                                        {this.datoEnFila("Apellido  : ", this.alum().apellido, anchoLabel)}
-                                        {this.datoEnFila("Nombre :  ", this.alum().nombre, anchoLabel)}
+                                        {this.datoEnFila("Surname: ", this.alum().surname, anchoLabel)}
+                                        {this.datoEnFila("Name :  ", this.alum().name, anchoLabel)}
                                         {//this.datoEnFila("D.N.I. :  ", this.alum().nombre, anchoLabel)}
                                             //{this.datoEnFila("Teléfono Ppal. :  ", this.alum()._telPrincipal, anchoLabel)}
                                             //{this.datoEnFila("Fecha Nac. :  ", this.alum()._fechaNac.substring(0,10), anchoLabel)}

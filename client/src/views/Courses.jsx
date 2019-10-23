@@ -94,7 +94,10 @@ class Courses extends Component {
               {this.state.cursos.map(c => this.tarjetaCursos(c))}
             </Row>
           </Grid>
-          <a class="btn btn-fill btn-warning btn-block" onClick={() => this.accionOnClick()}>New Course</a>
+          <a class="btn btn-fill btn-warning btn-block"
+          onClick={() => this.accionOnClick()}
+          //href="/admin/newCourse"
+          >New Course</a>
         </div>
       );
     }
@@ -108,6 +111,7 @@ class Courses extends Component {
   }
 
   mostrarNuevoCurso() {
+
     if (this.state.nuevocursoActivo) {
       return (
         <div>

@@ -3,6 +3,7 @@ import Courses from "views/Courses.jsx";
 import NewCourse from "views/NewCourse";
 import Students from "views/Students.jsx";
 import Abouts from "views/Abouts.jsx";
+import NewStudent from "views/NewStudent.jsx";
 
 
 const dashboardRoutes = [
@@ -40,14 +41,14 @@ const dashboardRoutes = [
     //icon: "pe-7s-science",
     component: NewCourse,
     layout: "/admin"
+  },
+  {
+    path: "/newStudent",
+    name: "NewStudent",
+    //icon: "pe-7s-map-marker",
+    component: NewStudent,
+    layout: "/admin"
   }
-  // {
-  //   path: "/maps",
-  //   name: "Maps",
-  //   icon: "pe-7s-map-marker",
-  //   component: Maps,
-  //   layout: "/admin"
-  // },
   // {
   //   path: "/notifications",
   //   name: "Notifications",
