@@ -22,7 +22,7 @@ class NewStudent extends Component {
             dni: 0,
             surname: "",
             name: "",
-            mail: "",
+            email: "",
             tel_principal: 0,
             tel_secundario: 0
         };
@@ -37,7 +37,7 @@ class NewStudent extends Component {
             dni: student.dni,
             surname: student.surname,
             name: student.name,
-            mail: student.mail,
+            mail: student.email,
             tel_principal: student.tel_principal,
             tel_secundario: student.tel_secundario
         });
@@ -62,15 +62,15 @@ class NewStudent extends Component {
         //     console.log("ERROR - " + error);
         //   });
         //   self.props.onCancel();
-      }
+    }
 
-      cancelarAgregado() {
+    cancelarAgregado() {
         this.props.onCancel();
-      }
-    
-      cancelar() {
+    }
+
+    cancelar() {
         this.props.onCancel();
-      }
+    }
 
     render() {
         return (
@@ -83,32 +83,100 @@ class NewStudent extends Component {
                                 content={
                                     <form>
                                         <FormInputs
-                                            ncols={["col-md-5"]}
+                                            ncols={["col-md-3"]}
                                             properties={[
                                                 {
-                                                    label: "Name",
-                                                    type: "text",
+                                                    label: "DNI",
+                                                    type: "number",
                                                     bsClass: "form-control",
-                                                    placeholder: "Name Course",
-                                                    value: this.state.nombre,
-                                                    onChange: event => this.setState({ name: event.target.value }),
-                                                    defaultValue: " ",
+                                                    placeholder: "00000000",
+                                                    value: this.state.dni,
+                                                    onChange: event => this.setState({ dni: event.target.value }),
+                                                    defaultValue: 0,
                                                     disabled: false
                                                 }
                                             ]}
                                         />
-                                        <div className="col-md-8">
+                                        <div className="col-md-5">
                                             <FormInputs
                                                 ncols={["col-md-10"]}
                                                 properties={[
                                                     {
-                                                        label: "Teacher",
+                                                        label: "Surname",
                                                         type: "text",
                                                         bsClass: "form-control",
-                                                        placeholder: "Name Teacher",
-                                                        value: this.state.profesor,
-                                                        onChange: event => this.setState({ teacher: event.target.value }),
-                                                        defaultValue: "",
+                                                        placeholder: "Surname",
+                                                        value: this.state.surname,
+                                                        onChange: event => this.setState({ surname: event.target.value }),
+                                                        defaultValue: " ",
+                                                        disabled: false
+                                                    }
+                                                ]}
+                                            />
+                                            </div>
+                                            <div className="col-md-5">
+                                            <FormInputs
+                                                ncols={["col-md-10"]}
+                                                properties={[
+                                                    {
+                                                        label: "Name",
+                                                        type: "text",
+                                                        bsClass: "form-control",
+                                                        placeholder: "Name",
+                                                        value: this.state.name,
+                                                        onChange: event => this.setState({ name: event.target.value }),
+                                                        defaultValue: " ",
+                                                        disabled: false
+                                                    }
+                                                ]}
+                                            />
+                                        </div>
+                                        <div className="col-md-10">
+                                            <FormInputs
+                                                ncols={["col-md-10"]}
+                                                properties={[
+                                                    {
+                                                        label: "Email",
+                                                        type: "email",
+                                                        bsClass: "form-control",
+                                                        placeholder: "student@email.com",
+                                                        value: this.state.email,
+                                                        onChange: event => this.setState({ email: event.target.value }),
+                                                        defaultValue: " ",
+                                                        disabled: false
+                                                    }
+                                                ]}
+                                            />
+                                        </div>
+                                        <div className="col-md-5">
+                                            <FormInputs
+                                                ncols={["col-md-10"]}
+                                                properties={[
+                                                    {
+                                                        label: "Phone 1",
+                                                        type: "tel",
+                                                        bsClass: "form-control",
+                                                        placeholder: "02243-45-1234",
+                                                        value: this.state.tel_principal,
+                                                        onChange: event => this.setState({ tel_principal: event.target.value }),
+                                                        defaultValue: "0",
+                                                        disabled: false
+                                                    }
+                                                ]}
+                                            />
+                                            </div>
+                                            <div className="col-md-5">
+                                            <FormInputs
+                                                ncols={["col-md-10"]}
+                                                properties={[
+                                                    {
+                                                        label: "Phone 2",
+                                                        type: "tel",
+                                                        bsClass: "form-control",
+                                                        placeholder: "02243-45-1234",
+                                                        value: this.state.tel_secundario,
+                                                        onChange: event => this.setState({ tel_secundario: event.target.value }),
+                                                        defaultValue: "0",
                                                         disabled: false
                                                     }
                                                 ]}
@@ -122,7 +190,7 @@ class NewStudent extends Component {
                                 acceptText={"Save Course"}
                                 cancelText={"Calcel"}
                                 cancelar={() => this.cancelar()}
-                                //aceptar={() => this.guardarCurso()}
+                            //aceptar={() => this.guardarCurso()}
                             >
                             </AceptarYCancelar>
                         </Col>
@@ -133,8 +201,6 @@ class NewStudent extends Component {
             </div>
         );
     }
-
 }
-
 
 export default NewStudent;
