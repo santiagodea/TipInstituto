@@ -35,6 +35,7 @@ class OneCourse extends Component {
     super(props);
     this.curso = this.props.curso;
     this.state = {
+      scId:"",
       nombre: "",
       nivel: "",
       turno: "",
@@ -294,6 +295,7 @@ class OneCourse extends Component {
         panelInfo = (
           <div id="AddMark">
             <AddMark
+              scid={this.state.scId}
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
@@ -302,9 +304,12 @@ class OneCourse extends Component {
         );
       }
       else {
+        {console.log(this.state.scId);}
         panelInfo = (
+
           <div id="InfoAlumno">
             <InfoAlumno
+              scid={this.state.scId}
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}

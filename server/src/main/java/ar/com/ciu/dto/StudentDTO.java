@@ -1,5 +1,8 @@
 package ar.com.ciu.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.com.ciu.model.Student;
 
 public class StudentDTO {
@@ -11,6 +14,7 @@ public class StudentDTO {
 	private String mail;
 	private String tel_principal;
 	private String tel_secundario;
+	private List<MarkDTO> marks;
 
 	public StudentDTO(){
 		super();
@@ -24,6 +28,8 @@ public class StudentDTO {
 		this.mail = mail;
 		this.tel_principal = tel_principal;
 		this.tel_secundario = tel_secundario;
+		this.marks = new ArrayList<MarkDTO>();
+		
 	}
 	public StudentDTO(Student student){
 		this(student.getDni(), student.getSurname(), student.getName(), student.getMail(), student.getTel_principal(), student.getTel_secundario());
@@ -86,5 +92,16 @@ public class StudentDTO {
 		this.tel_secundario = tel_secundario;
 	}
 	
+	public void addListMarks(List<MarkDTO> lista) {
+		this.marks = lista;
+	}
+
+	public List<MarkDTO> getMarks() {
+		return marks;
+	}
+
+	public void setMarks(List<MarkDTO> marks) {
+		this.marks = marks;
+	}
 	
 }

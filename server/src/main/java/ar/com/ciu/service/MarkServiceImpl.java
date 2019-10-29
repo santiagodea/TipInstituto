@@ -2,12 +2,15 @@ package ar.com.ciu.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.ciu.dto.MarkDTO;
+import ar.com.ciu.dto.MarksBySCDTO;
+import ar.com.ciu.dto.ScidDTO;
 import ar.com.ciu.model.Mark;
 import ar.com.ciu.model.StudentCourse;
 import ar.com.ciu.repository.MarkRepository;
@@ -15,6 +18,7 @@ import ar.com.ciu.repository.StudentCourseRepository;
 
 @Service
 public class MarkServiceImpl implements MarkService {
+
 
 	// ATRIBUTOS
 	@Autowired
@@ -76,5 +80,14 @@ public class MarkServiceImpl implements MarkService {
 	public void delete(Long idMark) {
 		this.markRepository.deleteById(idMark);
 
+	}
+	
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
+	public MarksBySCDTO marksBySC(ScidDTO scidDTO) {
+		StudentCourse sc = this.scRepository.findByIdCourseAndStudent(scidDTO.getIdStudent(), scidDTO.getIdCourse());
+		List<Mark> listMarks = this.markRepository.findByIdSC(sc.getId());
+		MarksBySCDTO marksbyDTO = new MarksBySCDTO(sc, listMarks);
+		return marksbyDTO;
 	}
 }

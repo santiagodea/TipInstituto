@@ -1,14 +1,41 @@
 import Card from "components/Card/Card.jsx";
+import { getDefaultWatermarks } from "istanbul-lib-report";
 const React = require('react')
 const { Alert } = require("react-alert");
+const axios = require("axios");
 
 class InfoAlumno extends React.Component {
     constructor(props) {
         super(props)
-        this.screen = this.props.screen    // con esto seteo la pantalla padre
-        
+        this.screen = this.props.screen;    // con esto seteo la pantalla padre
+        this.scID = this.props.scid;
+        this.state = {
+            marks: []
+        }
     }
 
+    componentDidMount(){
+        console.log(this.state.scID);
+        this.getMarks();
+        console.log(this.state.scID);
+        console.log(this.state.marks);
+    }
+
+    getMarks() {
+        let self = this;
+        return axios
+          .get("/student/marksBySC/" + this.scID)
+          .then(function (response) {
+            const listaDeMark = response.data.marksListDTO;
+            self.setState({
+              marks: listaDeMark
+            })
+            return Promise.resolve(listaDeMark);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
 
     alum() {
         return this.props.data

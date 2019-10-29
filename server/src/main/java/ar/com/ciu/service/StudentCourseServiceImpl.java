@@ -63,10 +63,14 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	public CourseWithStudentsDTO findByIdWithStudents(Long idCourse) {
 		Course course = this.courseRepository.findById(idCourse).orElse(null);
 		List<StudentCourse> listStudentCourse = this.studentCourseRepository.findByIdCourse(idCourse);
+		
 		List<Student> listStudent = listStudentCourse.stream().map(sc -> sc.getStudent()).collect(Collectors.toList());
+		
 		CourseWithStudentsDTO csDTO = new CourseWithStudentsDTO(course, listStudent);
 		return csDTO;
 	}
+	
+	
 	
 	@Override
 	public List<StudentCourseDTO> findAll() {

@@ -15,7 +15,10 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourse, L
 	@Query("SELECT s FROM StudentCourse s WHERE s.course.id = :id")
 	public List<StudentCourse> findByIdCourse(@Param("id") Long id);
 	
+	@Query("SELECT s FROM StudentCourse s WHERE s.course.id = :idc and s.student.id = :ids")
+	public StudentCourse findByIdCourseAndStudent(@Param("idc") Long idc, @Param("ids") Long ids);
+	
 	//SELECT u FROM User u WHERE u.status = 1")
-
+	
 }
 

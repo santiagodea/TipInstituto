@@ -36,3 +36,13 @@ content-type: application/json
     "date": "2019-10-08",
     "idStudentCourse": 1
 }
+
+### 
+
+GET {{url}}/marksBySC HTTP/1.1
+content-type: application/json
+
+{
+    "idCourse": 1,
+    "idStudent": 1
+}

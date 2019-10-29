@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ciu.dto.MarkDTO;
+import ar.com.ciu.dto.MarksBySCDTO;
+import ar.com.ciu.dto.ScidDTO;
 import ar.com.ciu.service.MarkService;
 
 @RestController
@@ -63,6 +65,15 @@ public class MarkController {
 	public ResponseEntity<Void> delete(@PathVariable("id") long id) throws NotFoundException {
 		this.markService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/marksBySC", method = RequestMethod.GET)
+	public ResponseEntity<MarksBySCDTO> marksBySC(@RequestBody ScidDTO scidDTO) throws NotFoundException {
+		MarksBySCDTO marksBySCDTO = this.markService.marksBySC(scidDTO);
+		if (marksBySCDTO == null) {
+			throw new NotFoundException();
+		}
+		return new ResponseEntity<MarksBySCDTO>(marksBySCDTO, HttpStatus.OK);
 	}
 
 }

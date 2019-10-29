@@ -42,4 +42,4 @@ content-type: application/json
 
 # consulto un curso con estudiantes por ud id
 ###
-GET {{url}}/findByIdWithStudent/1 HTTP/1.1
+GET {{url}}/findByIdWithStudents/1 HTTP/1.1
