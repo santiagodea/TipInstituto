@@ -11,8 +11,6 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 const axios = require("axios");
 
-const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
-
 class NewStudent extends Component {
     constructor(props) {
         super(props);
@@ -34,9 +32,7 @@ class NewStudent extends Component {
         };
     }
 
-    componentDidMount() {
-
-    }
+    componentDidMount() { }
 
     llenarStudent(student) {
         this.setState({
@@ -81,8 +77,6 @@ class NewStudent extends Component {
         //  self.props.onCancel();
     }
 
-
-
     guardarStudent() {
         let self = this;
         const student = {
@@ -97,20 +91,18 @@ class NewStudent extends Component {
             .post("/student", student)
             .then(function (res) {
                 console.log("The new Student was successfully created.");
-
                 self.guardaridStudent(res.data.id);
             })
             .then(function (res) {
                 self.guardarSC();
             })
-            .then(function (res){
+            .then(function (res) {
                 self.props.recargado();
                 self.props.onCancel();
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);
             });
-        
     }
 
     cancelarAgregado() {
@@ -120,7 +112,6 @@ class NewStudent extends Component {
     cancelar() {
         this.props.onCancel();
     }
-
 
     render() {
         return (

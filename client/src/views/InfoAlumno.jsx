@@ -6,7 +6,9 @@ class InfoAlumno extends React.Component {
     constructor(props) {
         super(props)
         this.screen = this.props.screen    // con esto seteo la pantalla padre
+        
     }
+
 
     alum() {
         return this.props.data

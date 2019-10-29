@@ -47,7 +47,8 @@ class OneCourse extends Component {
       alumnoActual: null,
       agregaNota: false,
       panelAlumnos: true,
-      panelNuevoAlumno: false
+      panelNuevoAlumno: false,
+      tamanioPanel:"col-md-12"
     };
   }
 
@@ -103,7 +104,7 @@ class OneCourse extends Component {
 
       <div class="btn-group"
         style={{
-          marginRight: "10px",
+          marginRight: "6px",
           textAlign: "center"
         }}>
         {this.botonDetalle(estudiante)}
@@ -145,8 +146,8 @@ class OneCourse extends Component {
           <button
             className={"btn btn-fill " + clasesAdicionales}
             style={{
-              marginRight: "5px",
-              paddingRight: "100px",
+              marginRight: "4px",
+              paddingRight: "50px",
               textAlign: "center"
             }}
             onClick={() => accion(alert)}
@@ -185,10 +186,11 @@ class OneCourse extends Component {
   }
   mostrarAlumnos(panelInfo) {
     // if (this.state.tarjetaDeCursos) {
+
     return (
       <div>
         <div class="row">
-          <div class="col-md-8">
+          <div class= {this.state.tamanioPanel}>
             <Card
               title="List of students"
               ctTableFullWidth
@@ -212,7 +214,7 @@ class OneCourse extends Component {
             />
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-6">
             {panelInfo}
           </div>
 
@@ -264,20 +266,23 @@ class OneCourse extends Component {
     this.setState({
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
-      agregarNota: false
+      agregarNota: false,
+      tamanioPanel:"col-md-6"
     });
   }
   agregarNota(estudiante) {
     this.setState({
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
-      agregarNota: true
+      agregarNota: true,
+      tamanioPanel:"col-md-6"
     });
   }
   cerrarInfoAlumno() {
     this.setState({
       mostrarPanelDeAlumno: false,
-      agregarNota: false
+      agregarNota: false,
+      tamanioPanel:"col-md-12"
     });
   }
 
