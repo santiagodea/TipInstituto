@@ -46,8 +46,8 @@ class OneCourse extends Component {
       mostrarPanelDeAlumno: false,
       alumnoActual: null,
       agregaNota: false,
-      panelAlumnos:true,
-      panelNuevoAlumno:false
+      panelAlumnos: true,
+      panelNuevoAlumno: false
     };
   }
 
@@ -61,7 +61,6 @@ class OneCourse extends Component {
     return axios
       .get("/course/findByIdWithStudents/" + this.curso.id)
       .then(function (response) {
-        console.log(response.data);
         const listaDeS = response.data.studentListDTO;
         self.setState({
           students: listaDeS
@@ -167,7 +166,7 @@ class OneCourse extends Component {
   }
   cancelarNuevoAlumno() {
     this.setState({
-      panelAlumnos:true,
+      panelAlumnos: true,
       panelNuevoAlumno: false
     });
   }
@@ -178,14 +177,16 @@ class OneCourse extends Component {
           <NewStudent
             onCancel={() => this.cancelarNuevoAlumno()}
             recargado={() => this.recargado()}
+            course={this.curso}
           />
         </div>
       )
     }
   }
   mostrarAlumnos(panelInfo) {
-   // if (this.state.tarjetaDeCursos) {
-      return (
+    // if (this.state.tarjetaDeCursos) {
+    return (
+      <div>
         <div class="row">
           <div class="col-md-8">
             <Card
@@ -207,16 +208,31 @@ class OneCourse extends Component {
                     ))}
                   </tbody>
                 </Table>
-            }
+              }
             />
           </div>
 
           <div class="col-md-4">
-            {panelInfo }
+            {panelInfo}
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6 col-md-4">
+            <a class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Back</a>
+          </div>
+          <div class="col-xs-6 col-md-4">
+            <a class="btn btn-fill btn-success" onClick={() => this.agregarEstudiante()}>Add Student</a>
+          </div>
+          <div class="col-xs-6 col-md-4">
+            <a class="btn btn-fill btn-primary" onClick={() => this.imprimirListado()}>Print List</a>
           </div>
         </div>
-      );
-   // }
+
+      </div>
+    );
+    // }
   }
 
 
@@ -313,15 +329,6 @@ class OneCourse extends Component {
 
             </div>{" "}
 
-            <div class="col-xs-6 col-md-4">
-              <a class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Back</a>
-            </div>
-            <div class="col-xs-6 col-md-4">
-              <a class="btn btn-fill btn-success" onClick={() => this.agregarEstudiante()}>Add Student</a>
-            </div>
-            <div class="col-xs-6 col-md-4">
-              <a class="btn btn-fill btn-primary" onClick={() => this.imprimirListado()}>Print List</a>
-            </div>
           </div>{" "}
         </div>{" "}
       </div>
