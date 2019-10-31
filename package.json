@@ -19,7 +19,7 @@
     "react-router-dom": "^5.1.2"
   },
   "engines": {
-    "node": "10.9.0"
+    "node": "12.13.0"
   },
   "comemnts": {
     "serverAnt": "cd ./server && npm run dev",
