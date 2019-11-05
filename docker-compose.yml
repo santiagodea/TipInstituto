@@ -6,8 +6,6 @@ services:
   mysql:
     container_name: mongo
     image: mongo:4.2
-    ports:
-      - '27017:27017'
 
   server:
     container_name: inst_server

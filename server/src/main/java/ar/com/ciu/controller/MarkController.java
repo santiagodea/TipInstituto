@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,7 @@ import ar.com.ciu.dto.MarksBySCDTO;
 import ar.com.ciu.dto.ScidDTO;
 import ar.com.ciu.service.MarkService;
 
-@RestController
+@RestController		
 @RequestMapping("/mark")
 @CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
 public class MarkController {
@@ -68,8 +69,9 @@ public class MarkController {
 	}
 	
 	@RequestMapping(value = "/marksBySC", method = RequestMethod.GET)
-	public ResponseEntity<MarksBySCDTO> marksBySC(@RequestBody ScidDTO scidDTO) throws NotFoundException {
-		MarksBySCDTO marksBySCDTO = this.markService.marksBySC(scidDTO);
+	public ResponseEntity<MarksBySCDTO> marksBySC(@Param ("idCourse") Long idCourse, @Param("idStudent") Long idStudent) throws NotFoundException {
+		ScidDTO sciddto = new ScidDTO(idCourse,idStudent);
+		MarksBySCDTO marksBySCDTO = this.markService.marksBySC(sciddto);
 		if (marksBySCDTO == null) {
 			throw new NotFoundException();
 		}

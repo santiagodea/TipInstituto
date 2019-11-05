@@ -46,6 +46,7 @@ class OneCourse extends Component {
       students: [],
       mostrarPanelDeAlumno: false,
       alumnoActual: null,
+      marksAlumnoActual: [],
       agregaNota: false,
       panelAlumnos: true,
       panelNuevoAlumno: false,
@@ -286,6 +287,9 @@ class OneCourse extends Component {
       tamanioPanel:"col-md-12"
     });
   }
+  guardarMarks(marks){
+    this.setState({marksAlumnoActual: marks});
+  }
 
   render() {
     let panelInfo = null;
@@ -295,7 +299,7 @@ class OneCourse extends Component {
         panelInfo = (
           <div id="AddMark">
             <AddMark
-              scid={this.state.scId}
+              idCourse={this.curso.id}
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
@@ -304,15 +308,16 @@ class OneCourse extends Component {
         );
       }
       else {
-        {console.log(this.state.scId);}
         panelInfo = (
-
           <div id="InfoAlumno">
             <InfoAlumno
-              scid={this.state.scId}
+              idCourse={this.curso.id}
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
+              recargado={() => this.recargado()}
+              guardarMarks={() => this.guardarMarks()}
+              marksAA={this.state.marksAlumnoActual}
             />
           </div>
         );

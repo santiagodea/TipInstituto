@@ -1,5 +1,5 @@
 import Card from "components/Card/Card.jsx";
-import { getDefaultWatermarks } from "istanbul-lib-report";
+import { Grid, Row, Col, Table } from "react-bootstrap";
 const React = require('react')
 const { Alert } = require("react-alert");
 const axios = require("axios");
@@ -8,34 +8,46 @@ class InfoAlumno extends React.Component {
     constructor(props) {
         super(props)
         this.screen = this.props.screen;    // con esto seteo la pantalla padre
-        this.scID = this.props.scid;
+        this.idCourse = this.props.idCourse;
+        this.idStudent = this.props.data.id;
         this.state = {
             marks: []
         }
     }
 
-    componentDidMount(){
-        console.log(this.state.scID);
+    componentDidMount() {
+        this.setState({ idCourse: this.props.idCourse })
+        //this.getMarks();
+    }
+    componentWillUpdate(){
         this.getMarks();
-        console.log(this.state.scID);
-        console.log(this.state.marks);
     }
 
     getMarks() {
         let self = this;
+        const idCS = {
+            idCourse: this.props.idCourse,
+            idStudent: this.alum().id
+        }
         return axios
-          .get("/student/marksBySC/" + this.scID)
-          .then(function (response) {
-            const listaDeMark = response.data.marksListDTO;
-            self.setState({
-              marks: listaDeMark
+            .get("/mark/marksBySC", { params: idCS })
+            .then(function (response) {
+                const listaDeMark = response.data.marksListDTO;
+                self.setState({
+                    marks: listaDeMark
+                })
+                this.props.guardarMarks(this.state.marks);
+                return Promise.resolve(listaDeMark);
             })
-            return Promise.resolve(listaDeMark);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    //   axios.get('/users', {
+    //     // Asignamos el valor de userInfo a params
+    //     params: userInfo
+    //   })
 
     alum() {
         return this.props.data
@@ -58,13 +70,32 @@ class InfoAlumno extends React.Component {
                             }}>
                                 <div className="row">
                                     <div className="card-body ">
-                                        {this.datoEnFila("Surname: ", this.alum().surname, anchoLabel)}
-                                        {this.datoEnFila("Name :  ", this.alum().name, anchoLabel)}
-                                        {//this.datoEnFila("D.N.I. :  ", this.alum().nombre, anchoLabel)}
-                                            //{this.datoEnFila("Teléfono Ppal. :  ", this.alum()._telPrincipal, anchoLabel)}
-                                            //{this.datoEnFila("Fecha Nac. :  ", this.alum()._fechaNac.substring(0,10), anchoLabel)}
-                                            //{this.datoEnFila("Comentarios :  ", this.alum()._comentario, 12)
-                                        }
+                                        {this.datoEnFila("Surname:", this.alum().surname, anchoLabel)}
+                                        {this.datoEnFila("Name:", this.alum().name, anchoLabel)}
+                                        {this.datoEnFila("D.N.I.:", this.alum().dni, anchoLabel)}
+                                        {this.datoEnFila("Email:", this.alum().mail, anchoLabel)}
+                                        {this.datoEnFila("Phone 1°:", this.alum().tel_principal, anchoLabel)}
+                                        {this.datoEnFila("Phone 2°:", this.alum().tel_secundario, anchoLabel)}
+                                    </div>
+                                    <div className="card-body ">
+                                        <Table striped hover>
+                                            <thead>
+                                                <tr>
+                                                    {["Unit", "Calification", "Date"].map((prop, key) => {
+                                                        return <th key={key}>{prop}</th>;
+                                                    })}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.state.marks.map(m => (
+                                                    <tr id="marks" key={m.id}>
+                                                        <td>{m.unit}</td>
+                                                        <td>{m.calification}</td>
+                                                        <td>{m.date}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </Table>
                                     </div>
                                 </div>
                             </div>

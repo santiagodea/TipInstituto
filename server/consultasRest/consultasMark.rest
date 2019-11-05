@@ -39,7 +39,7 @@ content-type: application/json
 
 ### 
 
-GET {{url}}/marksBySC HTTP/1.1
+GET {{url}}/marksBySC/ HTTP/1.1
 content-type: application/json
 
 {
