@@ -30,7 +30,7 @@ public class Mark {
 	
 	@Column(length = 255, nullable = false)
 	@Type(type = "string")
-	private String unit; //es la "unidad" que se evalua por la cuals e le pone la nota unidad 1/unidad 2/etc, tema1/tema2/tema3, o una referencia...
+	private String description; //es la "unidad" que se evalua por la cuals e le pone la nota unidad 1/unidad 2/etc, tema1/tema2/tema3, o una referencia...
 	
 	@Column(nullable = false)
 	private LocalDate date;
@@ -44,10 +44,10 @@ public class Mark {
 		super();
 	}
 	
-	public Mark(double c, String unit, LocalDate date, StudentCourse studentCourse) {
+	public Mark(double c, String description, LocalDate date, StudentCourse studentCourse) {
 		super();
 		this.calification = c;
-		this.unit = unit;
+		this.description = description;
 		this.date = date;
 		this.studentCourse = studentCourse;
 	}
@@ -93,12 +93,12 @@ public class Mark {
 		this.calification = calification;
 	}
 
-	public String getUnit() {
-		return unit;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public LocalDate getDate() {

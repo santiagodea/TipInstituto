@@ -303,6 +303,7 @@ class OneCourse extends Component {
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
+              recargado={() => this.recargado()}
             />
           </div>
         );

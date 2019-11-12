@@ -1,5 +1,6 @@
 import Card from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
+const axios = require("axios");
 
 const React = require('react')
 const { Alert } = require("react-alert");
@@ -10,8 +11,7 @@ class InfoAlumno extends React.Component {
         this.state = {
             agregarNota: this.props.agregarNota,
             mark: 0,
-            unit: [1, 2, 3, 4, 5, 7, 8, 9, 10],
-            unitSelect: 0
+            description: ""
         }
     }
 
@@ -19,15 +19,24 @@ class InfoAlumno extends React.Component {
         return this.props.data
     }
 
-    manejarSeleccionUnit(event) {
-        this.setState({ unitSelect: event.target.value })
-    }
-    desplegar(collect) {
-        return collect.map(c => (
-            <option key={c} value={c}>
-                {c}
-            </option>
-        ));
+    saveMark() {
+        let self = this;
+        const newMark = {
+            idCourse: this.props.idCourse,
+            idStudent: this.props.data.id,
+            description: this.state.description,
+            mark: this.state.mark,
+            date: new Date().getDate()
+        };
+        axios
+            .post("/mark/addMark", newMark)
+            .then(function (res) {
+                console.log("A new mark has been added.");
+                self.props.recargado();
+            })
+            .catch(function (error) {
+                console.log("ERROR - " + error);
+            });
     }
 
     recuadroInfoAlumno() {
@@ -54,10 +63,27 @@ class InfoAlumno extends React.Component {
                             </div>
                         </div>
 
-                        <div class="row" style={{ margin: "6px" }}>
+                        <div class="row" style={{ margin: "2px" }}>
+                            <div class="col-xs-12">
+                                <FormInputs
+                                    ncols={["col-xs-12"]}
+                                    properties={[
+                                        {
+                                            label: "Description:",
+                                            type: "text",
+                                            bsClass: "form-control",
+                                            placeholder: "add a description",
+                                            value: this.state.description,
+                                            onChange: event => this.setState({ description: event.target.value }),
+                                            defaultValue: "without description",
+                                            disabled: false
+                                        }
+                                    ]}
+                                />
+                            </div>
                             <div class="col-xs-6">
                                 <FormInputs
-                                    ncols={["col-md-12"]}
+                                    ncols={["col-xs-4"]}
                                     properties={[
                                         {
                                             label: "Mark",
@@ -72,25 +98,14 @@ class InfoAlumno extends React.Component {
                                     ]}
                                 />
                             </div>
-                            <div class="col-xs-6">
-                                <label htmlFor="unit"> Unit: </label>
-                                <select
-                                    label="unit"
-                                    className="form-control"
-                                    onChange={this.manejarSeleccionUnit.bind(this)}
-                                    id="units"
-                                >
-                                    {this.desplegar(this.state.unit)}
-                                </select>
-                            </div>
                         </div>
 
                         <div className="card-bg-info" style={{
-                            marginTop: "20px", marginLeft: "30px", marginBottom: "20px"
+                            marginTop: "10px", marginLeft: "10px", marginBottom: "20px"
                         }}>
                             {this.botonStandard(
                                 "Confirm ",
-                                this.screen,
+                                () => this.saveMark(),
                                 "btn-primary btn-xs",
                                 "fa-"
                             )}
