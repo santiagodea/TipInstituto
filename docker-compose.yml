@@ -17,7 +17,6 @@ services:
   #   ports:
   #     - '4200:4200'
 
->>>>>>> a163e427c536e2dce09ed6cbb6c2990fd07aabeb
   client:
     container_name: inst_client
     restart: always
