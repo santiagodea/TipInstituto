@@ -4,18 +4,18 @@ services:
   # EN LUGAR DE MONGO DEBO CONFIGURAR MYSQL 
   # FALTARIA CREAR UN VOLUMEN PARA GUARAR LO DE LA BASE
   mysql:
-    container_name: mongo
+    container_name: mysql
     image: mongo:4.2
 
-  server:
-    container_name: inst_server
-    restart: always
-    depends_on:
-      - mysql
-    build:
-      server.dockerfile
-    ports:
-      - '4200:4200'
+  # server:
+  #   container_name: inst_server
+  #   restart: always
+  #   depends_on:
+  #     - mysql
+  #   build:
+  #     server.dockerfile
+  #   ports:
+  #     - '4200:4200'
 
   client:
     container_name: inst_client
