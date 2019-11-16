@@ -83,10 +83,10 @@ public class MarkController {
 		return new ResponseEntity<MarksBySCDTO>(marksBySCDTO, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/addMark", method = RequestMethod.PUT)
-	public ResponseEntity<NewMarkDTO> addMark(@RequestBody NewMarkDTO newMarkDTO) throws NotFoundException {
-		MarkDTO markDTO = this.markService.addMark(newMarkDTO);
-		return new ResponseEntity<MarkDTO>(markDTO, HttpStatus.OK);
-	}
+//	@RequestMapping(value = "/addMark", method = RequestMethod.PUT)
+//	public ResponseEntity<NewMarkDTO> addMark(@RequestBody NewMarkDTO newMarkDTO) throws NotFoundException {
+//		MarkDTO markDTO = this.markService.addMark(newMarkDTO);
+//		return new ResponseEntity<MarkDTO>(markDTO, HttpStatus.OK);
+//	}
 
 }

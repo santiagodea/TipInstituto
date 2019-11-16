@@ -90,16 +90,16 @@ public class MarkServiceImpl implements MarkService {
 		return marksbyDTO;
 	}
 	
-	@Override
-	@Transactional(rollbackFor =  Exception.class)
-	public MarkDTO addMark(NewMarkDTO newMarkDTO) {
-		Mark mark = this.markRepository.findById(markDTO.getId()).get();
-		mark.setCalification(markDTO.getCalification());
-		mark.setDate(markDTO.getDate());
-		mark.setDescription(markDTO.getDescription());
-		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
-		mark.setStudentCourse(st);
-		mark = this.markRepository.save(mark);
-		return markDTO;
-	}
+//	@Override
+//	@Transactional(rollbackFor =  Exception.class)
+//	public MarkDTO addMark(NewMarkDTO newMarkDTO) {
+//		Mark mark = this.markRepository.findById(markDTO.getId()).get();
+//		mark.setCalification(markDTO.getCalification());
+//		mark.setDate(markDTO.getDate());
+//		mark.setDescription(markDTO.getDescription());
+//		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
+//		mark.setStudentCourse(st);
+//		mark = this.markRepository.save(mark);
+//		return markDTO;
+//	}
 }

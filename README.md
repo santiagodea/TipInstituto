@@ -91,6 +91,23 @@ npm start
 ```
 _http://localhost:3000_
 
+## DOCKER 💻
+
+_En construccion..._
+
+_Debo tener instalado Git, Docker & Docker Compose_
+
+_luego corro en una consola:_
+
+
+```
+git clone https://github.com/santiagodea/TipInstituto
+cd TipInstituto
+docker-compose up
+
+```
+_y listo tengo la aplicacion corriendo con el frontend corriendo en http://localhost:3000 y el backend en http://localhost:3001
+
 #### Tecnologias 📲
 * [JavaScript](https://www.javascript.com/)
 * [React](https://es.reactjs.org/)
