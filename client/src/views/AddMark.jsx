@@ -11,7 +11,8 @@ class InfoAlumno extends React.Component {
         this.state = {
             agregarNota: this.props.agregarNota,
             mark: 0,
-            description: ""
+            units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            unit: 0
         }
     }
 
@@ -24,7 +25,7 @@ class InfoAlumno extends React.Component {
         const newMark = {
             idCourse: this.props.idCourse,
             idStudent: this.props.data.id,
-            description: this.state.description,
+            unit: this.state.unit,
             mark: this.state.mark,
             date: new Date().getDate()
         };
@@ -38,6 +39,19 @@ class InfoAlumno extends React.Component {
                 console.log("ERROR - " + error);
             });
     }
+
+    manejarSeleccionUnit(event) {
+        this.setState({ unit: event.target.value })
+    }
+    desplegar(collect) {
+        return collect.map(c => (
+            <option key={c} value={c}>
+                {c}
+            </option>
+        ));
+    }
+
+
 
     recuadroInfoAlumno() {
         const anchoLabel = 5
@@ -64,26 +78,23 @@ class InfoAlumno extends React.Component {
                         </div>
 
                         <div class="row" style={{ margin: "2px" }}>
-                            <div class="col-xs-12">
-                                <FormInputs
-                                    ncols={["col-xs-12"]}
-                                    properties={[
-                                        {
-                                            label: "Description:",
-                                            type: "text",
-                                            bsClass: "form-control",
-                                            placeholder: "add a description",
-                                            value: this.state.description,
-                                            onChange: event => this.setState({ description: event.target.value }),
-                                            defaultValue: "without description",
-                                            disabled: false
-                                        }
-                                    ]}
-                                />
+                            <div class="col-xs-6">
+                                <div className="col-md-7">
+                                    <label htmlFor="level"> Unit: </label>
+                                    <select
+                                        label="nivel"
+                                        className="form-control"
+                                        onChange={this.manejarSeleccionUnit.bind(this)}
+                                        defaultValue="1"
+                                        id="niveles"
+                                    >
+                                        {this.desplegar(this.state.units)}
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-xs-6">
                                 <FormInputs
-                                    ncols={["col-xs-4"]}
+                                    ncols={["col-xs-7"]}
                                     properties={[
                                         {
                                             label: "Mark",

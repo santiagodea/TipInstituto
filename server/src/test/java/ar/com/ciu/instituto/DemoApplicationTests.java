@@ -96,10 +96,10 @@ public class DemoApplicationTests {
 		sc5 = this.studentCourseService.create(sc5);
 		Assert.assertNotNull(sc5.getId());
 		
-		Mark marka1 = new Mark(10, "unidad 1", hoy, sc1);
-		Mark marka12 = new Mark(9, "unidad 2", hoy, sc1);
-		Mark marka13 = new Mark(9.5, "unidad 3", hoy, sc1);
-		Mark marka2 = new Mark(5, "unidad 1", hoy, sc2);
+		Mark marka1 = new Mark(10, 1, hoy, sc1);
+		Mark marka12 = new Mark(9, 2, hoy, sc1);
+		Mark marka13 = new Mark(9.5, 3, hoy, sc1);
+		Mark marka2 = new Mark(5, 1, hoy, sc2);
 		
 		marka1 = this.markService.create(marka1);
 		Assert.assertNotNull(marka1.getId());

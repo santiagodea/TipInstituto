@@ -30,7 +30,7 @@ public class MarkServiceImpl implements MarkService {
 	@Transactional(rollbackFor =  Exception.class)
 	public Mark create(Mark mark) {
 		StudentCourse st = this.scRepository.findById(mark.getStudentCourse().getId()).orElse(null);
-		Mark mark1 = new Mark(mark.getCalification(), mark.getDescription(), mark.getDate(), st);
+		Mark mark1 = new Mark(mark.getCalification(), mark.getUnit(), mark.getDate(), st);
 		markRepository.save(mark1);
 		return mark1;
 	}
@@ -39,7 +39,7 @@ public class MarkServiceImpl implements MarkService {
 	@Transactional(rollbackFor =  Exception.class)
 	public MarkDTO create(MarkDTO markDTO) {
 		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
-		Mark mark = new Mark(markDTO.getCalification(), markDTO.getDescription(), markDTO.getDate(), st);
+		Mark mark = new Mark(markDTO.getCalification(), markDTO.getUnit(), markDTO.getDate(), st);
 		this.markRepository.save(mark);
 		return new MarkDTO(mark);
 	}
@@ -68,7 +68,7 @@ public class MarkServiceImpl implements MarkService {
 		Mark mark = this.markRepository.findById(markDTO.getId()).get();
 		mark.setCalification(markDTO.getCalification());
 		mark.setDate(markDTO.getDate());
-		mark.setDescription(markDTO.getDescription());
+		mark.setUnit(markDTO.getUnit());
 		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
 		mark.setStudentCourse(st);
 		mark = this.markRepository.save(mark);

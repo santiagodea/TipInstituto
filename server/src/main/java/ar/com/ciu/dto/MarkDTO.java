@@ -7,7 +7,7 @@ import ar.com.ciu.model.Mark;
 public class MarkDTO {
 	private Long id;
 	private double calification;
-	private String description;
+	private Integer unit;
 	private LocalDate date;
 	private Long idStudentCourse;
 
@@ -16,16 +16,16 @@ public class MarkDTO {
 		super();
 	}
 
-	public MarkDTO(double cal, String description, LocalDate date, Long idStudentCourse) {
+	public MarkDTO(double cal, Integer unit, LocalDate date, Long idStudentCourse) {
 		super();
 		this.calification = cal;
-		this.description = description;
+		this.unit = unit;
 		this.date = date;
 		this.idStudentCourse = idStudentCourse;
 	}
 
 	public MarkDTO(Mark mark) {
-		this(mark.getCalification(), mark.getDescription(), mark.getDate(), mark.getStudentCourse().getId());
+		this(mark.getCalification(), mark.getUnit(), mark.getDate(), mark.getStudentCourse().getId());
 		this.id = mark.getId();
 		
 	}
@@ -46,12 +46,12 @@ public class MarkDTO {
 		this.calification = calification;
 	}
 
-	public String getDescription() {
-		return description;
+	public Integer getUnit() {
+		return unit;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(Integer unit) {
+		this.unit = unit;
 	}
 
 	public LocalDate getDate() {
