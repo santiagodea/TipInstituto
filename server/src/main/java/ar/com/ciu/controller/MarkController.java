@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ciu.dto.MarkDTO;
 import ar.com.ciu.dto.MarksBySCDTO;
+import ar.com.ciu.dto.NewMarkDTO;
 import ar.com.ciu.dto.ScidDTO;
-import ar.com.ciu.model.StudentCourse;
+import ar.com.ciu.model.Mark;
 import ar.com.ciu.service.MarkService;
-import ar.com.ciu.service.StudentCourseService;
 
 @RestController		
 @RequestMapping("/mark")
@@ -29,9 +29,6 @@ public class MarkController {
 	@Autowired
 	private MarkService markService;
 	
-	@Autowired
-	private StudentCourseService studentCourseService;
-
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<MarkDTO> create(@RequestBody MarkDTO markDTO) {
 		markDTO = this.markService.create(markDTO);
@@ -83,10 +80,10 @@ public class MarkController {
 		return new ResponseEntity<MarksBySCDTO>(marksBySCDTO, HttpStatus.OK);
 	}
 	
-//	@RequestMapping(value = "/addMark", method = RequestMethod.PUT)
-//	public ResponseEntity<NewMarkDTO> addMark(@RequestBody NewMarkDTO newMarkDTO) throws NotFoundException {
-//		MarkDTO markDTO = this.markService.addMark(newMarkDTO);
-//		return new ResponseEntity<MarkDTO>(markDTO, HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/addMark", method = RequestMethod.POST)
+	public ResponseEntity<Mark> addMark(@RequestBody NewMarkDTO newMarkDTO) throws NotFoundException {
+		Mark mark = this.markService.addMark(newMarkDTO);
+		return new ResponseEntity<Mark>(mark, HttpStatus.OK);
+	}
 
 }

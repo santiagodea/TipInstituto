@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.ciu.dto.MarkDTO;
 import ar.com.ciu.dto.MarksBySCDTO;
+import ar.com.ciu.dto.NewMarkDTO;
 import ar.com.ciu.dto.ScidDTO;
 import ar.com.ciu.model.Mark;
 import ar.com.ciu.model.StudentCourse;
@@ -90,16 +91,12 @@ public class MarkServiceImpl implements MarkService {
 		return marksbyDTO;
 	}
 	
-//	@Override
-//	@Transactional(rollbackFor =  Exception.class)
-//	public MarkDTO addMark(NewMarkDTO newMarkDTO) {
-//		Mark mark = this.markRepository.findById(markDTO.getId()).get();
-//		mark.setCalification(markDTO.getCalification());
-//		mark.setDate(markDTO.getDate());
-//		mark.setDescription(markDTO.getDescription());
-//		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
-//		mark.setStudentCourse(st);
-//		mark = this.markRepository.save(mark);
-//		return markDTO;
-//	}
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
+	public Mark addMark(NewMarkDTO newMarkDTO) {
+		StudentCourse sc = this.scRepository.findByIdCourseAndStudent(newMarkDTO.getIdStudent(), newMarkDTO.getIdCourse());
+		Mark mark1 = new Mark(newMarkDTO.getMark(), newMarkDTO.getUnit(), newMarkDTO.getDate(), sc);
+		markRepository.save(mark1);	
+		return mark1;
+	}
 }

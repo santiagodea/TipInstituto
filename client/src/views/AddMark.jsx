@@ -20,6 +20,10 @@ class InfoAlumno extends React.Component {
         return this.props.data
     }
 
+    mostrarInfo(){
+
+    }
+
     saveMark() {
         let self = this;
         const newMark = {
@@ -29,11 +33,13 @@ class InfoAlumno extends React.Component {
             mark: this.state.mark,
             date: new Date().getDate()
         };
+        console.log(newMark)
         axios
             .post("/mark/addMark", newMark)
             .then(function (res) {
                 console.log("A new mark has been added.");
                 self.props.recargado();
+
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);

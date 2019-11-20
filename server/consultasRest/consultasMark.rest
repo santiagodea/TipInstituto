@@ -7,7 +7,7 @@ content-type: application/json
 
 {
     "calification": 9,
-    "unit": "unidad 7",
+    "unit": 7,
     "date": "2019-10-07",
     "idStudentCourse": 4
 }
@@ -38,11 +38,22 @@ content-type: application/json
 }
 
 ### 
-
 GET {{url}}/marksBySC/ HTTP/1.1
 content-type: application/json
 
 {
     "idCourse": 1,
     "idStudent": 1
+}
+
+### 
+POST {{url}}/addMark/ HTTP/1.1
+content-type: application/json
+
+{
+    "idCourse": 1,
+    "idStudent": 1,
+    "unit": 7,
+    "mark": 3,
+    "date": "2019-11-19"
 }

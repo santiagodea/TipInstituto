@@ -44,11 +44,6 @@ class InfoAlumno extends React.Component {
             });
     }
 
-    //   axios.get('/users', {
-    //     // Asignamos el valor de userInfo a params
-    //     params: userInfo
-    //   })
-
     alum() {
         return this.props.data
     }

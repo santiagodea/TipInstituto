@@ -3,24 +3,28 @@ package ar.com.ciu.dto;
 import java.time.LocalDate;
 
 public class NewMarkDTO {
-   
-    private Long id;
+
 	private Long idCourse;
 	private Long idStudent;
-	private String description;
+	private Integer unit;
 	private double mark;
 	private LocalDate date;
-	
-	public NewMarkDTO() {
-		
+
+	public NewMarkDTO(Long idCourse, Long idStudent, Integer unit, double mark, LocalDate date) {
+		super();
+		this.idCourse = idCourse;
+		this.idStudent = idStudent;
+		this.unit = unit;
+		this.mark = mark;
+		this.date = date;
 	}
 
-	public Long getId() {
-		return id;
+	public Integer getUnit() {
+		return unit;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUnit(Integer unit) {
+		this.unit = unit;
 	}
 
 	public Long getIdCourse() {
@@ -39,14 +43,6 @@ public class NewMarkDTO {
 		this.idStudent = idStudent;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public double getMark() {
 		return mark;
 	}
@@ -62,6 +58,5 @@ public class NewMarkDTO {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	
-	
+
 }

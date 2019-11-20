@@ -78,6 +78,12 @@ class OneCourse extends Component {
 
   recargado() {
     this.getDataCourse();
+    this.setState({
+      agregaNota: false,
+      panelAlumnos: true,
+      panelNuevoAlumno: false
+    })
+
   }
 
   llenarCurso(curso) {
