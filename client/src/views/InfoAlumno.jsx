@@ -17,10 +17,10 @@ class InfoAlumno extends React.Component {
 
     componentDidMount() {
         this.setState({ idCourse: this.props.idCourse })
-        //this.getMarks();
+        this.getMarks();
     }
     componentWillUpdate(){
-        this.getMarks();
+        //this.getMarks();
     }
 
     getMarks() {
