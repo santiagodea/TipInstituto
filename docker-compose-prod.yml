@@ -5,7 +5,7 @@ services:
   inst-prod:
     container_name: inst-prod
     build:
-      context: .
+      context: ./client
       dockerfile: Dockerfile-prod
     ports:
       - '80:80'
