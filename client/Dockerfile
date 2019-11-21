@@ -1,8 +1,9 @@
 # build environment
 FROM node:12.2.0-alpine as build
+RUN mkdir -p /usr/src/client
+COPY . /usr/src/client
 WORKDIR /usr/src/client
 ENV PATH /usr/src/client/node_modules/.bin:$PATH
-COPY package.json /usr/src/client/package.json
 RUN npm install --silent
 COPY . /usr/src/client
 RUN npm run build
