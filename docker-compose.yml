@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 services:
 
   # EN LUGAR DE MONGO DEBO CONFIGURAR MYSQL 
@@ -23,7 +23,7 @@ services:
 #   depends_on:
 #     - mysql
     build:
-      context: .
+      context: ./client
       dockerfile: Dockerfile
     volumes:
       - '.:/client'
