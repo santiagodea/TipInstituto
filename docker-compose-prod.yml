@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  inst-prod:
+    container_name: inst-prod
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
+    ports:
+      - '80:80'
