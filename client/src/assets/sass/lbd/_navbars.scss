@@ -10,7 +10,7 @@
     border: $none;
     font-size: $font-size-navbar;
     border-radius: 0;
-    
+
     .navbar-brand {
         font-weight: $font-weight-normal;
         margin: $navbar-margin-brand;
@@ -36,7 +36,7 @@
              line-height: 16px;
              top: 1px;
         }
-        
+
         .notification{
             position: absolute;
             background-color: #FB404B;
@@ -63,9 +63,9 @@
     .caret{
        // @include center-item();
     }
-    
+
     &.fixed{
-        width: calc(100% - $sidebar-width);
+        width: calc(100% - #{$sidebar-width});
         right: 0;
         left: auto;
         border-radius: 0;
