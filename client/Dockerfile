@@ -7,7 +7,7 @@ ENV PATH /usr/src/client/node_modules/.bin:$PATH
 RUN npm install --silent
 #RUN npm install react-scripts@3.0.1 -g --silent
 COPY . /usr/src/client
-RUN npm run build
+RUN npm run-script build
 
 # production environment
 FROM nginx:1.16.0-alpine
