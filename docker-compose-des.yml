@@ -1,27 +1,22 @@
 version: '3'
 services:
 
-  # EN LUGAR DE MONGO DEBO CONFIGURAR MYSQL 
-  # FALTARIA CREAR UN VOLUMEN PARA GUARAR LO DE LA BASE
-  # mysql:
-  #   container_name: mysql
-  #   image: mongo:4.2
-
-  # server:
-  #   container_name: inst_server
-  #   restart: always
-  #   depends_on:
-  #     - mysql
-  #   build:
-  #     server.dockerfile
-  #   ports:
-  #     - '4200:4200'
+services:
+  server:
+    image: springboot-docker-compose-app:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/springboot-docker-compose-app
+    ports:
+      - "8081:8081"
 
   client:
     container_name: inst_client
     restart: always
-#   depends_on:
-#     - mysql
+   depends_on:
+     - server
     build:
       context: ./client
       dockerfile: Dockerfile
