@@ -1,9 +1,22 @@
 version: '3'
 
 services:
+  server:
+    image: springboot-docker-compose-app:1
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/springboot-docker-compose-app
+    ports:
+      - '8081:8081'
 
   inst-prod:
-    container_name: inst-prod
+    container_name: inst-prod\
+    restart: always
+    depends_on:
+     - server
     build:
       context: ./client
       dockerfile: Dockerfile
