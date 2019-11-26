@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 
 
@@ -11,7 +11,6 @@ import AddMark from "views/AddMark";
 const axios = require("axios");
 
 const { Alert } = require("react-alert");
-const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
 const thArray = ["Surname", "Name", " "];
 
 
@@ -75,6 +74,28 @@ class OneCourse extends Component {
       });
   }
 
+  getMarks(estudiante) {
+    let self = this;
+    const idCS = {
+        idCourse: self.curso.id,
+        idStudent: estudiante.id
+    }
+    return axios
+        .get("/mark/marksBySC", { params: idCS })
+        .then(function (response) {
+            const listaDeMark = response.data.marksListDTO;
+            self.setState({
+              marksAlumnoActual: listaDeMark
+            })
+            return Promise.resolve(listaDeMark);
+        })
+        .then(function (res) {
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 
   recargado() {
     this.getDataCourse();
@@ -83,7 +104,14 @@ class OneCourse extends Component {
       panelAlumnos: true,
       panelNuevoAlumno: false
     })
-
+  }
+  recargadoNotas() {
+    this.getDataCourse();
+    this.setState({
+      agregaNota: false,
+      panelAlumnos: true,
+      mostrarPanelDeAlumno:true
+    })
   }
 
   llenarCurso(curso) {
@@ -179,6 +207,8 @@ class OneCourse extends Component {
       panelNuevoAlumno: false
     });
   }
+
+
   mostrarNuevoStudent() {
     if (this.state.panelNuevoAlumno) {
       return (
@@ -271,20 +301,24 @@ class OneCourse extends Component {
 
   }
   mostrarDatosAlumno(estudiante) {
+    this.getDataCourse();
     this.setState({
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
       agregarNota: false,
       tamanioPanel:"col-md-6"
     });
+    this.getMarks(estudiante)
   }
   agregarNota(estudiante) {
+    this.getDataCourse();
     this.setState({
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
       agregarNota: true,
       tamanioPanel:"col-md-6"
     });
+
   }
   cerrarInfoAlumno() {
     this.setState({
@@ -300,7 +334,6 @@ class OneCourse extends Component {
   render() {
     let panelInfo = null;
     if (this.state.mostrarPanelDeAlumno) {
-      // acá le paso el Alumno a la pantalla de InfoPersona
       if (this.state.agregarNota) {
         panelInfo = (
           <div id="AddMark">
@@ -309,7 +342,8 @@ class OneCourse extends Component {
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
-              recargado={() => this.recargado()}
+              recargado={() => this.recargadoNotas()}
+              volver={(estudiante) => this.mostrarDatosAlumno(estudiante)}
             />
           </div>
         );
@@ -324,7 +358,7 @@ class OneCourse extends Component {
               agregarNota={this.state.agregarNota}
               recargado={() => this.recargado()}
               guardarMarks={() => this.guardarMarks()}
-              marksAA={this.state.marksAlumnoActual}
+              marks={this.state.marksAlumnoActual}
             />
           </div>
         );

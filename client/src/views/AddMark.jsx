@@ -10,6 +10,7 @@ class InfoAlumno extends React.Component {
         this.screen = this.props.screen    // con esto seteo la pantalla padre
         this.state = {
             agregarNota: this.props.agregarNota,
+            alumno: this.props.data,
             mark: 0,
             units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             unit: 0
@@ -31,15 +32,15 @@ class InfoAlumno extends React.Component {
             idStudent: this.props.data.id,
             unit: this.state.unit,
             mark: this.state.mark,
-            date: new Date().getDate()
+            date: new Date()
         };
-        console.log(newMark)
         axios
             .post("/mark/addMark", newMark)
             .then(function (res) {
                 console.log("A new mark has been added.");
-                self.props.recargado();
-
+            })
+            .then(function (res) {
+                self.props.volver(self.alum());
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);

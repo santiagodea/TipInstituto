@@ -94,8 +94,10 @@ public class MarkServiceImpl implements MarkService {
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
 	public Mark addMark(NewMarkDTO newMarkDTO) {
-		StudentCourse sc = this.scRepository.findByIdCourseAndStudent(newMarkDTO.getIdStudent(), newMarkDTO.getIdCourse());
+		//System.out.println("IDSSSSSSSSSSSS" + newMarkDTO.getIdStudent() +  newMarkDTO.getIdCourse());
+		StudentCourse sc = this.scRepository.findByIdCourseAndStudent( newMarkDTO.getIdCourse(), newMarkDTO.getIdStudent());
 		Mark mark1 = new Mark(newMarkDTO.getMark(), newMarkDTO.getUnit(), newMarkDTO.getDate(), sc);
+		System.out.println("STUDENT COURSE A GUARDAR" + sc);
 		markRepository.save(mark1);	
 		return mark1;
 	}

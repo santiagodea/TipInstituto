@@ -4,17 +4,11 @@ import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import NewCourse from "views/NewCourse";
 import OneCourse from "views/OneCourse";
 const axios = require("axios");
-const log = require('chalk');
 
 class Courses extends Component {
   constructor(props) {
     super(props);
-    const curso = {
-      nombre: "",
-      nivel: "",
-      turno: "",
-      profesor: ""
-    };
+
     this.state = {
       cursoSeleccionado: null,
       tarjetaDeCursos: true,
@@ -94,7 +88,7 @@ class Courses extends Component {
               {this.state.cursos.map(c => this.tarjetaCursos(c))}
             </Row>
           </Grid>
-          <a class="btn btn-fill btn-warning btn-block"
+          <a className="btn btn-fill btn-warning btn-block"
           onClick={() => this.accionOnClick()}
           //href="/admin/newCourse"
           >New Course</a>
@@ -157,7 +151,6 @@ class Courses extends Component {
       <div>
         {this.tarjetasOUnCurso()}
         {this.mostrarNuevoCurso()}
-
       </div>
     )
   }

@@ -1,12 +1,4 @@
 import React, { Component } from "react";
-import {
-    Grid,
-    Row,
-    Col,
-    FormGroup,
-    ControlLabel,
-    FormControl
-} from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 const axios = require("axios");
@@ -16,11 +8,6 @@ class NewStudent extends Component {
         super(props);
         this.course = this.props.course;
         this.student = this.props.student;
-        const sc = {
-            year: new Date().getFullYear(),
-            idStudent: " ",
-            idCourse: this.course.id
-        }
         this.state = {
             id: "",
             dni: 0,
@@ -73,8 +60,6 @@ class NewStudent extends Component {
             .catch(function (error) {
                 console.log("ERROR - " + error);
             });
-        //  self.props.recargado();
-        //  self.props.onCancel();
     }
 
     guardarStudent() {
@@ -227,10 +212,10 @@ class NewStudent extends Component {
                 />
                 <div >
                     <div class="col-xs-6 col-md-4">
-                        <a class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Cancel</a>
+                        <button class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Cancel</button>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <a class="btn btn-fill btn-success" onClick={() => this.guardarStudent()}>Save Student</a>
+                        <button class="btn btn-fill btn-success" onClick={() => this.guardarStudent()}>Save Student</button>
                     </div>
                 </div>
             </div>

@@ -1,51 +1,32 @@
 import Card from "components/Card/Card.jsx";
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import {Table } from "react-bootstrap";
 const React = require('react')
 const { Alert } = require("react-alert");
-const axios = require("axios");
 
 class InfoAlumno extends React.Component {
     constructor(props) {
         super(props)
         this.screen = this.props.screen;    // con esto seteo la pantalla padre
         this.idCourse = this.props.idCourse;
-        this.idStudent = this.props.data.id;
         this.state = {
-            marks: []
+            marks: this.props.marks
         }
     }
 
     componentDidMount() {
-        this.setState({ idCourse: this.props.idCourse })
-        this.getMarks();
-    }
-    componentWillUpdate(){
-        //this.getMarks();
+        this.setState({ 
+            idCourse: this.props.idCourse,
+            //marks: this.props.marks
+        })
+        this.props.recargado();
     }
 
-    getMarks() {
-        let self = this;
-        const idCS = {
-            idCourse: this.props.idCourse,
-            idStudent: this.alum().id
-        }
-        return axios
-            .get("/mark/marksBySC", { params: idCS })
-            .then(function (response) {
-                const listaDeMark = response.data.marksListDTO;
-                self.setState({
-                    marks: listaDeMark
-                })
-                this.props.guardarMarks(this.state.marks);
-                return Promise.resolve(listaDeMark);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
 
     alum() {
         return this.props.data
+    }
+    notas(){
+        return this.props.marks
     }
 
     recuadroInfoAlumno() {
@@ -82,7 +63,7 @@ class InfoAlumno extends React.Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {this.state.marks.map(m => (
+                                                {this.notas().map(m => (
                                                     <tr id="marks" key={m.id}>
                                                         <td>{m.unit}</td>
                                                         <td>{m.calification}</td>

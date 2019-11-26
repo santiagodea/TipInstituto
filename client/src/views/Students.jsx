@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
-import { tdArray } from "variables/Variables.jsx";
 const axios = require("axios");
 const { Alert } = require("react-alert");
 const titulosArray = ["Surname", "Name", "Phone", "Course", "Payment"];
@@ -86,9 +85,8 @@ class Students extends Component {
       </Alert>
     );
   }
-  mostrarAddPago(estudiante){
-
-  }
+  mostrarAddPago(estudiante){}
+  mostrarDatosAlumno(student){}
 
   botonAddPago(estudiante) {
     return this.botonStandard(
@@ -106,8 +104,6 @@ class Students extends Component {
       "fa-info"
     );
   }
-  mostrarAddPago(student){}
-  mostrarDatosAlumno(student){}
 
   render() {
     return (
