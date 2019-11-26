@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
- db:
+  db:
     image: mysql:5.7
     ports:
       - "3306:3306"
@@ -17,7 +17,7 @@ services:
     networks:
       - backend
 
-app-server:
+  app-server:
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -47,7 +47,7 @@ app-server:
     ports:
       - '80:80'
     networks:
-      - frontend 
+      - frontend
 
 
 
@@ -56,4 +56,4 @@ volumes:
 
 networks:
   backend:
-  frontend:    
+  frontend:
