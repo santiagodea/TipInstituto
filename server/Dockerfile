@@ -2,7 +2,7 @@
 FROM maven:3.6.1-jdk-8 as maven_builder
 ADD ./ /app
 WORKDIR /app
-RUN mvn clean install
+RUN mvn clean install -DskipTests=true
 
 FROM tomcat:8.0.51-jre8-alpine
 RUN rm -rf /usr/local/tomcat/webapps/*

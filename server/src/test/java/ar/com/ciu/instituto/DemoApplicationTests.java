@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,6 +26,7 @@ import ar.com.ciu.service.StudentService;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InstitutoApplication.class)
 @TestPropertySource(locations="classpath:test.properties")
+//@ContextConfiguration (locations = "classpath*:/spring/applicationContext*.xml")
 public class DemoApplicationTests {
 
 	@Autowired
