@@ -1,11 +1,10 @@
 version: '3'
 
 services:
-
   db:
     image: mysql:5.7
     ports:
-      - "3306:3306"
+      - '3306:3306'
     restart: always
     environment:
       MYSQL_DATABASE: tip-instituto
@@ -22,12 +21,12 @@ services:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - '8080:8080'
     restart: always
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/tip-instituto?useSSL=false&serverTimezone=GMT-3
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tip-instituto?useSSL=false&serverTimezone=GMT-3
       SPRING_DATASOURCE_USERNAME: Santiago
       SPRING_DATASOURCE_PASSWORD: 33269447
     networks:
@@ -35,10 +34,10 @@ services:
       - frontend
 
   inst-prod:
-    container_name: inst-prod\
+    container_name: inst-prod
     restart: always
     depends_on:
-     - app-server
+      - app-server
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -48,8 +47,6 @@ services:
       - '80:80'
     networks:
       - frontend
-
-
 
 volumes:
   db-data:
