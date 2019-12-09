@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db/tip-instituto?useSSL=false&serverTimezone=GMT-3
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tip-instituto?useSSL=false&serverTimezone=GMT-3
       SPRING_DATASOURCE_USERNAME: Santiago
       SPRING_DATASOURCE_PASSWORD: 33269447
     networks:
