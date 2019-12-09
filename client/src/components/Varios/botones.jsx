@@ -1,5 +1,5 @@
-const React = require("react");
-const { Alert } = require("react-alert");
+import  React from "react";
+import  { Alert } from "react-alert";
 
 class AceptarYCancelar extends React.Component {
   render() {
@@ -47,5 +47,6 @@ class BackButton extends React.Component {
   }
 }
 
-exports.BackButton = BackButton;
-exports.AceptarYCancelar = AceptarYCancelar;
+export default {BackButton, AceptarYCancelar}
+// exports.BackButton = BackButton;
+// exports.AceptarYCancelar = AceptarYCancelar;

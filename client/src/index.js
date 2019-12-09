@@ -15,7 +15,7 @@ import proxyApi from "./forBuild/proxyApi.js";
 import AdminLayout from "layouts/Admin.jsx";
 //axios.defaults.baseURL = 'http://localhost:8080'; //si esta en prod. va proxyApi;
 console.log(proxyApi);
-axios.defaults.baseURL = proxyApi;
+axios.defaults.baseURL = proxyApi.API_BASE_URL;
 
 
 ReactDOM.render(
