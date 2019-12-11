@@ -1,9 +1,9 @@
+import React from "react";
 import Card from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-const axios = require("axios");
+import axios from "axios";
 
-const React = require('react')
-const { Alert } = require("react-alert");
+
 class InfoAlumno extends React.Component {
     constructor(props) {
         super(props)
@@ -202,8 +202,6 @@ class InfoAlumno extends React.Component {
     // Botón -  parámetros Label , Acción, Clases Adicionales, Icono (GlypIcon)
     botonStandard(label, accion, clasesAdicionales, glyphIcon) {
         return (
-            <Alert>
-                {alert => (
                     <button
                         className={"btn btn-fill " + clasesAdicionales}
                         style={{
@@ -215,8 +213,6 @@ class InfoAlumno extends React.Component {
                     >
                         <span className={"fa " + glyphIcon}> {label} </span>
                     </button>
-                )}
-            </Alert>
         );
     }
     render() {

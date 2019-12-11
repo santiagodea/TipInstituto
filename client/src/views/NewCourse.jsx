@@ -6,10 +6,8 @@ import {
 } from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-const axios = require("axios");
-
-
-const { AceptarYCancelar } = require("../components/Varios/botones.jsx");
+import { Alert } from "react-alert";
+import axios from "axios";
 
 class NewCourse
   extends Component {
@@ -56,13 +54,15 @@ class NewCourse
     axios
       .post("/course", course)
       .then(function (res) {
+        alert.success("The new Course was successfully created. " + course.name);
         console.log("The new Course was successfully created.");
         self.props.recargado();
       })
       .catch(function (error) {
+        //alert.error("ERROR - " + error.response.data.message);
         console.log("ERROR - " + error);
       });
-      self.props.onCancel();
+    self.props.onCancel();
   }
 
   cancelarAgregado() {
@@ -94,9 +94,9 @@ class NewCourse
 
   desplegarHoras(string) {
     let collect = [];
-    if (string == "tomorrow"){collect = this.state.horariosMan}
-    else if (string == "afternoon"){collect = this.state.horariosTar}
-    else {{collect = this.state.horariosNoch}}
+    if (string === "tomorrow") { collect = this.state.horariosMan }
+    else if (string === "afternoon") { collect = this.state.horariosTar }
+    else { collect = this.state.horariosNoch }
     return collect.map(c => (
       <option key={c} value={c}>
         {c}
@@ -184,13 +184,16 @@ class NewCourse
                   </form>
                 }
               />
-              <AceptarYCancelar
-                acceptText={"Save Course"}
-                cancelText={"Calcel"}
-                cancelar={() => this.cancelar()}
-                aceptar={() => this.guardarCurso()}
-              >
-              </AceptarYCancelar>
+              <div class="col-xs-6 col-md-4">
+                <button class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Cancel</button>
+              </div>
+              <div class="col-xs-6 col-md-4">
+                <Alert>
+                  {alert => (
+                    <button class="btn btn-fill btn-success" onClick={() => this.guardarCurso(alert)}>Save Student</button>
+                  )}
+                </Alert>
+              </div>
             </Col>
             <Col md={4}>
             </Col>

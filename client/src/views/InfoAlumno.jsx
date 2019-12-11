@@ -1,7 +1,7 @@
+import React from "react";
 import Card from "components/Card/Card.jsx";
-import {Table } from "react-bootstrap";
-const React = require('react')
-const { Alert } = require("react-alert");
+import { Table } from "react-bootstrap";
+
 
 class InfoAlumno extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class InfoAlumno extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ 
+        this.setState({
             idCourse: this.props.idCourse,
             //marks: this.props.marks
         })
@@ -25,7 +25,7 @@ class InfoAlumno extends React.Component {
     alum() {
         return this.props.data
     }
-    notas(){
+    notas() {
         return this.props.marks
     }
 
@@ -107,21 +107,17 @@ class InfoAlumno extends React.Component {
     // Botón -  parámetros Label , Acción, Clases Adicionales, Icono (GlypIcon)
     botonStandard(label, accion, clasesAdicionales, glyphIcon) {
         return (
-            <Alert>
-                {alert => (
-                    <button
-                        className={"btn btn-fill " + clasesAdicionales}
-                        style={{
-                            marginRight: "5px",
-                            paddingRight: "100px",
-                            textAlign: "center"
-                        }}
-                        onClick={() => accion(alert)}
-                    >
-                        <span className={"fa " + glyphIcon}> {label} </span>
-                    </button>
-                )}
-            </Alert>
+            <button
+                className={"btn btn-fill " + clasesAdicionales}
+                style={{
+                    marginRight: "5px",
+                    paddingRight: "100px",
+                    textAlign: "center"
+                }}
+                onClick={() => accion()}
+            >
+                <span className={"fa " + glyphIcon}> {label} </span>
+            </button>
         );
     }
     render() {

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
-const axios = require("axios");
-const { Alert } = require("react-alert");
+import axios from "axios";
 const titulosArray = ["Surname", "Name", "Phone", "Course", "Payment"];
 
 class FilaStudent extends React.Component {
@@ -68,8 +67,6 @@ class Students extends Component {
   }
   botonStandard(label, accion, clasesAdicionales, glyphIcon) {
     return (
-      <Alert>
-        {alert => (
           <button
             className={"btn btn-fill " + clasesAdicionales}
             style={{
@@ -77,12 +74,10 @@ class Students extends Component {
               paddingRight: "100px",
               textAlign: "center"
             }}
-            onClick={() => accion(alert)}
+            onClick={() => accion()}
           >
             <span className={"fa " + glyphIcon}> {label} </span>
           </button>
-        )}
-      </Alert>
     );
   }
   mostrarAddPago(estudiante){}

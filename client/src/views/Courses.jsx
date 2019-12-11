@@ -3,7 +3,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import NewCourse from "views/NewCourse";
 import OneCourse from "views/OneCourse";
-const axios = require("axios");
+import axios from "axios";
 
 class Courses extends Component {
   constructor(props) {

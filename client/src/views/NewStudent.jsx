@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-const axios = require("axios");
+import axios from "axios";
 
 class NewStudent extends Component {
     constructor(props) {

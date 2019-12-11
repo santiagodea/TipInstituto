@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
-
-
-//const infoAlumno = require("views/InfoAlumno");
 import InfoAlumno from "views/InfoAlumno";
 import NewStudent from "views/NewStudent";
 import AddMark from "views/AddMark";
-//import { addListener } from "cluster";
-const axios = require("axios");
+import axios from "axios";
 
-const { Alert } = require("react-alert");
 const thArray = ["Surname", "Name", " "];
 
 
@@ -161,7 +156,7 @@ class OneCourse extends Component {
   botonEliminar(estudiante) {
     return this.botonStandard(
       "Delete",
-      alert => this.eliminarAlumno(estudiante, alert),
+      this.eliminarAlumno(estudiante),
       "btn-danger btn-xs",
       "fa-close"
     );
@@ -177,21 +172,17 @@ class OneCourse extends Component {
   }
   botonStandard(label, accion, clasesAdicionales, glyphIcon) {
     return (
-      <Alert>
-        {alert => (
-          <button
+    <button
             className={"btn btn-fill " + clasesAdicionales}
             style={{
               marginRight: "4px",
               paddingRight: "50px",
               textAlign: "center"
             }}
-            onClick={() => accion(alert)}
+            onClick={() => accion()}
           >
             <span className={"fa " + glyphIcon}> {label} </span>
           </button>
-        )}
-      </Alert>
     );
   }
 
@@ -297,7 +288,7 @@ class OneCourse extends Component {
     this.props.onCancel();
   }
 
-  eliminarAlumno(estudiante, alert) {
+  eliminarAlumno(estudiante) {
 
   }
   mostrarDatosAlumno(estudiante) {
