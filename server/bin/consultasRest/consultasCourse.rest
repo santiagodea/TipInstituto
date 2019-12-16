@@ -1,0 +1,45 @@
+@url = http://localhost:8080/course
+
+# agrego un curso
+###
+POST {{url}} HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Kinder",
+    "level": "One",
+    "shift": "Morning",
+    "teacher": "Ana",
+    "hour": "10"
+}
+
+# consultos todos los cursos que tengo
+###
+GET  {{url}}/findAll HTTP/1.1
+
+# consulto un curso especifico
+###
+GET {{url}}/findById/3 HTTP/1.1
+
+
+#  borro un curso por un id :(
+###
+DELETE  {{url}}/delete/1
+
+# update de un curso
+###
+PUT {{url}}/update HTTP/1.1
+content-type: application/json
+
+{
+    "id" : "1",
+    "name": "Kinder",
+    "level": "One",
+    "shift": "Morning",
+    "teacher": "Ana MAria",
+    "hour": "10"
+}
+
+# consulto un curso con estudiantes por ud id
+###
+GET {{url}}/findByIdWithStudents/1 HTTP/1.1

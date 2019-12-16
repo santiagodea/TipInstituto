@@ -7,4 +7,5 @@ in elc/node_modules
 server_Spring/target
 server_Spring/.classpath
 .metals
+.env
 
