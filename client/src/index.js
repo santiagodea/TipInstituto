@@ -9,14 +9,15 @@ import "./assets/css/pe-icon-7-stroke.css";
 import axios from "axios";
 import proxyApi from "./forBuild/proxyApi.js";
 import AdminLayout from "layouts/Admin.jsx";
-
 //Para las notificaciones
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
-//axios.defaults.baseURL = 'http://localhost:8080'; //si esta en prod. va proxyApi;
-console.log(proxyApi);
-axios.defaults.baseURL = proxyApi.API_BASE_URL;
+require('dotenv').config();
+
+axios.defaults.baseURL = proxyApi.REACT_APP_URL;
+console.log(process.env.REACT_APP_URL);
+console.log(process.env.NODE_ENV);
 
 // optional cofiguration de las notificaciones
 const options = {
