@@ -29,7 +29,7 @@ class OneCourse extends Component {
     super(props);
     this.curso = this.props.curso;
     this.state = {
-      scId:"",
+      scId: "",
       nombre: "",
       nivel: "",
       turno: "",
@@ -44,7 +44,7 @@ class OneCourse extends Component {
       agregaNota: false,
       panelAlumnos: true,
       panelNuevoAlumno: false,
-      tamanioPanel:"col-md-12"
+      tamanioPanel: "col-md-12"
     };
   }
 
@@ -72,24 +72,24 @@ class OneCourse extends Component {
   getMarks(estudiante) {
     let self = this;
     const idCS = {
-        idCourse: self.curso.id,
-        idStudent: estudiante.id
+      idCourse: self.curso.id,
+      idStudent: estudiante.id
     }
     return axios
-        .get("/mark/marksBySC", { params: idCS })
-        .then(function (response) {
-            const listaDeMark = response.data.marksListDTO;
-            self.setState({
-              marksAlumnoActual: listaDeMark
-            })
-            return Promise.resolve(listaDeMark);
+      .get("/mark/marksBySC", { params: idCS })
+      .then(function (response) {
+        const listaDeMark = response.data.marksListDTO;
+        self.setState({
+          marksAlumnoActual: listaDeMark
         })
-        .then(function (res) {
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+        return Promise.resolve(listaDeMark);
+      })
+      .then(function (res) {
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
 
   recargado() {
@@ -105,7 +105,7 @@ class OneCourse extends Component {
     this.setState({
       agregaNota: false,
       panelAlumnos: true,
-      mostrarPanelDeAlumno:true
+      mostrarPanelDeAlumno: true
     })
   }
 
@@ -172,17 +172,17 @@ class OneCourse extends Component {
   }
   botonStandard(label, accion, clasesAdicionales, glyphIcon) {
     return (
-    <button
-            className={"btn btn-fill " + clasesAdicionales}
-            style={{
-              marginRight: "4px",
-              paddingRight: "50px",
-              textAlign: "center"
-            }}
-            onClick={() => accion()}
-          >
-            <span className={"fa " + glyphIcon}> {label} </span>
-          </button>
+      <button
+        className={"btn btn-fill " + clasesAdicionales}
+        style={{
+          marginRight: "4px",
+          paddingRight: "50px",
+          textAlign: "center"
+        }}
+        onClick={() => accion()}
+      >
+        <span className={"fa " + glyphIcon}> {label} </span>
+      </button>
     );
   }
 
@@ -219,7 +219,7 @@ class OneCourse extends Component {
     return (
       <div>
         <div class="row">
-          <div class= {this.state.tamanioPanel}>
+          <div class={this.state.tamanioPanel}>
             <Card
               title="List of students"
               ctTableFullWidth
@@ -260,12 +260,10 @@ class OneCourse extends Component {
             <a class="btn btn-fill btn-primary" onClick={() => this.imprimirListado()}>Print List</a>
           </div>
         </div>
-
       </div>
     );
     // }
   }
-
 
   alumnosONuevoAlumno(panelInfo) {
     if (this.state.panelAlumnos) {
@@ -278,7 +276,6 @@ class OneCourse extends Component {
   mostrarListado() {
 
   }
-
 
   imprimirListado() {
 
@@ -297,7 +294,7 @@ class OneCourse extends Component {
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
       agregarNota: false,
-      tamanioPanel:"col-md-6"
+      tamanioPanel: "col-md-6"
     });
     this.getMarks(estudiante)
   }
@@ -307,7 +304,7 @@ class OneCourse extends Component {
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
       agregarNota: true,
-      tamanioPanel:"col-md-6"
+      tamanioPanel: "col-md-6"
     });
 
   }
@@ -315,11 +312,11 @@ class OneCourse extends Component {
     this.setState({
       mostrarPanelDeAlumno: false,
       agregarNota: false,
-      tamanioPanel:"col-md-12"
+      tamanioPanel: "col-md-12"
     });
   }
-  guardarMarks(marks){
-    this.setState({marksAlumnoActual: marks});
+  guardarMarks(marks) {
+    this.setState({ marksAlumnoActual: marks });
   }
 
   render() {
