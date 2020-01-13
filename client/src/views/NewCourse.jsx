@@ -190,7 +190,7 @@ class NewCourse
               <div class="col-xs-6 col-md-4">
                 <Alert>
                   {alert => (
-                    <button class="btn btn-fill btn-success" onClick={() => this.guardarCurso(alert)}>Save Student</button>
+                    <button class="btn btn-fill btn-success" onClick={() => this.guardarCurso(alert)}>Save Course</button>
                   )}
                 </Alert>
               </div>
