@@ -28,8 +28,8 @@ class Students extends Component {
       students: [],
       mostrarPanelDeAlumno: false,
       alumnoActual: null,
-      marksAlumnoActual: [],
-      agregaNota: false,
+      paymentsAlumnoActual: [],
+      agregaPayment: false,
       panelAlumnos: true,
       tamanioPanel: "col-md-12"
     }
@@ -185,8 +185,10 @@ class Students extends Component {
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
               recargado={() => this.recargado()}
-              guardarMarks={() => this.guardarMarks()}
-              marks={this.state.marksAlumnoActual}
+              
+              //modificar esto por listado con los pagos...
+              //guardarMarks={() => this.guardarMarks()}
+              payments={[]}
             />
           </div>
         );

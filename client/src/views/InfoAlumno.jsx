@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "components/Card/Card.jsx";
 import { Table } from "react-bootstrap";
+const titulosMarks = ["Unit", "Calification", "Date"];
+const titulosPayments = ["Month", "Amount", "Date"];
 
 
 class InfoAlumno extends React.Component {
@@ -9,7 +11,8 @@ class InfoAlumno extends React.Component {
         this.screen = this.props.screen;    // con esto seteo la pantalla padre
         this.idCourse = this.props.idCourse;
         this.state = {
-            marks: this.props.marks
+            marks: this.props.marks,
+            payments: this.props.payments
         }
     }
 
@@ -26,8 +29,66 @@ class InfoAlumno extends React.Component {
         return this.props.data
     }
     notas() {
-        return this.props.marks
+        return this.props.marks.map(m => (
+            <tr id="marks" key={m.id}>
+                <td>{m.unit}</td>
+                <td>{m.calification}</td>
+                <td>{m.date}</td>
+            </tr>
+        ))
     }
+
+    pagos(){
+        return this.props.payments.map(m => (
+            <tr id="marks" key={m.id}>
+                <td>{m.month}</td>
+                <td>{m.amount}</td>
+                <td>{m.date_payment}</td>
+            </tr>
+        ))
+    }
+
+    panelMarks(){
+        return(<div className="card-body ">
+        <Table striped hover>
+            <thead>
+                <tr>
+                    {titulosMarks.map((prop, key) => {
+                        return <th key={key}>{prop}</th>;
+                    })}
+                </tr>
+            </thead>
+            <tbody>
+                {this.notas()}
+            </tbody>
+        </Table>
+    </div>)
+    }
+
+    panelPayments(){
+        return(<div className="card-body ">
+        <Table striped hover>
+            <thead>
+                <tr>
+                    {titulosPayments.map((prop, key) => {
+                        return <th key={key}>{prop}</th>;
+                    })}
+                </tr>
+            </thead>
+            <tbody>
+                {this.pagos()}
+            </tbody>
+        </Table>
+    </div>)
+    }
+
+    marksOPayments() {
+        if (this.state.marks) {
+          return this.panelMarks();
+        } else {
+          return this.panelPayments();
+        }
+      }
 
     recuadroInfoAlumno() {
         const anchoLabel = 5
@@ -53,26 +114,7 @@ class InfoAlumno extends React.Component {
                                         {this.datoEnFila("Phone 1°:", this.alum().tel_principal, anchoLabel)}
                                         {this.datoEnFila("Phone 2°:", this.alum().tel_secundario, anchoLabel)}
                                     </div>
-                                    <div className="card-body ">
-                                        <Table striped hover>
-                                            <thead>
-                                                <tr>
-                                                    {["Unit", "Calification", "Date"].map((prop, key) => {
-                                                        return <th key={key}>{prop}</th>;
-                                                    })}
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {this.notas().map(m => (
-                                                    <tr id="marks" key={m.id}>
-                                                        <td>{m.unit}</td>
-                                                        <td>{m.calification}</td>
-                                                        <td>{m.date}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </Table>
-                                    </div>
+                                    { this.marksOPayments() }
                                 </div>
                             </div>
                         </div>
