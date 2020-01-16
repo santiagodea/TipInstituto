@@ -4,16 +4,16 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import axios from "axios";
 
 
-class AddMark extends React.Component {
+class AddPayment extends React.Component {
     constructor(props) {
         super(props)
         this.screen = this.props.screen    // con esto seteo la pantalla padre
         this.state = {
-            agregarNota: this.props.agregarNota,
+            agregarPago: this.props.agregarPago,
             alumno: this.props.data,
-            mark: 0,
-            units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            unit: 0
+            amount: 0,
+            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            month: ""
         }
     }
 
@@ -21,23 +21,22 @@ class AddMark extends React.Component {
         return this.props.data
     }
 
-    mostrarInfo(){
+    mostrarInfo() {
 
     }
 
-    saveMark() {
+    savePayment() {
         let self = this;
-        const newMark = {
-            idCourse: this.props.idCourse,
-            idStudent: this.props.data.id,
-            unit: this.state.unit,
-            mark: this.state.mark,
-            date: new Date()
+        const newPayment = {
+            month: this.state.month,
+            date: new Date(),
+            amount: this.state.amount,
+            idStudent: this.props.data.id
         };
         axios
-            .post("/mark/addMark", newMark)
+            .post("/payment", newPayment)
             .then(function (res) {
-                console.log("A new mark has been added.");
+                console.log("A new payment has been added.");
             })
             .then(function (res) {
                 self.props.volver(self.alum());
@@ -47,8 +46,8 @@ class AddMark extends React.Component {
             });
     }
 
-    manejarSeleccionUnit(event) {
-        this.setState({ unit: event.target.value })
+    manejarSeleccionDeMes(event) {
+        this.setState({ month: event.target.value })
     }
     desplegar(collect) {
         return collect.map(c => (
@@ -64,7 +63,7 @@ class AddMark extends React.Component {
         const anchoLabel = 5
         return (
             <Card
-                title="Add a new note"
+                title="Add a new payment"
                 ctTableFullWidth
                 ctTableResponsive
                 content={
@@ -87,15 +86,15 @@ class AddMark extends React.Component {
                         <div class="row" style={{ margin: "2px" }}>
                             <div class="col-xs-6">
                                 <div className="col-md-7">
-                                    <label htmlFor="level"> Unit: </label>
+                                    <label htmlFor="month"> Month: </label>
                                     <select
-                                        label="nivel"
+                                        label="Month"
                                         className="form-control"
-                                        onChange={this.manejarSeleccionUnit.bind(this)}
-                                        defaultValue="1"
-                                        id="niveles"
+                                        onChange={this.manejarSeleccionDeMes.bind(this)}
+                                        defaultValue=" "
+                                        id="meses"
                                     >
-                                        {this.desplegar(this.state.units)}
+                                        {this.desplegar(this.state.months)}
                                     </select>
                                 </div>
                             </div>
@@ -104,13 +103,13 @@ class AddMark extends React.Component {
                                     ncols={["col-xs-7"]}
                                     properties={[
                                         {
-                                            label: "Mark",
-                                            type: "text",
+                                            label: "amount",
+                                            type: "number",
                                             bsClass: "form-control",
-                                            placeholder: "10",
-                                            value: this.state.mark,
-                                            onChange: event => this.setState({ mark: event.target.value }),
-                                            defaultValue: "0",
+                                            placeholder: "$100",
+                                            value: this.state.amount,
+                                            onChange: event => this.setState({ amount: event.target.value }),
+                                            defaultValue: "000",
                                             disabled: false
                                         }
                                     ]}
@@ -123,7 +122,7 @@ class AddMark extends React.Component {
                         }}>
                             {this.botonStandard(
                                 "Confirm ",
-                                () => this.saveMark(),
+                                () => this.savePayment(),
                                 "btn-primary btn-xs",
                                 "fa-"
                             )}
@@ -150,69 +149,20 @@ class AddMark extends React.Component {
         )
     }
 
-    // panelNota() {
-    //     return (
-    //         <div class="row" style={{ margin: "6px" }}>
-    //             <div class="col-xs-6">
-    //                 <FormInputs
-    //                     ncols={["col-md-12"]}
-    //                     properties={[
-    //                         {
-    //                             label: "Mark",
-    //                             type: "text",
-    //                             bsClass: "form-control",
-    //                             placeholder: "10",
-    //                             value: this.state.mark,
-    //                             onChange: event => this.setState({ mark: event.target.value }),
-    //                             defaultValue: "0",
-    //                             disabled: false
-    //                         }
-    //                     ]}
-    //                 />
-    //             </div>
-    //             <div class="col-xs-6">
-    //                 <label htmlFor="unit"> Unit: </label>
-    //                 <select
-    //                     label="unit"
-    //                     className="form-control"
-    //                     onChange={this.manejarSeleccionUnit.bind(this)}
-    //                     id="units"
-    //                 >
-    //                     {this.desplegar(this.state.unit)}
-    //                 </select>
-    //             </div>
-    //             <div>
-    //                 {this.botonStandard(
-    //                     "Confirm ",
-    //                     this.screen,
-    //                     "btn-primary btn",
-    //                     "fa-"
-    //                 )}
-    //                 {this.botonStandard(
-    //                     "Cancel ",
-    //                     this.screen,
-    //                     "btn-primary btn",
-    //                     "fa-"
-    //                 )}
-    //             </div>
-    //         </div>
-    //     )
-    // }
-
     // Botón -  parámetros Label , Acción, Clases Adicionales, Icono (GlypIcon)
     botonStandard(label, accion, clasesAdicionales, glyphIcon) {
         return (
-                    <button
-                        className={"btn btn-fill " + clasesAdicionales}
-                        style={{
-                            marginRight: "5px",
-                            paddingRight: "100px",
-                            textAlign: "center"
-                        }}
-                        onClick={() => accion(alert)}
-                    >
-                        <span className={"fa " + glyphIcon}> {label} </span>
-                    </button>
+            <button
+                className={"btn btn-fill " + clasesAdicionales}
+                style={{
+                    marginRight: "5px",
+                    paddingRight: "100px",
+                    textAlign: "center"
+                }}
+                onClick={() => accion(alert)}
+            >
+                <span className={"fa " + glyphIcon}> {label} </span>
+            </button>
         );
     }
     render() {
@@ -227,4 +177,4 @@ class AddMark extends React.Component {
 
 
 }
-export default AddMark;
+export default AddPayment;

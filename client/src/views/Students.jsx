@@ -3,6 +3,7 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import axios from "axios";
 import InfoAlumno from "views/InfoAlumno";
+import AddPayment from "views/AddPayment";
 const titulosArray = ["Surname", "Name", "Phone", ""];
 
 class FilaStudent extends React.Component {
@@ -105,6 +106,13 @@ class Students extends Component {
     );
   }
   mostrarAddPago(student) {
+    this.getPayments(student);
+    this.setState({
+      mostrarPanelDeAlumno: true,
+      alumnoActual: student,
+      agregarPayment: true,
+      tamanioPanel: "col-md-6"
+    });
   }
   mostrarDatosAlumno(student) {
     this.setState({
@@ -179,18 +187,17 @@ class Students extends Component {
     let panelInfo = null;
     if (this.state.mostrarPanelDeAlumno) {
       if (this.state.agregarPayment) {
-        // panelInfo = (
-        //   <div id="AddMark">
-        //     <AddMark
-        //       idCourse={this.curso.id}
-        //       data={this.state.alumnoActual}
-        //       screen={() => this.cerrarInfoAlumno()}
-        //       agregarNota={this.state.agregarNota}
-        //       recargado={() => this.recargadoNotas()}
-        //       volver={(estudiante) => this.mostrarDatosAlumno(estudiante)}
-        //     />
-        //   </div>
-        // );
+        panelInfo = (
+          <div id="AddPayment">
+            <AddPayment
+              data={this.state.alumnoActual}
+              screen={() => this.cerrarInfoAlumno()}
+              agregarPago={this.state.agregarNota}
+              recargado={() => this.recargadoPagos()}
+              volver={(estudiante) => this.mostrarDatosAlumno(estudiante)}
+            />
+          </div>
+        );
       }
       else {
         panelInfo = (
@@ -201,8 +208,6 @@ class Students extends Component {
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
               recargado={() => this.recargado()}
-              //modificar esto por listado con los pagos...
-              //guardarMarks={() => this.guardarMarks()}
               payments={this.state.paymentsAlumnoActual}
             />
           </div>
