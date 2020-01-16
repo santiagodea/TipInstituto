@@ -46,7 +46,6 @@ class Students extends Component {
     return axios
       .get("/student/findAll")
       .then(function (response) {
-        console.log(response.data[0]);
         const listStudent = response.data;
         self.setState({
           students: listStudent
@@ -57,7 +56,24 @@ class Students extends Component {
         console.log(error);
       });
   }
-  getPayments(student) { }
+  getPayments(student) {
+    let self = this;
+    return axios
+      .get("/payment/paymentsByStudent/" + student.id)
+      .then(function (response) {
+        console.log(response.data);
+        const listaDePayment = response.data.paymentListDTO;
+        self.setState({
+          paymentsAlumnoActual: listaDePayment
+        })
+        return Promise.resolve(listaDePayment);
+      })
+      .then(function (res) {
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
 
   botones(estudiante) {
@@ -97,7 +113,7 @@ class Students extends Component {
       agregarPayment: false,
       tamanioPanel: "col-md-6"
     });
-    this.getPayments(student)
+    this.getPayments(student);
   }
 
   botonAddPago(estudiante) {
@@ -185,10 +201,9 @@ class Students extends Component {
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
               recargado={() => this.recargado()}
-              
               //modificar esto por listado con los pagos...
               //guardarMarks={() => this.guardarMarks()}
-              payments={[]}
+              payments={this.state.paymentsAlumnoActual}
             />
           </div>
         );

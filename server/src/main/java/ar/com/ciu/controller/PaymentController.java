@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.ciu.dto.PaymentByStudentDTO;
 import ar.com.ciu.dto.PaymentDTO;
 import ar.com.ciu.service.PaymentService;
 
@@ -63,5 +64,14 @@ public class PaymentController {
 	public ResponseEntity<Void> delete(@PathVariable("id") long id) throws NotFoundException {
 		this.paymentService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/paymentsByStudent/{id}", method = RequestMethod.GET)
+	public ResponseEntity<PaymentByStudentDTO> paymentByStudent(@PathVariable("id") long id) throws NotFoundException {
+		PaymentByStudentDTO paymentByStudentDTO = this.paymentService.paymentsByStudent(id);
+		if (paymentByStudentDTO == null) {
+			throw new NotFoundException();
+		}
+		return new ResponseEntity<PaymentByStudentDTO>(paymentByStudentDTO, HttpStatus.OK);
 	}
 }

@@ -36,3 +36,7 @@ content-type: application/json
   "amount": 150.0,
   "idStudent": 5
 }
+
+# consulto un pago especifico
+###
+GET {{url}}/paymentsByStudent/1 HTTP/1.1

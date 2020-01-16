@@ -2,6 +2,7 @@ package ar.com.ciu.service;
 
 import java.util.List;
 
+import ar.com.ciu.dto.PaymentByStudentDTO;
 import ar.com.ciu.dto.PaymentDTO;
 import ar.com.ciu.model.Payment;
 
@@ -17,4 +18,6 @@ public interface PaymentService {
 	public PaymentDTO update(PaymentDTO paymentDTO);
 
 	public void delete(Long idPayment);
+
+	PaymentByStudentDTO paymentsByStudent(Long idStudent);
 }

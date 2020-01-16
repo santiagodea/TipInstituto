@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.com.ciu.dto.PaymentByStudentDTO;
 import ar.com.ciu.dto.PaymentDTO;
 import ar.com.ciu.model.Payment;
 import ar.com.ciu.model.Student;
@@ -75,5 +76,14 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public void delete(Long idPayment) {
 		this.paymentRepository.deleteById(idPayment);
+	}
+	
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
+	public PaymentByStudentDTO paymentsByStudent(Long idStudent) {
+		Student student = this.studentRepository.findById(idStudent).orElse(null);;
+		List<Payment> listPayment = this.paymentRepository.findByIdStudent(idStudent);
+		PaymentByStudentDTO paymentsByStudentDTO = new PaymentByStudentDTO(student, listPayment);
+		return paymentsByStudentDTO;
 	}
 }
