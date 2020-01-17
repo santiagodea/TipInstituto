@@ -13,7 +13,7 @@ class AddPayment extends React.Component {
             alumno: this.props.data,
             amount: 0,
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            month: ""
+            month: "January"
         }
     }
 
@@ -29,7 +29,7 @@ class AddPayment extends React.Component {
         let self = this;
         const newPayment = {
             month: this.state.month,
-            date: new Date(),
+            date_payment: new Date(),
             amount: this.state.amount,
             idStudent: this.props.data.id
         };
