@@ -62,7 +62,6 @@ class Students extends Component {
     return axios
       .get("/payment/paymentsByStudent/" + student.id)
       .then(function (response) {
-        console.log(response.data);
         const listaDePayment = response.data.paymentListDTO;
         self.setState({
           paymentsAlumnoActual: listaDePayment
@@ -181,6 +180,10 @@ class Students extends Component {
       agregarNota: false,
       tamanioPanel: "col-md-12"
     });
+  }
+
+  recargadoPagos(){
+    this.getPayments();
   }
 
   render() {

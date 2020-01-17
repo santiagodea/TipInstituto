@@ -1,8 +1,9 @@
 import React from "react";
 import Card from "components/Card/Card.jsx";
 import { Table } from "react-bootstrap";
-const titulosMarks = ["Unit", "Calification", "Date"];
-const titulosPayments = ["Month", "Amount", "Date"];
+import axios from "axios";
+const titulosMarks = ["Unit", "Calification", "Date"," "];
+const titulosPayments = ["Month", "Amount", "Date"," "];
 
 
 class InfoAlumno extends React.Component {
@@ -34,19 +35,54 @@ class InfoAlumno extends React.Component {
                 <td>{m.unit}</td>
                 <td>{m.calification}</td>
                 <td>{m.date}</td>
+                <td >{<button type="button" class="btn btn-danger btn-xs" onClick={() => this.borrarM(m)}>Delete</button>}</td>
             </tr>
         ))
     }
 
     pagos(){
-        return this.props.payments.map(m => (
-            <tr id="marks" key={m.id}>
-                <td>{m.month}</td>
-                <td>{m.amount}</td>
-                <td>{m.date_payment}</td>
+        return this.props.payments.map(p => (
+            <tr id="payment" key={p.id}>
+                <td>{p.month}</td>
+                <td>{p.amount}</td>
+                <td>{p.date_payment}</td>
+                <td >{<button type="button" class="btn btn-danger btn-xs" onClick={() => this.borrarP(p)}>Delete</button>}</td>
             </tr>
         ))
     }
+
+
+      borrarM(mark){
+        let self = this;
+        axios
+            .delete("/mark/delete/" +  mark.id)
+            .then(function (res) {
+                console.log("The mark has been deleted successfully!");
+            })
+            .then(function (res) {
+                //this.props.recargado();
+            })
+            .catch(function (error) {
+                console.log("ERROR - " + error);
+            });
+      }
+
+
+      borrarP(payment){
+          console.log("INTENTANDO BORRAR")
+        let self = this;
+        axios
+            .delete("/payment/delete/" + payment.id)
+            .then(function (res) {
+                console.log("The payment has been deleted successfully!");
+            })
+            .then(function (res) {
+                this.props.recargado();
+            })
+            .catch(function (error) {
+                console.log("ERROR - " + error);
+            });
+      }
 
     panelMarks(){
         return(<div className="card-body ">
