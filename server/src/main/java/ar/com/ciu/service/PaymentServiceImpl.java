@@ -2,6 +2,7 @@ package ar.com.ciu.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,9 @@ public class PaymentServiceImpl implements PaymentService {
 	public List<PaymentDTO> findAll() {
 		List<Payment> payments = (List<Payment>) this.paymentRepository.findAll();
 		List<PaymentDTO> paymentsDTO = new ArrayList<PaymentDTO>();
-		payments.stream().forEach(pay -> paymentsDTO.add(new PaymentDTO(pay)));
+		
+		payments.stream().filter(p -> p.getDate_deleted() == null).forEach(pay -> paymentsDTO.add(new PaymentDTO(pay)));
+		
 		return paymentsDTO;
 	}
 
@@ -74,8 +77,18 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public void delete(Long idPayment) {
-		this.paymentRepository.deleteById(idPayment);
+	@Transactional(rollbackFor =  Exception.class)
+	public PaymentDTO deleteById(PaymentDTO paymentDTO) {
+		Payment payment = this.paymentRepository.findById(paymentDTO.getId()).get();
+		Student student = this.studentRepository.findById(paymentDTO.getIdStudent()).orElse(null);
+		payment.setAmount(paymentDTO.getAmount());
+		payment.setDate_payment(paymentDTO.getDate_payment());
+		payment.setMonth(paymentDTO.getMonth());
+		payment.setStudent(student);
+		payment.setDate_deleted(paymentDTO.getDate_deleted());
+		
+		payment = this.paymentRepository.save(payment);
+		return paymentDTO;
 	}
 	
 	@Override
@@ -83,6 +96,9 @@ public class PaymentServiceImpl implements PaymentService {
 	public PaymentByStudentDTO paymentsByStudent(Long idStudent) {
 		Student student = this.studentRepository.findById(idStudent).orElse(null);;
 		List<Payment> listPayment = this.paymentRepository.findByIdStudent(idStudent);
+		
+		listPayment = listPayment.stream().filter(p -> p.getDate_deleted() == null).collect(Collectors.toList());
+		
 		PaymentByStudentDTO paymentsByStudentDTO = new PaymentByStudentDTO(student, listPayment);
 		return paymentsByStudentDTO;
 	}

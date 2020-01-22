@@ -12,6 +12,7 @@ public class PaymentDTO {
 	private LocalDate date_payment;
 	private double amount;
 	private Long idStudent;
+	private LocalDate date_deleted;
 
 	public PaymentDTO() {
 		super();
@@ -23,6 +24,7 @@ public class PaymentDTO {
 		this.date_payment = date;
 		this.amount = amount;
 		this.idStudent = idStudent;
+		this.date_deleted = null;
 
 	}
 
@@ -69,6 +71,14 @@ public class PaymentDTO {
 
 	public void setIdStudent(Long idStudent) {
 		this.idStudent = idStudent;
+	}
+
+	public LocalDate getDate_deleted() {
+		return date_deleted;
+	}
+
+	public void setDate_deleted(LocalDate date_deleted) {
+		this.date_deleted = date_deleted;
 	}
 
 }

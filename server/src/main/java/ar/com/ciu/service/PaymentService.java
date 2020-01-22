@@ -17,7 +17,7 @@ public interface PaymentService {
 
 	public PaymentDTO update(PaymentDTO paymentDTO);
 
-	public void delete(Long idPayment);
-
 	PaymentByStudentDTO paymentsByStudent(Long idStudent);
+
+	PaymentDTO deleteById(PaymentDTO paymentDTO);
 }

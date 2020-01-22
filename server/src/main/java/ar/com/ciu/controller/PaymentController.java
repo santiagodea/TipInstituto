@@ -1,5 +1,6 @@
 package ar.com.ciu.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import ar.com.ciu.service.PaymentService;
 
 @RestController
 @RequestMapping("/payment")
-@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
 public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
@@ -60,10 +61,13 @@ public class PaymentController {
 		return new ResponseEntity<PaymentDTO>(paymentDTO, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable("id") long id) throws NotFoundException {
-		this.paymentService.delete(id);
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	@RequestMapping(value = "/deleteById/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<PaymentDTO> deleteById(@PathVariable("id") long id) throws NotFoundException {
+		PaymentDTO paymentDTO = this.paymentService.findById(id);
+		System.out.println("FECHA A GRABAR" + LocalDate.now());
+		paymentDTO.setDate_deleted( LocalDate.now());
+		this.paymentService.deleteById(paymentDTO);
+		return new ResponseEntity<PaymentDTO>(paymentDTO, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/paymentsByStudent/{id}", method = RequestMethod.GET)

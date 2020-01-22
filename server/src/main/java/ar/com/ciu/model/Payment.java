@@ -40,6 +40,7 @@ public class Payment {
     @JoinColumn(name = "studentId")
 	private Student student;
 
+	private LocalDate date_deleted;
 	
 	//CONSTRUCTORES
 	public Payment() {
@@ -51,6 +52,7 @@ public class Payment {
 		this.amount = amount;
 		this.date_payment = date_payment;
 		this.student = student;
+		this.date_deleted = null;
 	}
 
 	//HASHCODE AND EQUALS
@@ -116,6 +118,12 @@ public class Payment {
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	public LocalDate getDate_deleted() {
+		return date_deleted;
+	}
+	public void setDate_deleted(LocalDate date_deleted) {
+		this.date_deleted = date_deleted;
 	}
 	
 	

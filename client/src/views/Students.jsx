@@ -182,8 +182,8 @@ class Students extends Component {
     });
   }
 
-  recargadoPagos(){
-    this.getPayments();
+  recargadoPagos(estudiante){
+    this.getPayments(estudiante);
   }
 
   render() {
@@ -196,7 +196,7 @@ class Students extends Component {
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarPago={this.state.agregarNota}
-              recargado={() => this.recargadoPagos()}
+              recargado={(estudiante) => this.recargadoPagos(estudiante)}
               volver={(estudiante) => this.mostrarDatosAlumno(estudiante)}
             />
           </div>
@@ -210,7 +210,7 @@ class Students extends Component {
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
-              recargado={() => this.recargado()}
+              recargado={(estudiante) => this.recargadoPagos(estudiante)}
               payments={this.state.paymentsAlumnoActual}
             />
           </div>

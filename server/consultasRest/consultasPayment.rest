@@ -22,7 +22,7 @@ GET {{url}}/findById/3 HTTP/1.1
 
 #  borro un pago por un id :(
 ###
-DELETE  {{url}}/delete/1
+PUT  {{url}}/deleteById/4
 
 # update de un pago
 ###
@@ -30,7 +30,7 @@ PUT {{url}}/update HTTP/1.1
 content-type: application/json
 
 {
-  "id": 8,
+  "id": 5,
   "month": "Enero",
   "date_payment": "2019-10-12",
   "amount": 150.0,

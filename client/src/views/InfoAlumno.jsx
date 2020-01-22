@@ -22,7 +22,7 @@ class InfoAlumno extends React.Component {
             idCourse: this.props.idCourse,
             //marks: this.props.marks
         })
-        this.props.recargado();
+        this.props.recargado(this.alum());
     }
 
 
@@ -60,7 +60,7 @@ class InfoAlumno extends React.Component {
                 console.log("The mark has been deleted successfully!");
             })
             .then(function (res) {
-                //this.props.recargado();
+                //this.props.recargado(this.alum());
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);
@@ -72,12 +72,13 @@ class InfoAlumno extends React.Component {
           console.log("INTENTANDO BORRAR")
         let self = this;
         axios
-            .delete("/payment/delete/" + payment.id)
+            .put("/payment/deleteById/" + payment.id)
             .then(function (res) {
                 console.log("The payment has been deleted successfully!");
             })
             .then(function (res) {
-                this.props.recargado();
+                console.log(self.alum())
+                this.props.recargado( self.props.data);
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);
