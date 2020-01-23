@@ -64,7 +64,6 @@ public class PaymentController {
 	@RequestMapping(value = "/deleteById/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<PaymentDTO> deleteById(@PathVariable("id") long id) throws NotFoundException {
 		PaymentDTO paymentDTO = this.paymentService.findById(id);
-		System.out.println("FECHA A GRABAR" + LocalDate.now());
 		paymentDTO.setDate_deleted( LocalDate.now());
 		this.paymentService.deleteById(paymentDTO);
 		return new ResponseEntity<PaymentDTO>(paymentDTO, HttpStatus.OK);

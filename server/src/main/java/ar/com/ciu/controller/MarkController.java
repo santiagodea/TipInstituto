@@ -1,5 +1,6 @@
 package ar.com.ciu.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import ar.com.ciu.service.MarkService;
 
 @RestController		
 @RequestMapping("/mark")
-@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
 public class MarkController {
 	@Autowired
 	private MarkService markService;
@@ -64,10 +65,12 @@ public class MarkController {
 		return new ResponseEntity<MarkDTO>(markDTO, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable("id") long id) throws NotFoundException {
-		this.markService.delete(id);
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	@RequestMapping(value = "/deleteById/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<MarkDTO> deleteById(@PathVariable("id") long id) throws NotFoundException {
+		MarkDTO markDTO = this.markService.findById(id);
+		markDTO.setDate_deleted( LocalDate.now());
+		this.markService.deleteById(markDTO);
+		return new ResponseEntity<MarkDTO>(markDTO, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/marksBySC", method = RequestMethod.GET)

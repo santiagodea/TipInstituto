@@ -26,19 +26,20 @@ public class PaymentServiceImpl implements PaymentService {
 	private StudentRepository studentRepository;
 
 	@Override
-	@Transactional(rollbackFor =  Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public Payment create(Payment payment) {
 		Student student = this.studentRepository.findById(payment.getStudent().getId()).orElse(null);
-		Payment payment1 = new Payment(payment.getMonth(), payment.getAmount(), payment.getDate_payment(),student);
+		Payment payment1 = new Payment(payment.getMonth(), payment.getAmount(), payment.getDate_payment(), student);
 		paymentRepository.save(payment1);
 		return payment1;
 	}
 
 	@Override
-	@Transactional(rollbackFor =  Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public PaymentDTO create(PaymentDTO paymentDTO) {
 		Student student = this.studentRepository.findById(paymentDTO.getIdStudent()).orElse(null);
-		Payment payment = new Payment(paymentDTO.getMonth(), paymentDTO.getAmount(), paymentDTO.getDate_payment(),student);
+		Payment payment = new Payment(paymentDTO.getMonth(), paymentDTO.getAmount(), paymentDTO.getDate_payment(),
+				student);
 		this.paymentRepository.save(payment);
 		return new PaymentDTO(payment);
 	}
@@ -57,9 +58,7 @@ public class PaymentServiceImpl implements PaymentService {
 	public List<PaymentDTO> findAll() {
 		List<Payment> payments = (List<Payment>) this.paymentRepository.findAll();
 		List<PaymentDTO> paymentsDTO = new ArrayList<PaymentDTO>();
-		
 		payments.stream().filter(p -> p.getDate_deleted() == null).forEach(pay -> paymentsDTO.add(new PaymentDTO(pay)));
-		
 		return paymentsDTO;
 	}
 
@@ -77,7 +76,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	@Transactional(rollbackFor =  Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public PaymentDTO deleteById(PaymentDTO paymentDTO) {
 		Payment payment = this.paymentRepository.findById(paymentDTO.getId()).get();
 		Student student = this.studentRepository.findById(paymentDTO.getIdStudent()).orElse(null);
@@ -86,19 +85,20 @@ public class PaymentServiceImpl implements PaymentService {
 		payment.setMonth(paymentDTO.getMonth());
 		payment.setStudent(student);
 		payment.setDate_deleted(paymentDTO.getDate_deleted());
-		
+
 		payment = this.paymentRepository.save(payment);
 		return paymentDTO;
 	}
-	
+
 	@Override
-	@Transactional(rollbackFor =  Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public PaymentByStudentDTO paymentsByStudent(Long idStudent) {
-		Student student = this.studentRepository.findById(idStudent).orElse(null);;
+		Student student = this.studentRepository.findById(idStudent).orElse(null);
+		;
 		List<Payment> listPayment = this.paymentRepository.findByIdStudent(idStudent);
-		
+
 		listPayment = listPayment.stream().filter(p -> p.getDate_deleted() == null).collect(Collectors.toList());
-		
+
 		PaymentByStudentDTO paymentsByStudentDTO = new PaymentByStudentDTO(student, listPayment);
 		return paymentsByStudentDTO;
 	}

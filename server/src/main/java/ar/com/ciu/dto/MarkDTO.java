@@ -10,6 +10,7 @@ public class MarkDTO {
 	private Integer unit;
 	private LocalDate date;
 	private Long idStudentCourse;
+	private LocalDate date_deleted;
 
 	// CONSTRUCTORES
 	public MarkDTO() {
@@ -22,6 +23,7 @@ public class MarkDTO {
 		this.unit = unit;
 		this.date = date;
 		this.idStudentCourse = idStudentCourse;
+		this.date_deleted = null;
 	}
 
 	public MarkDTO(Mark mark) {
@@ -69,5 +71,18 @@ public class MarkDTO {
 	public void setIdStudentCourse(Long idStudentCourse) {
 		this.idStudentCourse = idStudentCourse;
 	}
+
+	public LocalDate getDate_deleted() {
+		return date_deleted;
+	}
+
+	public void setDate_deleted(LocalDate date_deleted) {
+		this.date_deleted = date_deleted;
+	}
+
+	public void setUnit(Integer unit) {
+		this.unit = unit;
+	}
+	
 	
 }

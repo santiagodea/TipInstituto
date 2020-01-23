@@ -19,7 +19,7 @@ import ar.com.ciu.service.StudentService;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
 public class StudentController {
 	@Autowired
 	private StudentService studentService;

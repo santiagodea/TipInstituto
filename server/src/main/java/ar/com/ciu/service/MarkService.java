@@ -19,11 +19,11 @@ public interface MarkService {
 
 	public MarkDTO update(MarkDTO markDTO);
 
-	public void delete(Long idMark);
-
 	public MarksBySCDTO marksBySC(ScidDTO scidDTO);
 
 	public Mark addMark(NewMarkDTO newMarkDTO);
+
+	MarkDTO deleteById(MarkDTO markDTO);
 
 	
 }

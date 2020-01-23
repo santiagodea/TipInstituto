@@ -2,6 +2,7 @@ package ar.com.ciu.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class MarkServiceImpl implements MarkService {
 	public List<MarkDTO> findAll() {
 		List<Mark> marks = (List<Mark>) this.markRepository.findAll();
 		List<MarkDTO> marksDTO = new ArrayList<MarkDTO>();
-		marks.stream().forEach(mark -> marksDTO.add(new MarkDTO(mark)));
+		marks.stream().filter(m -> m.getDate_deleted() == null).forEach(mark -> marksDTO.add(new MarkDTO(mark)));
 		return marksDTO;
 	}
 
@@ -77,16 +78,25 @@ public class MarkServiceImpl implements MarkService {
 	}
 
 	@Override
-	public void delete(Long idMark) {
-		this.markRepository.deleteById(idMark);
-
+	@Transactional(rollbackFor =  Exception.class)
+	public MarkDTO deleteById(MarkDTO markDTO) {
+		Mark mark = this.markRepository.findById(markDTO.getId()).get();
+		mark.setCalification(markDTO.getCalification());
+		mark.setDate(markDTO.getDate());
+		mark.setUnit(markDTO.getUnit());
+		StudentCourse st = this.scRepository.findById(markDTO.getIdStudentCourse()).orElse(null);
+		mark.setStudentCourse(st);
+		mark.setDate_deleted(markDTO.getDate_deleted());
+		mark = this.markRepository.save(mark);
+		return markDTO;
 	}
 	
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
 	public MarksBySCDTO marksBySC(ScidDTO scidDTO) {
 		StudentCourse sc = this.scRepository.findByIdCourseAndStudent(scidDTO.getIdStudent(), scidDTO.getIdCourse());
-		List<Mark> listMarks = this.markRepository.findByIdSC(sc.getId());
+		List<Mark> listMarks = this.markRepository.findByIdSC(sc.getId()).stream().filter(m -> m.getDate_deleted() == null).collect(Collectors.toList());
+
 		MarksBySCDTO marksbyDTO = new MarksBySCDTO(sc, listMarks);
 		return marksbyDTO;
 	}
@@ -94,7 +104,6 @@ public class MarkServiceImpl implements MarkService {
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
 	public Mark addMark(NewMarkDTO newMarkDTO) {
-		//System.out.println("IDSSSSSSSSSSSS" + newMarkDTO.getIdStudent() +  newMarkDTO.getIdCourse());
 		StudentCourse sc = this.scRepository.findByIdCourseAndStudent( newMarkDTO.getIdCourse(), newMarkDTO.getIdStudent());
 		Mark mark1 = new Mark(newMarkDTO.getMark(), newMarkDTO.getUnit(), newMarkDTO.getDate(), sc);
 		System.out.println("STUDENT COURSE A GUARDAR" + sc);

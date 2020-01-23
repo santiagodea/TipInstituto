@@ -38,6 +38,8 @@ public class Mark {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "studentCourseId")
 	private StudentCourse studentCourse;
+	
+	private LocalDate date_deleted;
 
 	//CONSTRUCTORES
 	public Mark() {
@@ -50,6 +52,7 @@ public class Mark {
 		this.unit = unit;
 		this.date = date;
 		this.studentCourse = studentCourse;
+		this.date_deleted = null;
 	}
 
 	//HASHCODE AND EQUALS
@@ -116,6 +119,13 @@ public class Mark {
 	public void setStudentCourse(StudentCourse studentCourse) {
 		this.studentCourse = studentCourse;
 	}
-	
 
+	public LocalDate getDate_deleted() {
+		return date_deleted;
+	}
+
+	public void setDate_deleted(LocalDate date_deleted) {
+		this.date_deleted = date_deleted;
+	}
+	
 }

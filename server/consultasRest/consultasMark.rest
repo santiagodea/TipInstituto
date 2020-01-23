@@ -18,11 +18,11 @@ GET  {{url}}/findAll HTTP/1.1
 
 # consulto un nota especifico
 ###
-GET {{url}}/findById/3 HTTP/1.1
+GET {{url}}/findById/1 HTTP/1.1
 
 #  borro un nota por un id :(
 ###
-DELETE  {{url}}/delete/1
+PUT  {{url}}/deleteById/1
 
 # update de un nota
 ###

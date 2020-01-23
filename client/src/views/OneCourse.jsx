@@ -100,6 +100,11 @@ class OneCourse extends Component {
       panelNuevoAlumno: false
     })
   }
+
+  recargado(estudiante) {
+    this.getMarks(estudiante)
+  }
+
   recargadoNotas() {
     this.getDataCourse();
     this.setState({
@@ -344,7 +349,7 @@ class OneCourse extends Component {
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
-              recargado={() => this.recargado()}
+              recargado={(estudiante) => this.recargado(estudiante)}
               guardarMarks={() => this.guardarMarks()}
               marks={this.state.marksAlumnoActual}
             />
