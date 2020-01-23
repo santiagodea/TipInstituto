@@ -60,7 +60,7 @@ class InfoAlumno extends React.Component {
                 console.log("The mark has been deleted successfully!");
             })
             .then(function (res) {
-                //this.props.recargado(this.alum());
+                //self.props.recargado(this.alum());
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);
@@ -77,8 +77,7 @@ class InfoAlumno extends React.Component {
                 console.log("The payment has been deleted successfully!");
             })
             .then(function (res) {
-                console.log(self.alum())
-                this.props.recargado( self.props.data);
+                self.props.recargado( self.props.data);
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);
