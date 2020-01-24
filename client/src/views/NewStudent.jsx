@@ -19,24 +19,26 @@ class NewStudent extends Component {
         };
     }
 
-    componentDidMount() { }
+    componentDidMount() {
+        if (this.props.alumno) {
+            this.setState({
+                id: this.props.alumno.id
+            })
+            console.log(this.props.alumno.id);
+            this.llenarStudent(this.props.alumno)
+        }
+    }
 
     llenarStudent(student) {
         this.setState({
             dni: student.dni,
             surname: student.surname,
             name: student.name,
-            mail: student.email,
+            email: student.mail,
             tel_principal: student.tel_principal,
             tel_secundario: student.tel_secundario
         });
     }
-
-    // guardar() {
-    //     let self = this;
-    //     this.guardarStudent(self);
-    //     this.guardarSC();
-    // }
 
     guardaridStudent(idCreado) {
         this.setState({ id: idCreado });
@@ -57,6 +59,41 @@ class NewStudent extends Component {
                 console.log("The new Student was successfully aggregate.");
             })
             .then()
+            .catch(function (error) {
+                console.log("ERROR - " + error);
+            });
+    }
+
+    guardarOActualizar() {
+        if (this.state.id) {
+            this.actualizarStudent()
+        }
+        else {
+            this.guardarStudent()
+        }
+    }
+
+    actualizarStudent() {
+        let self = this;
+        const student = {
+            id: self.state.id,
+            dni: self.state.dni,
+            surname: self.state.surname,
+            name: self.state.name,
+            mail: self.state.email,
+            tel_principal: self.state.tel_principal,
+            tel_secundario: self.state.tel_secundario
+        };
+        console.log(student)
+        axios
+            .put("/student/update", student)
+            .then(function (res) {
+                console.log("The new student was updated successfully.");
+            })
+            .then(function (res) {
+                self.props.recargado();
+                self.props.onCancel();
+            })
             .catch(function (error) {
                 console.log("ERROR - " + error);
             });
@@ -215,7 +252,7 @@ class NewStudent extends Component {
                         <button class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Cancel</button>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <button class="btn btn-fill btn-success" onClick={() => this.guardarStudent()}>Save Student</button>
+                        <button class="btn btn-fill btn-success" onClick={() => this.guardarOActualizar()}>Save Student</button>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,8 @@ import React from "react";
 import Card from "components/Card/Card.jsx";
 import { Table } from "react-bootstrap";
 import axios from "axios";
-const titulosMarks = ["Unit", "Calification", "Date"," "];
-const titulosPayments = ["Month", "Amount", "Date"," "];
+const titulosMarks = ["Unit", "Calification", "Date", " "];
+const titulosPayments = ["Month", "Amount", "Date", " "];
 
 
 class InfoAlumno extends React.Component {
@@ -40,7 +40,7 @@ class InfoAlumno extends React.Component {
         ))
     }
 
-    pagos(){
+    pagos() {
         return this.props.payments.map(p => (
             <tr id="payment" key={p.id}>
                 <td>{p.month}</td>
@@ -52,10 +52,10 @@ class InfoAlumno extends React.Component {
     }
 
 
-      borrarM(mark){
+    borrarM(mark) {
         let self = this;
         axios
-            .put("/mark/deleteById/" +  mark.id)
+            .put("/mark/deleteById/" + mark.id)
             .then(function (res) {
                 console.log("The mark has been deleted successfully!");
             })
@@ -65,10 +65,10 @@ class InfoAlumno extends React.Component {
             .catch(function (error) {
                 console.log("ERROR - " + error);
             });
-      }
+    }
 
 
-      borrarP(payment){
+    borrarP(payment) {
         let self = this;
         axios
             .put("/payment/deleteById/" + payment.id)
@@ -76,54 +76,54 @@ class InfoAlumno extends React.Component {
                 console.log("The payment has been deleted successfully!");
             })
             .then(function (res) {
-                self.props.recargado( self.props.data);
+                self.props.recargado(self.props.data);
             })
             .catch(function (error) {
                 console.log("ERROR - " + error);
             });
-      }
-
-    panelMarks(){
-        return(<div className="card-body ">
-        <Table striped hover>
-            <thead>
-                <tr>
-                    {titulosMarks.map((prop, key) => {
-                        return <th key={key}>{prop}</th>;
-                    })}
-                </tr>
-            </thead>
-            <tbody>
-                {this.notas()}
-            </tbody>
-        </Table>
-    </div>)
     }
 
-    panelPayments(){
-        return(<div className="card-body ">
-        <Table striped hover>
-            <thead>
-                <tr>
-                    {titulosPayments.map((prop, key) => {
-                        return <th key={key}>{prop}</th>;
-                    })}
-                </tr>
-            </thead>
-            <tbody>
-                {this.pagos()}
-            </tbody>
-        </Table>
-    </div>)
+    panelMarks() {
+        return (<div className="card-body ">
+            <Table striped hover>
+                <thead>
+                    <tr>
+                        {titulosMarks.map((prop, key) => {
+                            return <th key={key}>{prop}</th>;
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.notas()}
+                </tbody>
+            </Table>
+        </div>)
+    }
+
+    panelPayments() {
+        return (<div className="card-body ">
+            <Table striped hover>
+                <thead>
+                    <tr>
+                        {titulosPayments.map((prop, key) => {
+                            return <th key={key}>{prop}</th>;
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.pagos()}
+                </tbody>
+            </Table>
+        </div>)
     }
 
     marksOPayments() {
         if (this.state.marks) {
-          return this.panelMarks();
+            return this.panelMarks();
         } else {
-          return this.panelPayments();
+            return this.panelPayments();
         }
-      }
+    }
 
     recuadroInfoAlumno() {
         const anchoLabel = 5
@@ -149,7 +149,7 @@ class InfoAlumno extends React.Component {
                                         {this.datoEnFila("Phone 1°:", this.alum().tel_principal, anchoLabel)}
                                         {this.datoEnFila("Phone 2°:", this.alum().tel_secundario, anchoLabel)}
                                     </div>
-                                    { this.marksOPayments() }
+                                    {this.marksOPayments()}
                                 </div>
                             </div>
                         </div>
@@ -201,8 +201,8 @@ class InfoAlumno extends React.Component {
         return (
             <div className="col-md-12">
                 <div className="card text-dark">
-                    {this.recuadroInfoAlumno()}
                 </div>
+                {this.recuadroInfoAlumno()}
             </div>
         )
     }

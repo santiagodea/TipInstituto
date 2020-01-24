@@ -29,6 +29,7 @@ class OneCourse extends Component {
     super(props);
     this.curso = this.props.curso;
     this.state = {
+      id: null,
       scId: "",
       nombre: "",
       nivel: "",
@@ -93,15 +94,15 @@ class OneCourse extends Component {
 
 
   recargado() {
-    this.getDataCourse();
     this.setState({
       agregaNota: false,
       panelAlumnos: true,
       panelNuevoAlumno: false
     })
+    this.getDataCourse();
   }
 
-  recargado(estudiante) {
+  recargadoMarks(estudiante) {
     this.getMarks(estudiante)
   }
 
@@ -145,6 +146,7 @@ class OneCourse extends Component {
         }}>
         {this.botonDetalle(estudiante)}
         {this.botonNota(estudiante)}
+        {this.botonEditar(estudiante)}
         {this.botonEliminar(estudiante)}
       </div>
     );
@@ -161,11 +163,20 @@ class OneCourse extends Component {
   botonEliminar(estudiante) {
     return this.botonStandard(
       "Delete",
-      this.eliminarAlumno(estudiante),
+      () => this.eliminarAlumno(estudiante),
       "btn-danger btn-xs",
       "fa-close"
     );
   }
+  botonEditar(estudiante) {
+    return this.botonStandard(
+      "Edit",
+      () => this.editarAlumno(estudiante),
+      "btn-warning btn-xs",
+      "fa-pencil"
+    );
+  }
+
 
   botonNota(estudiante) {
     return this.botonStandard(
@@ -193,6 +204,7 @@ class OneCourse extends Component {
 
   agregarEstudiante() {
     this.setState({
+      alumnoActual: null,
       panelAlumnos: false,
       panelNuevoAlumno: true
     });
@@ -204,12 +216,21 @@ class OneCourse extends Component {
     });
   }
 
+  editarAlumno(estudiante){
+    this.setState({
+      panelAlumnos: false,
+      panelNuevoAlumno: true,
+      alumnoActual:estudiante
+    });
+  }
+
 
   mostrarNuevoStudent() {
     if (this.state.panelNuevoAlumno) {
       return (
         <div>
           <NewStudent
+            alumno={this.state.alumnoActual}
             onCancel={() => this.cancelarNuevoAlumno()}
             recargado={() => this.recargado()}
             course={this.curso}
@@ -349,7 +370,7 @@ class OneCourse extends Component {
               data={this.state.alumnoActual}
               screen={() => this.cerrarInfoAlumno()}
               agregarNota={this.state.agregarNota}
-              recargado={(estudiante) => this.recargado(estudiante)}
+              recargado={(estudiante) => this.recargadoMarks(estudiante)}
               guardarMarks={() => this.guardarMarks()}
               marks={this.state.marksAlumnoActual}
             />
