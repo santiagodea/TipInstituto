@@ -20,5 +20,7 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourse, L
 	
 	//SELECT u FROM User u WHERE u.status = 1")
 	
+	
+	
 }
 

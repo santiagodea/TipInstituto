@@ -103,6 +103,16 @@ public class MarkServiceImpl implements MarkService {
 	
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
+	public MarksBySCDTO marksByIdsSC(Long IdC, Long IdS) {
+		StudentCourse sc = this.scRepository.findByIdCourseAndStudent(IdC, IdS);
+		List<Mark> listMarks = this.markRepository.findByIdSC(sc.getId()).stream().filter(m -> m.getDate_deleted() == null).collect(Collectors.toList());
+
+		MarksBySCDTO marksbyDTO = new MarksBySCDTO(sc, listMarks);
+		return marksbyDTO;
+	}
+	
+	@Override
+	@Transactional(rollbackFor =  Exception.class)
 	public Mark addMark(NewMarkDTO newMarkDTO) {
 		StudentCourse sc = this.scRepository.findByIdCourseAndStudent( newMarkDTO.getIdCourse(), newMarkDTO.getIdStudent());
 		Mark mark1 = new Mark(newMarkDTO.getMark(), newMarkDTO.getUnit(), newMarkDTO.getDate(), sc);

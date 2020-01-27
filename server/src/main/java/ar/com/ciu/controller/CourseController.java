@@ -16,16 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ciu.dto.CourseDTO;
 import ar.com.ciu.dto.CourseWithStudentsDTO;
+import ar.com.ciu.dto.StudentDTO;
 import ar.com.ciu.service.CourseService;
+import ar.com.ciu.service.MarkService;
 import ar.com.ciu.service.StudentCourseService;
 
 @RestController
 @RequestMapping("/course")
-@CrossOrigin(origins = "*", methods= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
+@CrossOrigin(origins = "*", methods = { RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT })
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
-	
+
+	@Autowired
+	private MarkService markService;
+
 	@Autowired
 	private StudentCourseService studentCourseService;
 
@@ -69,14 +74,15 @@ public class CourseController {
 		this.courseService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
-	
+
 	@RequestMapping(value = "/findByIdWithStudents/{id}", method = RequestMethod.GET)
-	public ResponseEntity<CourseWithStudentsDTO> findByIdWithStudent(@PathVariable("id") long id) throws NotFoundException {
+	public ResponseEntity<CourseWithStudentsDTO> findByIdWithStudent(@PathVariable("id") long id)
+			throws NotFoundException {
 		CourseWithStudentsDTO courseWithStudentsDTO = this.studentCourseService.findByIdWithStudents(id);
-		if (courseWithStudentsDTO == null) {
-			throw new NotFoundException();
-		}
+		List<StudentDTO> studentsDTO = courseWithStudentsDTO.getStudentListDTO();
+		studentsDTO.stream().forEach(s -> s.setMarks(this.markService.marksByIdsSC(id, s.getId()).getMarksListDTO()));
+		courseWithStudentsDTO.setStudentListDTO(studentsDTO);
 		return new ResponseEntity<CourseWithStudentsDTO>(courseWithStudentsDTO, HttpStatus.OK);
 	}
-	
+
 }

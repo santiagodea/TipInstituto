@@ -52,7 +52,9 @@ class OneCourse extends Component {
   componentDidMount() {
     this.llenarCurso(this.curso);
     this.getDataCourse();
+    console.log(this.state.students);
   }
+
 
   getDataCourse() {
     let self = this;
@@ -63,6 +65,7 @@ class OneCourse extends Component {
         self.setState({
           students: listaDeS
         })
+        console.log(listaDeS)
         return Promise.resolve(listaDeS);
       })
       .catch(function (error) {

@@ -1,14 +1,11 @@
 package ar.com.ciu.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -47,8 +44,8 @@ public class Student {
 	@Type(type = "string")
 	private String tel_secundario;
 	
-	@Transient
-	private List<Mark> marks;
+//	@Transient
+//	private List<Mark> marks;
 	
 	
 	//CONSTRUCTORES
@@ -160,13 +157,13 @@ public class Student {
 		this.tel_secundario = tel_secundario;
 	}
 
-	public List<Mark> getMarks() {
-		return marks;
-	}
-
-	public void setMarks(List<Mark> marks) {
-		this.marks = marks;
-	}
+//	public List<Mark> getMarks() {
+//		return marks;
+//	}
+//
+//	public void setMarks(List<Mark> marks) {
+//		this.marks = marks;
+//	}
 	
 	
 }

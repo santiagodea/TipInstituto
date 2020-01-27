@@ -25,5 +25,7 @@ public interface MarkService {
 
 	MarkDTO deleteById(MarkDTO markDTO);
 
+	MarksBySCDTO marksByIdsSC(Long IdC, Long IdS);
+
 	
 }
