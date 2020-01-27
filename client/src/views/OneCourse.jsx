@@ -6,6 +6,11 @@ import NewStudent from "views/NewStudent";
 import AddMark from "views/AddMark";
 import axios from "axios";
 
+import pdfMake from "pdfmake/build/pdfmake.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 const thArray = ["Surname", "Name", " "];
 
 
@@ -94,6 +99,53 @@ class OneCourse extends Component {
         console.log(error);
       });
   }
+
+
+generarPDF() {
+    var cuerpo = [];
+    var titulos = [
+      { text: 'Surname', bold: true, alignment: 'center' },
+      { text: 'Name', bold: true, alignment: 'center' },
+      { text: 'DNI', bold: true, alignment: 'center' },
+      //{ text: 'Importe', bold: true, alignment: 'center' }
+    ];
+
+     var lAgregados = this.state.students;
+
+     cuerpo.push(titulos);
+
+    lAgregados.map(agregado => {
+      var fila = [];
+       fila.push(agregado.surname);
+      fila.push(agregado.name);
+      fila.push(agregado.dni);
+      return cuerpo.push(fila);
+    });
+
+    var docDefinition = {
+      content: [
+        {
+          text:
+            'Procedencia de los visitantes entre los días ',
+          style: 'header',
+          bold: true,
+          alignment: 'center',
+          fontSize: 20
+        },
+        {
+          table: {
+            headerRows: 2,
+            alignment: 'center',
+            widths: [65, 230, 80, 60],
+            body: cuerpo
+          }
+        }
+      ]
+    };
+    console.log("imprimiendo");
+    pdfMake.createPdf(docDefinition).open();
+  }
+
 
 
   recargado() {
@@ -286,7 +338,7 @@ class OneCourse extends Component {
             <a class="btn btn-fill btn-success" onClick={() => this.agregarEstudiante()}>Add Student</a>
           </div>
           <div class="col-xs-6 col-md-4">
-            <a class="btn btn-fill btn-primary" onClick={() => this.imprimirListado()}>Print List</a>
+            <a class="btn btn-fill btn-primary" onClick={() => this.generarPDF()}>Print List</a>
           </div>
         </div>
       </div>
@@ -306,9 +358,6 @@ class OneCourse extends Component {
 
   }
 
-  imprimirListado() {
-
-  }
 
   cancelar() {
     this.props.onCancel();
