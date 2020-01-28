@@ -2,6 +2,7 @@ import React from "react";
 import Card from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import axios from "axios";
+import { Alert } from "react-alert";
 
 
 class AddPayment extends React.Component {
@@ -25,7 +26,7 @@ class AddPayment extends React.Component {
 
     }
 
-    savePayment() {
+    savePayment(alert) {
         let self = this;
         const newPayment = {
             month: this.state.month,
@@ -36,6 +37,7 @@ class AddPayment extends React.Component {
         axios
             .post("/payment", newPayment)
             .then(function (res) {
+                alert.success("The payment has been loaded correctly.");
                 console.log("A new payment has been added.");
             })
             .then(function (res) {
@@ -120,12 +122,18 @@ class AddPayment extends React.Component {
                         <div className="card-bg-info" style={{
                             marginTop: "10px", marginLeft: "10px", marginBottom: "20px"
                         }}>
-                            {this.botonStandard(
-                                "Confirm ",
-                                () => this.savePayment(),
-                                "btn-primary btn-xs",
-                                "fa-"
-                            )}
+                            {
+                                <Alert>
+                                    {alert => (
+                                        this.botonStandard(
+                                            "Confirm ",
+                                            () => this.savePayment(alert),
+                                            "btn-primary btn-xs",
+                                            "fa-"
+                                        ))
+                                    }
+                                </Alert>
+                            }
                             {this.botonStandard(
                                 "Cancel ",
                                 this.screen,

@@ -59,7 +59,7 @@ class NewCourse
         self.props.recargado();
       })
       .catch(function (error) {
-        //alert.error("ERROR - " + error.response.data.message);
+        alert.error("ERROR - " + error.response.data.message);
         console.log("ERROR - " + error);
       });
     self.props.onCancel();
