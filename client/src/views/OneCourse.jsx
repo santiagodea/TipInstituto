@@ -42,7 +42,7 @@ class OneCourse extends Component {
       profesor: "",
       formErrors: {},
       niveles: [1, 2, 3, 4, 5],
-      turnos: ["maniana", "tarde", "noche"],
+      turnos: ["Tomorrow", "Afternoon", "Night"],
       students: [],
       mostrarPanelDeAlumno: false,
       alumnoActual: null,
@@ -101,52 +101,74 @@ class OneCourse extends Component {
   }
 
 
-generarPDF() {
+  generarPDFAssist() {
     var cuerpo = [];
     var titulos = [
       { text: 'Surname', bold: true, alignment: 'center' },
       { text: 'Name', bold: true, alignment: 'center' },
       { text: 'DNI', bold: true, alignment: 'center' },
-      //{ text: 'Importe', bold: true, alignment: 'center' }
+      { text: 'Assists', bold: true, alignment: 'center' },
     ];
 
-     var lAgregados = this.state.students;
-
-     cuerpo.push(titulos);
-
+    var lAgregados = this.state.students;
+    cuerpo.push(titulos);
     lAgregados.map(agregado => {
       var fila = [];
-       fila.push(agregado.surname);
+      fila.push(agregado.surname);
       fila.push(agregado.name);
       fila.push(agregado.dni);
+      fila.push([
+        {
+          table: {
+            headerRows: 1,
+            alignment: 'center',
+            widths: [70, 70, 70, 70, 70],
+            body: [
+              ['_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _'],
+              ['_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _']
+            ],
+          },
+          layout: 'noBorders'
+        }
+      ])
       return cuerpo.push(fila);
     });
 
     var docDefinition = {
+
+      pageSize: 'A4',
+      pageOrientation: 'landscape',
       content: [
         {
-          text:
-            'Procedencia de los visitantes entre los días ',
+          text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Duty: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
           style: 'header',
           bold: true,
           alignment: 'center',
           fontSize: 20
         },
         {
+          text: ' ',
+          style: 'header'
+        },
+        {
           table: {
             headerRows: 2,
             alignment: 'center',
-            widths: [65, 230, 80, 60],
+            widths: ['auto', 'auto', 'auto', 'auto'],
             body: cuerpo
           }
-        }
+        },
+        { text: ['English Language Centre - Gral. Belgrano'], color: 'gray', italics: true },
+
       ]
     };
     console.log("imprimiendo");
     pdfMake.createPdf(docDefinition).open();
   }
 
+  generarPDFMarks() {
 
+  }
 
   recargado() {
     this.setState({
@@ -271,11 +293,11 @@ generarPDF() {
     });
   }
 
-  editarAlumno(estudiante){
+  editarAlumno(estudiante) {
     this.setState({
       panelAlumnos: false,
       panelNuevoAlumno: true,
-      alumnoActual:estudiante
+      alumnoActual: estudiante
     });
   }
 
@@ -331,14 +353,17 @@ generarPDF() {
         </div>
 
         <div class="row">
-          <div class="col-xs-6 col-md-4">
+          <div class="col-xs-4 col-md-3">
             <a class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Back</a>
           </div>
-          <div class="col-xs-6 col-md-4">
+          <div class="col-xs-4 col-md-3">
             <a class="btn btn-fill btn-success" onClick={() => this.agregarEstudiante()}>Add Student</a>
           </div>
-          <div class="col-xs-6 col-md-4">
-            <a class="btn btn-fill btn-primary" onClick={() => this.generarPDF()}>Print List</a>
+          <div class="col-xs-4 col-md-3">
+            <a class="btn btn-fill btn-primary" onClick={() => this.generarPDFAssist()}>Print Listing For Assistance </a>
+          </div>
+          <div class="col-xs-4 col-md-3">
+            <a class="btn btn-fill btn-primary" onClick={() => this.generarPDFMarks()}>Print List With Notes </a>
           </div>
         </div>
       </div>

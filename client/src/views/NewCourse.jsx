@@ -18,12 +18,12 @@ class NewCourse
     this.state = {
       name: "",
       level: 1,
-      shift: "tomorrow",
+      shift: "Tomorrow",
       teacher: "",
       startTime: 8.00,
       formErrors: {},
       niveles: [1, 2, 3, 4, 5],
-      turnos: ["tomorrow", "afternoon", "night"],
+      turnos: ["Tomorrow", "Afternoon", "Night"],
       //la idea es dependiendo del turno que ponga desplegar una lista con posibles horarios de entrada al cuerso.
       horariosMan: [8.00, 8.30, 9.00, 9.30, 10.00, 10.30, 11.00, 11.30, 12.00, 12.30],
       horariosTar: [13.00, 13.30, 14.00, 14.30, 15.00, 16.30, 17.00, 17.30, 18.00, 18.30, 19.00, 19.30],
