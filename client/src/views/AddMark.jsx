@@ -12,7 +12,7 @@ class AddMark extends React.Component {
         this.state = {
             agregarNota: this.props.agregarNota,
             alumno: this.props.data,
-            mark: 0,
+            mark: 1,
             units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             unit: 1,
             unitUpdate: null
@@ -39,17 +39,20 @@ class AddMark extends React.Component {
     saveMark(alert) {
         let self = this;
         const newMark = {
-            idCourse: self.props.idCourse,
-            idStudent: self.props.data.id,
-            unit: self.state.unit,
-            calification: self.state.mark,
+            idCourse: this.props.idCourse,
+            idStudent: this.props.data.id,
+            unit: this.state.unit,
+            mark:  parseInt(self.state.mark),
             date: new Date()
         };
+
+
         axios
             .post("/mark/addMark", newMark)
             .then(function (res) {
                 console.log("A new mark has been added.");
                 alert.success("The mark has been loaded correctly.");
+                console.log(newMark);
             })
             .then(function (res) {
                 self.props.volver(self.alum());
@@ -69,15 +72,6 @@ class AddMark extends React.Component {
             idStudentCourse: self.state.unitUpdate.idStudentCourse,
             date_deleted: null
         };
-
-        // "id": 1,
-        // "calification": 10.0,
-        // "unit": 2,
-        // "date": "2020-01-23",
-        // "idStudentCourse": 1,
-        // "date_deleted": null
-
-        console.log(newMark)
 
         axios
             .put("/mark/update", newMark)
@@ -160,7 +154,7 @@ class AddMark extends React.Component {
                                             placeholder: "10",
                                             value: this.state.mark,
                                             onChange: event => this.setState({ mark: event.target.value }),
-                                            defaultValue: "0",
+                                            defaultValue: "1",
                                             disabled: false
                                         }
                                     ]}
@@ -205,56 +199,6 @@ class AddMark extends React.Component {
             </div>
         )
     }
-
-    // panelNota() {
-    //     return (
-    //         <div class="row" style={{ margin: "6px" }}>
-    //             <div class="col-xs-6">
-    //                 <FormInputs
-    //                     ncols={["col-md-12"]}
-    //                     properties={[
-    //                         {
-    //                             label: "Mark",
-    //                             type: "text",
-    //                             bsClass: "form-control",
-    //                             placeholder: "10",
-    //                             value: this.state.mark,
-    //                             onChange: event => this.setState({ mark: event.target.value }),
-    //                             defaultValue: "0",
-    //                             disabled: false
-    //                         }
-    //                     ]}
-    //                 />
-    //             </div>
-    //             <div class="col-xs-6">
-    //                 <label htmlFor="unit"> Unit: </label>
-    //                 <select
-    //                     label="unit"
-    //                     className="form-control"
-    //                     onChange={this.manejarSeleccionUnit.bind(this)}
-    //                     id="units"
-    //                 >
-    //                     {this.desplegar(this.state.unit)}
-    //                 </select>
-    //             </div>
-    //             <div>
-    //                 {this.botonStandard(
-    //                     "Confirm ",
-    //                     this.screen,
-    //                     "btn-primary btn",
-    //                     "fa-"
-    //                 )}
-    //                 {this.botonStandard(
-    //                     "Cancel ",
-    //                     this.screen,
-    //                     "btn-primary btn",
-    //                     "fa-"
-    //                 )}
-    //             </div>
-    //         </div>
-    //     )
-    // }
-
     // Botón -  parámetros Label , Acción, Clases Adicionales, Icono (GlypIcon)
     botonStandard(label, accion, clasesAdicionales, glyphIcon) {
         return (

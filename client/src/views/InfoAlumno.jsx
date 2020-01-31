@@ -19,8 +19,7 @@ class InfoAlumno extends React.Component {
 
     componentDidMount() {
         this.setState({
-            idCourse: this.props.idCourse,
-            //marks: this.props.marks
+            idCourse: this.props.idCourse
         })
         this.props.recargado(this.alum());
     }
@@ -29,8 +28,24 @@ class InfoAlumno extends React.Component {
     alum() {
         return this.props.data
     }
+
+    ordenarMarks(marks) {
+        marks.sort(function (a, b) {
+            if (a.unit > b.unit) {
+                return 1;
+            }
+            if (a.unit < b.unit) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return marks;
+    }
+
     notas() {
-        return this.props.marks.map(m => (
+        let marksOrd = this.ordenarMarks(this.props.marks);
+        return marksOrd.map(m => (
             <tr id="marks" key={m.id}>
                 <td>{m.unit}</td>
                 <td>{m.calification}</td>

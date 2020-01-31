@@ -59,6 +59,11 @@ class OneCourse extends Component {
     this.getDataCourse();
   }
 
+  ordernarStudent(students) {
+    var studentOrd = students.sort((a, b) => a.surname > b.surname ? 1 : -1).sort((a, b) => +a.name-b.name);
+  return studentOrd;
+                    }
+
 
   getDataCourse() {
     let self = this;
@@ -405,7 +410,7 @@ class OneCourse extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.students.map(alum => (
+                    {this.ordernarStudent(this.state.students).map(alum => (
                       <FilaAlumno alumno={alum}>{this.botones(alum)}</FilaAlumno>
                     ))}
                   </tbody>

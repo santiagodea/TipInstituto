@@ -32,6 +32,7 @@ public class MarkController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<MarkDTO> create(@RequestBody MarkDTO markDTO) {
+		System.out.println("nota a guardar");
 		markDTO = this.markService.create(markDTO);
 		return new ResponseEntity<MarkDTO>(markDTO, HttpStatus.CREATED);
 	}
