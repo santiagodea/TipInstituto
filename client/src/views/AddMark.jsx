@@ -14,25 +14,35 @@ class AddMark extends React.Component {
             alumno: this.props.data,
             mark: 0,
             units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            unit: 0
+            unit: 1,
+            unitUpdate: null
         }
     }
+
+    componentDidMount(){
+        this.setState({unitUpdate: this.alum().marks.find(m => m.unit == this.state.unit)})
+       }
 
     alum() {
         return this.props.data
     }
 
-    mostrarInfo(){
-
+    saveOUpdateMark(alert){
+        if(this.state.unitUpdate){
+            this.updateMark(alert)
+        }
+        else{
+            this.saveMark(alert)
+        }
     }
 
     saveMark(alert) {
         let self = this;
         const newMark = {
-            idCourse: this.props.idCourse,
-            idStudent: this.props.data.id,
-            unit: this.state.unit,
-            mark: this.state.mark,
+            idCourse: self.props.idCourse,
+            idStudent: self.props.data.id,
+            unit: self.state.unit,
+            calification: self.state.mark,
             date: new Date()
         };
         axios
@@ -49,8 +59,46 @@ class AddMark extends React.Component {
             });
     }
 
+    updateMark(alert) {
+        let self = this;
+        const newMark = {
+            id: self.state.unitUpdate.id,
+            calification: parseInt(self.state.mark),
+            unit: self.state.unitUpdate.unit,
+            date: new Date(),
+            idStudentCourse: self.state.unitUpdate.idStudentCourse,
+            date_deleted: null
+        };
+
+        // "id": 1,
+        // "calification": 10.0,
+        // "unit": 2,
+        // "date": "2020-01-23",
+        // "idStudentCourse": 1,
+        // "date_deleted": null
+
+        console.log(newMark)
+
+        axios
+            .put("/mark/update", newMark)
+            .then(function (res) {
+                console.log("A new mark has been added.");
+                alert.success("The note for unit " + self.state.unitUpdate.unit + " has been updated successfully.");
+            })
+            .then(function (res) {
+                self.props.volver(self.alum());
+            })
+            .catch(function (error) {
+                console.log("ERROR - " + error);
+            });
+    }
+
     manejarSeleccionUnit(event) {
-        this.setState({ unit: event.target.value })
+        this.setState({
+            unit: event.target.value,
+            unitUpdate: this.alum().marks.find(m => m.unit == event.target.value)
+        })
+
     }
     desplegar(collect) {
         return collect.map(c => (
@@ -128,7 +176,7 @@ class AddMark extends React.Component {
                                     {alert => (
                                         this.botonStandard(
                                             "Confirm ",
-                                            () => this.saveMark(alert),
+                                            () => this.saveOUpdateMark(alert),
                                             "btn-primary btn-xs",
                                             "fa-"
                                         ))

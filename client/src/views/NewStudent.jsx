@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import axios from "axios";
+import { Alert } from "react-alert";
 
 class NewStudent extends Component {
     constructor(props) {
@@ -64,16 +65,16 @@ class NewStudent extends Component {
             });
     }
 
-    guardarOActualizar() {
+    guardarOActualizar(alert) {
         if (this.state.id) {
-            this.actualizarStudent()
+            this.actualizarStudent(alert)
         }
         else {
-            this.guardarStudent()
+            this.guardarStudent(alert)
         }
     }
 
-    actualizarStudent() {
+    actualizarStudent(alert) {
         let self = this;
         const student = {
             id: self.state.id,
@@ -84,11 +85,11 @@ class NewStudent extends Component {
             tel_principal: self.state.tel_principal,
             tel_secundario: self.state.tel_secundario
         };
-        console.log(student)
         axios
             .put("/student/update", student)
             .then(function (res) {
                 console.log("The new student was updated successfully.");
+                alert.success("The new student was updated successfully.");
             })
             .then(function (res) {
                 self.props.recargado();
@@ -99,7 +100,7 @@ class NewStudent extends Component {
             });
     }
 
-    guardarStudent() {
+    guardarStudent(alert) {
         let self = this;
         const student = {
             dni: self.state.dni,
@@ -113,6 +114,7 @@ class NewStudent extends Component {
             .post("/student", student)
             .then(function (res) {
                 console.log("The new Student was successfully created.");
+                alert.success("The new Student was successfully created. ");
                 self.guardaridStudent(res.data.id);
             })
             .then(function (res) {
@@ -251,9 +253,11 @@ class NewStudent extends Component {
                     <div class="col-xs-6 col-md-4">
                         <button class="btn btn-fill btn-danger" onClick={() => this.cancelar()}>Cancel</button>
                     </div>
-                    <div class="col-xs-6 col-md-4">
-                        <button class="btn btn-fill btn-success" onClick={() => this.guardarOActualizar()}>Save Student</button>
-                    </div>
+                    <Alert>
+                        {alert => (
+                            <button class="btn btn-fill btn-success" onClick={() => this.guardarOActualizar(alert)}>Save Student</button>
+                        )}
+                    </Alert>
                 </div>
             </div>
         );

@@ -14,8 +14,15 @@ class AddPayment extends React.Component {
             alumno: this.props.data,
             amount: 0,
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            month: "January"
+            month: " "
         }
+    }
+
+
+    actMonths(){
+        var unitsAlum = this.alum().marks.map(m => m.unit);
+        var unitsFalt = this.state.units.filter(l => !unitsAlum.includes(l));
+        this.setState({units: unitsFalt});
     }
 
     alum() {

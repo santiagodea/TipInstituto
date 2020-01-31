@@ -30,11 +30,12 @@ PUT {{url}}/update HTTP/1.1
 content-type: application/json
 
 {
-    "id": 3,
-    "calification": 10,
-    "unit": "unidad XX",
-    "date": "2019-10-08",
-    "idStudentCourse": 1
+    "id": 1,
+  "calification": 10.0,
+  "unit": 2,
+  "date": "2020-01-23",
+  "idStudentCourse": 1,
+  "date_deleted": null
 }
 
 ### 

@@ -57,7 +57,6 @@ class OneCourse extends Component {
   componentDidMount() {
     this.llenarCurso(this.curso);
     this.getDataCourse();
-    console.log(this.state.students);
   }
 
 
@@ -70,7 +69,6 @@ class OneCourse extends Component {
         self.setState({
           students: listaDeS
         })
-        console.log(listaDeS)
         return Promise.resolve(listaDeS);
       })
       .catch(function (error) {
@@ -162,12 +160,82 @@ class OneCourse extends Component {
 
       ]
     };
-    console.log("imprimiendo");
     pdfMake.createPdf(docDefinition).open();
   }
 
   generarPDFMarks() {
+        var cuerpo = [];
+    var titulos = [
+      { text: 'Surname', bold: true, alignment: 'center' },
+      { text: 'Name', bold: true, alignment: 'center' },
+      { text: 'DNI', bold: true, alignment: 'center' },
+      { text: 'Assists', bold: true, alignment: 'center' },
+    ];
 
+    var lAgregados = this.state.students;
+    cuerpo.push(titulos);
+    lAgregados.map(agregado => {
+      var fila = [];
+      fila.push(agregado.surname);
+      fila.push(agregado.name);
+      fila.push(agregado.dni);
+      fila.push([
+        {
+          table: {
+            headerRows: 1,
+            alignment: 'center',
+            widths: [70, 70, 70, 70, 70],
+            body: [
+              ['_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _'],
+              ['_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _']
+            ],
+          },
+          layout: 'noBorders'
+        }
+      ])
+      return cuerpo.push(fila);
+    });
+
+    var docDefinition = {
+
+      pageSize: 'A4',
+      pageOrientation: 'landscape',
+      content: [
+        {
+          text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Duty: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
+          style: 'header',
+          bold: true,
+          alignment: 'center',
+          fontSize: 20
+        },
+        {
+          text: ' ',
+          style: 'header'
+        },
+        {
+          text: 'Marks ',
+          style: 'header',
+          bold: true,
+          alignment: 'center',
+          fontSize: 25
+        },
+        {
+          text: ' ',
+          style: 'header'
+        },
+        {
+          table: {
+            headerRows: 2,
+            alignment: 'center',
+            widths: ['auto', 'auto', 'auto', 'auto'],
+            body: cuerpo
+          }
+        },
+        { text: ['English Language Centre - Gral. Belgrano'], color: 'gray', italics: true },
+
+      ]
+    };
+    pdfMake.createPdf(docDefinition).open();
   }
 
   recargado() {
@@ -399,7 +467,6 @@ class OneCourse extends Component {
       agregarNota: false,
       tamanioPanel: "col-md-6"
     });
-    this.getMarks(estudiante)
   }
   agregarNota(estudiante) {
     this.getDataCourse();

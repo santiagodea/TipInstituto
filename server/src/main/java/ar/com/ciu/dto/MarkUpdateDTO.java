@@ -2,31 +2,29 @@ package ar.com.ciu.dto;
 
 import java.time.LocalDate;
 
-import ar.com.ciu.model.Mark;
-
-public class MarkDTO {
+public class MarkUpdateDTO {
 	private Long id;
 	private double calification;
 	private Integer unit;
 	private LocalDate date;
-	private Long idStudentCourse;
+	private Long idStudent;
+	private Long idCourse;
 	private LocalDate date_deleted;
 
 	// CONSTRUCTORES
+	public MarkUpdateDTO() {
+		super();
+	}
 
-	public MarkDTO(double cal, Integer unit, LocalDate date, Long idStudentCourse) {
+	public MarkUpdateDTO(double cal, Integer unit, LocalDate date, Long idStudent, Long idCourse) {
 		super();
 		this.calification = cal;
 		this.unit = unit;
 		this.date = date;
-		this.idStudentCourse = idStudentCourse;
+		this.idStudent = idStudent;
+		this.idCourse = idCourse;
 		this.date_deleted = null;
-	}
-
-	public MarkDTO(Mark mark) {
-		this(mark.getCalification(), mark.getUnit(), mark.getDate(), mark.getStudentCourse().getId());
-		this.id = mark.getId();
-		
+			
 	}
 
 	public Long getId() {
@@ -61,13 +59,6 @@ public class MarkDTO {
 		this.date = date;
 	}
 
-	public Long getIdStudentCourse() {
-		return idStudentCourse;
-	}
-
-	public void setIdStudentCourse(Long idStudentCourse) {
-		this.idStudentCourse = idStudentCourse;
-	}
 
 	public LocalDate getDate_deleted() {
 		return date_deleted;
@@ -80,6 +71,20 @@ public class MarkDTO {
 	public void setUnit(Integer unit) {
 		this.unit = unit;
 	}
-	
-	
+
+	public Long getIdStudent() {
+		return idStudent;
+	}
+
+	public void setIdStudent(Long idStudent) {
+		this.idStudent = idStudent;
+	}
+
+	public Long getIdCourse() {
+		return idCourse;
+	}
+
+	public void setIdCourse(Long idCourse) {
+		this.idCourse = idCourse;
+	}
 }
