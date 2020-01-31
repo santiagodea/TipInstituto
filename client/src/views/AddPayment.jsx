@@ -4,6 +4,10 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import axios from "axios";
 import { Alert } from "react-alert";
 
+import pdfMake from "pdfmake/build/pdfmake.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 class AddPayment extends React.Component {
     constructor(props) {
@@ -14,15 +18,75 @@ class AddPayment extends React.Component {
             alumno: this.props.data,
             amount: 0,
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            month: " "
+            month: "January"
         }
     }
 
+    generarPDFPago(newPayment) {
+        console.log(newPayment)
 
-    actMonths(){
+        var fecha = newPayment.date_payment.toString().slice(0, 25);
+        console.log(fecha);
+
+        var student = this.state.alumno;
+        var cuerpo = [];
+        var docDefinition = {
+            pageSize: 'A6',
+            pageOrientation: 'landscape',
+            content: [
+                {
+                    text: 'Proof of payment',
+                    style: 'header', bold: true, alignment: 'center',
+                },
+                {
+                    text: 'The student: ' + student.surname + ' ' + student.name,
+                    style: 'subheader', bold: true, alignment: 'center', fontSize: 20
+                },
+                { text: ' ', style: 'header' },
+                {
+                    text: 'I make the following payment:',
+                    style: 'header', bold: true, alignment: 'center',
+                },
+                { text: ' ', style: 'header' },
+
+                {
+                    text: 'Month: ' + newPayment.month + ', Amount: ' + newPayment.amount,
+                    style: 'subheader',
+                    bold: true,
+                    alignment: 'center',
+                    fontSize: 20
+                },
+                {
+                    text: ' ',
+                    style: 'header'
+                },
+                {
+                    text: 'Date: ' + fecha,
+                    style: 'subheader',
+                    bold: true,
+                    alignment: 'center',
+                    fontSize: 10
+                },
+                { text: ' ', style: 'header' },
+
+                {
+                    text: 'Signature of the person in charge:__________________________',
+                    style: 'header', bold: true, alignment: 'center',
+                },
+                { text: ' ', style: 'header' },
+                { text: ' ', style: 'header' },
+                { text: ' ', style: 'header' },
+
+                { text: ['English Language Centre - Gral. Belgrano'], color: 'gray', italics: true, alignment: 'center', },
+            ]
+        };
+        pdfMake.createPdf(docDefinition).open();
+    }
+
+    actMonths() {
         var unitsAlum = this.alum().marks.map(m => m.unit);
         var unitsFalt = this.state.units.filter(l => !unitsAlum.includes(l));
-        this.setState({units: unitsFalt});
+        this.setState({ units: unitsFalt });
     }
 
     alum() {
@@ -36,16 +100,17 @@ class AddPayment extends React.Component {
     savePayment(alert) {
         let self = this;
         const newPayment = {
-            month: this.state.month,
+            month: self.state.month,
             date_payment: new Date(),
-            amount: this.state.amount,
-            idStudent: this.props.data.id
+            amount: self.state.amount,
+            idStudent: self.props.data.id
         };
         axios
             .post("/payment", newPayment)
             .then(function (res) {
                 alert.success("The payment has been loaded correctly.");
                 console.log("A new payment has been added.");
+                self.generarPDFPago(newPayment);
             })
             .then(function (res) {
                 self.props.volver(self.alum());

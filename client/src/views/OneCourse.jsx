@@ -60,9 +60,9 @@ class OneCourse extends Component {
   }
 
   ordernarStudent(students) {
-    var studentOrd = students.sort((a, b) => a.surname > b.surname ? 1 : -1).sort((a, b) => +a.name-b.name);
-  return studentOrd;
-                    }
+    var studentOrd = students.sort((a, b) => a.surname > b.surname ? 1 : -1).sort((a, b) => +a.name - b.name);
+    return studentOrd;
+  }
 
 
   getDataCourse() {
@@ -113,7 +113,7 @@ class OneCourse extends Component {
       { text: 'Assists', bold: true, alignment: 'center' },
     ];
 
-    var lAgregados = this.state.students;
+    var lAgregados = this.ordernarStudent(this.state.students);
     cuerpo.push(titulos);
     lAgregados.map(agregado => {
       var fila = [];
@@ -144,19 +144,12 @@ class OneCourse extends Component {
       content: [
         {
           text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Duty: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
-          style: 'header',
-          bold: true,
-          alignment: 'center',
-          fontSize: 20
+          style: 'header', bold: true, alignment: 'center', fontSize: 20
         },
-        {
-          text: ' ',
-          style: 'header'
-        },
+        { text: ' ', style: 'header' },
         {
           table: {
-            headerRows: 2,
-            alignment: 'center',
+            headerRows: 2, alignment: 'center',
             widths: ['auto', 'auto', 'auto', 'auto'],
             body: cuerpo
           }
@@ -169,7 +162,7 @@ class OneCourse extends Component {
   }
 
   generarPDFMarks() {
-        var cuerpo = [];
+    var cuerpo = [];
     var titulos = [
       { text: 'Surname', bold: true, alignment: 'center' },
       { text: 'Name', bold: true, alignment: 'center' },
@@ -177,7 +170,7 @@ class OneCourse extends Component {
       { text: 'Assists', bold: true, alignment: 'center' },
     ];
 
-    var lAgregados = this.state.students;
+    var lAgregados = this.ordernarStudent(this.state.students);
     cuerpo.push(titulos);
     lAgregados.map(agregado => {
       var fila = [];
@@ -208,15 +201,9 @@ class OneCourse extends Component {
       content: [
         {
           text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Duty: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
-          style: 'header',
-          bold: true,
-          alignment: 'center',
-          fontSize: 20
+          style: 'header', bold: true, alignment: 'center', fontSize: 20
         },
-        {
-          text: ' ',
-          style: 'header'
-        },
+        { text: ' ', style: 'header' },
         {
           text: 'Marks ',
           style: 'header',
@@ -224,10 +211,7 @@ class OneCourse extends Component {
           alignment: 'center',
           fontSize: 25
         },
-        {
-          text: ' ',
-          style: 'header'
-        },
+        { text: ' ', style: 'header' },
         {
           table: {
             headerRows: 2,
