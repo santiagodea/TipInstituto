@@ -5,6 +5,7 @@ import InfoAlumno from "views/InfoAlumno";
 import NewStudent from "views/NewStudent";
 import AddMark from "views/AddMark";
 import axios from "axios";
+import { Alert } from "react-alert";
 
 import pdfMake from "pdfmake/build/pdfmake.js";
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
@@ -295,12 +296,16 @@ class OneCourse extends Component {
   }
 
   botonEliminar(estudiante) {
-    return this.botonStandard(
-      "Delete",
-      () => this.eliminarAlumno(estudiante),
-      "btn-danger btn-xs",
-      "fa-close"
-    );
+    return <Alert>
+      {alert => (
+        this.botonStandard(
+          "Delete",
+          () => this.eliminarAlumno(alert, estudiante),
+          "btn-danger btn-xs",
+          "fa-close"
+        )
+      )}
+    </Alert>
   }
   botonEditar(estudiante) {
     return this.botonStandard(
@@ -445,7 +450,7 @@ class OneCourse extends Component {
     this.props.onCancel();
   }
 
-  eliminarAlumno(estudiante) {
+  eliminarAlumno(alert, estudiante) {
 
     let self = this;
     const idCS = {
@@ -454,16 +459,17 @@ class OneCourse extends Component {
     }
     console.log(idCS)
     return axios
-        .put("/studentCourse/deleteById/", idCS )
-        .then(function (res) {
-            console.log("The student has been successfully removed from the course!");
-        })
-        .then(function (res) {
-          self.recargado();
-        })
-        .catch(function (error) {
-            console.log("ERROR - " + error);
-        });
+      .put("/studentCourse/deleteById/", idCS)
+      .then(function (res) {
+        console.log("The student has been successfully removed from the course!");
+        alert.success("The student " + estudiante.surname + " has been successfully removed from the course!");
+      })
+      .then(function (res) {
+        self.recargado();
+      })
+      .catch(function (error) {
+        console.log("ERROR - " + error);
+      });
   }
   mostrarDatosAlumno(estudiante) {
     this.getDataCourse();
