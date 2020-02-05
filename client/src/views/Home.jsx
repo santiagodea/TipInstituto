@@ -19,6 +19,7 @@ class Home extends Component {
         <Grid fluid>
           <Row>
             <Col lg={3} sm={6}>
+            <a href="/admin/courses">
               <StatsCard
                 bigIcon={<i className="pe-7s-cash text-danger" />}
                 statsText="Charge Payment"
@@ -26,8 +27,10 @@ class Home extends Component {
                 //statsIcon={<i className="fa fa-refresh" />}
                 //statsIconText="Updated now"
               />
+              </a>
             </Col>
             <Col lg={3} sm={6}>
+            <a href="/admin/students">
               <StatsCard
                 bigIcon={<i className="pe-7s-study text-success" />}
                 statsText="Enroll Student"
@@ -35,6 +38,7 @@ class Home extends Component {
                 // statsIcon={<i className="fa fa-calendar-o" />}
                 // statsIconText="Last day"
               />
+              </a>
             </Col>
           </Row>
           <Row>

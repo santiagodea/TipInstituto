@@ -1,5 +1,7 @@
 package ar.com.ciu.dto;
 
+import java.time.LocalDate;
+
 import ar.com.ciu.model.StudentCourse;
 
 public class StudentCourseDTO {
@@ -9,7 +11,7 @@ public class StudentCourseDTO {
 	private Integer year;
 	private Long idStudent;
 	private Long idCourse;
-	//private List<Long> idMarks;
+	private LocalDate date_deleted;
 
 	// CONSTRUCTORES
 	public StudentCourseDTO() {
@@ -21,7 +23,7 @@ public class StudentCourseDTO {
 		this.year = year;
 		this.idStudent = idStudent;
 		this.idCourse = idCourse;
-		//this.idMarks = new ArrayList<Long>();
+		this.date_deleted = null;
 	}
 
 	public StudentCourseDTO(StudentCourse sc) {
@@ -65,16 +67,12 @@ public class StudentCourseDTO {
 		this.idCourse = idCourse;
 	}
 
-//	public List<Long> getIdMarks() {
-//		return idMarks;
-//	}
-//
-//	public void setIdMarks(List<Long> idMarks) {
-//		this.idMarks = idMarks;
-//	}
-//	
-//	public void addIdMark(Long idMark) {
-//		this.idMarks.add(idMark);
-//	}
-	
+	public LocalDate getDate_deleted() {
+		return date_deleted;
+	}
+
+	public void setDate_deleted(LocalDate date_deleted) {
+		this.date_deleted = date_deleted;
+	}
+
 }

@@ -80,7 +80,7 @@ public class MarkServiceImpl implements MarkService {
 	@Override
 	@Transactional(rollbackFor =  Exception.class)
 	public MarkDTO deleteById(MarkDTO markDTO) {
-		Mark mark = this.markRepository.findById(markDTO.getId()).get();
+		Mark mark = this.markRepository.findById(markDTO.getId()).orElse(null);
 		mark.setCalification(markDTO.getCalification());
 		mark.setDate(markDTO.getDate());
 		mark.setUnit(markDTO.getUnit());

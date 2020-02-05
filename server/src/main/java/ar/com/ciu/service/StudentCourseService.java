@@ -3,6 +3,7 @@ package ar.com.ciu.service;
 import java.util.List;
 
 import ar.com.ciu.dto.CourseWithStudentsDTO;
+import ar.com.ciu.dto.ScidDTO;
 import ar.com.ciu.dto.StudentCourseDTO;
 import ar.com.ciu.model.StudentCourse;
 
@@ -21,5 +22,7 @@ public interface StudentCourseService {
 	public void delete(Long idStudentCourse);
 
 	public CourseWithStudentsDTO findByIdWithStudents(Long idCourse);
+
+	public ScidDTO deleteById(ScidDTO scidDTO);
 
 }

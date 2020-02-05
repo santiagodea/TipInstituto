@@ -1,5 +1,7 @@
 package ar.com.ciu.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +37,8 @@ public class StudentCourse {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "courseId")
 	private Course course;
+	
+	private LocalDate date_deleted;
 	
 //	@OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL, orphanRemoval = true)
 //	private List<Mark> marks;
@@ -106,17 +110,12 @@ public class StudentCourse {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+	public LocalDate getDate_deleted() {
+		return date_deleted;
+	}
+	public void setDate_deleted(LocalDate date_deleted) {
+		this.date_deleted = date_deleted;
+	}
 
-//	public List<Mark> getMarks() {
-//		return marks;
-//	}
-//
-//	public void setMarks(List<Mark> marks) {
-//		this.marks = marks;
-//	}
-//	
-//	public void addMark(Mark mark) {
-//		this.marks.add(mark);
-//	}
-	
+
 }

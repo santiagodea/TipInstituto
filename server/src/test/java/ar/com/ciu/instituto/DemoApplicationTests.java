@@ -50,10 +50,17 @@ public class DemoApplicationTests {
 		
 		LocalDate hoy = LocalDate.now();
 				
-		Course cursoA = new Course("principiante", "uno", "maniana", "jose",10);
-		Course cursoB = new Course("adulto", "uno", "maniana", "maria",11);
-		Course cursoC = new Course("ninios", "dos", "tarde", "luis",15);
-		Course cursoD = new Course("avanzado", "tres", "tarde", "ana",19);
+		Course cursoA = new Course("Pre-Kinder", "1", "Tomorrow", "jose",10);
+		Course cursoB = new Course("Kinder", "1", "Tomorrow", "maria",11);
+		Course cursoC = new Course("Kinder", "2", "Tomorrow", "luis",15);
+		Course cursoD = new Course("Kinds", "1", "Tomorrow", "ana",19);
+		Course cursoE = new Course("Kinds", "2", "Tomorrow", "ana",19);
+		Course cursoF = new Course("Kinds", "3", "Tomorrow", "ana",19);
+		Course cursoG = new Course("Kinds", "1", "Tomorrow", "ana",19);
+		Course cursoH = new Course("Teens", "1", "Afternoon", "ana",19);
+		Course cursoI = new Course("Teens", "2", "Afternoon", "ana",19);
+		Course cursoJ = new Course("Teens", "3", "Afternoon", "ana",19);
+		Course cursoK = new Course("Teens", "4", "Afternoon", "ana",19);
 		
 		cursoA = this.courseService.create(cursoA);
 		Assert.assertNotNull(cursoA.getId());
@@ -63,6 +70,20 @@ public class DemoApplicationTests {
 		Assert.assertNotNull(cursoC.getId());
 		cursoD = this.courseService.create(cursoD);
 		Assert.assertNotNull(cursoD.getId());
+		cursoE = this.courseService.create(cursoD);
+		Assert.assertNotNull(cursoE.getId());
+		cursoF = this.courseService.create(cursoE);
+		Assert.assertNotNull(cursoF.getId());
+		cursoG = this.courseService.create(cursoG);
+		Assert.assertNotNull(cursoG.getId());
+		cursoH = this.courseService.create(cursoH);
+		Assert.assertNotNull(cursoH.getId());
+		cursoI = this.courseService.create(cursoI);
+		Assert.assertNotNull(cursoI.getId());
+		cursoJ = this.courseService.create(cursoJ);
+		Assert.assertNotNull(cursoJ.getId());
+		cursoK = this.courseService.create(cursoK);
+		Assert.assertNotNull(cursoK.getId());
 		
 		Student estudiante1 = new Student(123, "java", "juan", "juan@java.com", "2243", "2241");
 		Student estudiante2 = new Student(1234, "phiton", "marta", "marta@phiton.com", "2243", "2241");
@@ -112,13 +133,13 @@ public class DemoApplicationTests {
 		marka2 = this.markService.create(marka2);
 		Assert.assertNotNull(marka2.getId());
 		
-		Payment pago1 = new Payment("Enero", 300.00, hoy, estudiante1);
-		Payment pago2 = new Payment("Febrero", 300.00, hoy, estudiante1);
-		Payment pago3 = new Payment("Marzo", 400.00, hoy, estudiante1);
-		Payment pago4 = new Payment("Abril", 400.00, hoy, estudiante1);
-		Payment pago11 = new Payment("Enero", 300.00, hoy, estudiante2);
-		Payment pago12 = new Payment("Febrero", 300.00, hoy, estudiante2);
-		Payment pago13 = new Payment("Marzo", 400.00, hoy, estudiante2);
+		Payment pago1 = new Payment("January", 300.00, hoy, estudiante1);
+		Payment pago2 = new Payment("February", 300.00, hoy, estudiante1);
+		Payment pago3 = new Payment("March", 400.00, hoy, estudiante1);
+		Payment pago4 = new Payment("April", 400.00, hoy, estudiante1);
+		Payment pago11 = new Payment("January", 300.00, hoy, estudiante2);
+		Payment pago12 = new Payment("February", 300.00, hoy, estudiante2);
+		Payment pago13 = new Payment("March", 400.00, hoy, estudiante2);
 		
 		pago1 = this.paymentService.create(pago1);
 		Assert.assertNotNull(pago1.getId());

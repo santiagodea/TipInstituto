@@ -447,6 +447,23 @@ class OneCourse extends Component {
 
   eliminarAlumno(estudiante) {
 
+    let self = this;
+    const idCS = {
+      idCourse: self.curso.id,
+      idStudent: estudiante.id
+    }
+    console.log(idCS)
+    return axios
+        .put("/studentCourse/deleteById/", idCS )
+        .then(function (res) {
+            console.log("The student has been successfully removed from the course!");
+        })
+        .then(function (res) {
+          self.recargado();
+        })
+        .catch(function (error) {
+            console.log("ERROR - " + error);
+        });
   }
   mostrarDatosAlumno(estudiante) {
     this.getDataCourse();

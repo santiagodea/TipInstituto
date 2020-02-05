@@ -34,3 +34,12 @@ content-type: application/json
     "idStudent": 3,
     "idCourse": 3
 }
+
+###
+PUT {{url}}/deleteById HTTP/1.1
+content-type: application/json
+
+{
+    "idCourse": 1,
+    "idStudent": 1
+}
