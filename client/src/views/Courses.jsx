@@ -36,6 +36,11 @@ class Courses extends Component {
     return legend;
   }
 
+  ordernarCourses(cursos) {
+    var cursosOrd = cursos.sort((a, b) => a.level < b.level ? 1 : -1).sort((a, b) => a.name > b.name ? 1 : -1);
+  return cursosOrd;
+                    }
+
   getDataCourse() {
     let self = this;
     return axios
@@ -85,7 +90,7 @@ class Courses extends Component {
         <div className="content">
           <Grid fluid>
             <Row>
-              {this.state.cursos.map(c => this.tarjetaCursos(c))}
+              {this.ordernarCourses(this.state.cursos).map(c => this.tarjetaCursos(c))}
             </Row>
           </Grid>
           <a className="btn btn-fill btn-warning btn-block"

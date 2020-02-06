@@ -7,13 +7,13 @@ import NewStudent from "views/NewStudent.jsx";
 
 
 const dashboardRoutes = [
-  {
-    path: "/home",
-    name: "Index",
-    icon: "pe-7s-note2",
-    component: Home,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/home",
+  //   name: "Index",
+  //   icon: "pe-7s-note2",
+  //   component: Home,
+  //   layout: "/admin"
+  // },
   {
     path: "/courses",
     name: "Courses",

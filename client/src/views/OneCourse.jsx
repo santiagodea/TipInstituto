@@ -144,7 +144,7 @@ class OneCourse extends Component {
       pageOrientation: 'landscape',
       content: [
         {
-          text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Duty: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
+          text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Shift : ' + this.state.turno + ', Teacher: ' + this.state.profesor,
           style: 'header', bold: true, alignment: 'center', fontSize: 20
         },
         { text: ' ', style: 'header' },
@@ -201,7 +201,7 @@ class OneCourse extends Component {
       pageOrientation: 'landscape',
       content: [
         {
-          text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Duty: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
+          text: 'Students of: ' + this.state.nombre + ', Level: ' + this.state.nivel + ', Shift: ' + this.state.turno + ', Teacher: ' + this.state.profesor,
           style: 'header', bold: true, alignment: 'center', fontSize: 20
         },
         { text: ' ', style: 'header' },
@@ -547,7 +547,7 @@ class OneCourse extends Component {
               </h1>{" "}
               <div class="row">
                 <div class="col-xs-6 col-md-4"><h4>Level: <b> {this.state.nivel}</b></h4></div>
-                <div class="col-xs-6 col-md-4"><h4>Duty: <b> {this.state.turno}</b></h4></div>
+                <div class="col-xs-6 col-md-4"><h4>Shift: <b> {this.state.turno}</b></h4></div>
                 <div class="col-xs-6 col-md-4"><h4>Teacher: <b> {this.state.profesor} </b></h4></div>
               </div>
 

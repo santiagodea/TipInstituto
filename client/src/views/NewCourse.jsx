@@ -91,11 +91,10 @@ class NewCourse
       </option>
     ));
   }
-
   desplegarHoras(string) {
     let collect = [];
-    if (string === "tomorrow") { collect = this.state.horariosMan }
-    else if (string === "afternoon") { collect = this.state.horariosTar }
+    if (string === "Tomorrow") { collect = this.state.horariosMan }
+    else if (string === "Afternoon") { collect = this.state.horariosTar }
     else { collect = this.state.horariosNoch }
     return collect.map(c => (
       <option key={c} value={c}>
@@ -142,9 +141,9 @@ class NewCourse
                       </select>
                     </div>
                     <div className="col-md-5">
-                      <label htmlFor="turno"> Duty: </label>
+                      <label htmlFor="turno"> Shift : </label>
                       <select
-                        label="turno"
+                        label="shift"
                         className="form-control"
                         onChange={this.manejarSeleccionTurnos.bind(this)}
                         id="turno"
