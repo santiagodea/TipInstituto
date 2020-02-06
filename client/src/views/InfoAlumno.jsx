@@ -2,6 +2,10 @@ import React from "react";
 import Card from "components/Card/Card.jsx";
 import { Table } from "react-bootstrap";
 import axios from "axios";
+import { Alert } from "react-alert";
+import JSAlert from "js-alert";
+
+
 const titulosMarks = ["Unit", "Calification", "Date", " "];
 const titulosPayments = ["Month", "Amount", "Date", " "];
 
@@ -50,7 +54,11 @@ class InfoAlumno extends React.Component {
                 <td>{m.unit}</td>
                 <td>{m.calification}</td>
                 <td>{m.date}</td>
-                <td >{<button type="button" class="btn btn-danger btn-xs" onClick={() => this.borrarM(m)}>Delete</button>}</td>
+                <td >{
+                    <Alert>
+                        {alert => (<button type="button" class="btn btn-danger btn-xs" onClick={() => this.confirmacionEliminarMark(alert, m)}>Delete</button>)}
+                    </Alert>
+                }</td>
             </tr>
         ))
     }
@@ -61,18 +69,46 @@ class InfoAlumno extends React.Component {
                 <td>{p.month}</td>
                 <td>{p.amount}</td>
                 <td>{p.date_payment}</td>
-                <td >{<button type="button" class="btn btn-danger btn-xs" onClick={() => this.borrarP(p)}>Delete</button>}</td>
+                <td >{
+                    <Alert>
+                        {alert => (<button type="button" class="btn btn-danger btn-xs" onClick={() => this.confirmacionEliminarPayment(alert, p)}>Delete</button>)}
+                    </Alert>
+                }</td>
             </tr>
         ))
     }
 
 
-    borrarM(mark) {
+    confirmacionEliminarMark(alert, mark) {
+        let self = this;
+        return (
+            JSAlert.confirm("Are you sure you want to remove this qualification?").then(function (result) {
+                if (!result)
+                    return;
+                self.borrarM(alert, mark)
+            })
+        )
+    }
+
+    confirmacionEliminarPayment(alert, payment) {
+        let self = this;
+        return (
+            JSAlert.confirm("Are you sure you want to remove this payment?").then(function (result) {
+                if (!result)
+                    return;
+                self.borrarP(alert, payment)
+            })
+        )
+    }
+
+
+    borrarM(alert, mark) {
         let self = this;
         axios
             .put("/mark/deleteById/" + mark.id)
             .then(function (res) {
-                console.log("The mark has been deleted successfully!");
+                console.log("The qualification has been deleted successfully!");
+                alert.success("The qualification has been deleted successfully!");
             })
             .then(function (res) {
                 self.props.recargado(self.props.data);
@@ -83,12 +119,13 @@ class InfoAlumno extends React.Component {
     }
 
 
-    borrarP(payment) {
+    borrarP(alert, payment) {
         let self = this;
         axios
             .put("/payment/deleteById/" + payment.id)
             .then(function (res) {
                 console.log("The payment has been deleted successfully!");
+                alert.success("The payment has been deleted successfully!");
             })
             .then(function (res) {
                 self.props.recargado(self.props.data);

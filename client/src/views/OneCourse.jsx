@@ -6,6 +6,7 @@ import NewStudent from "views/NewStudent";
 import AddMark from "views/AddMark";
 import axios from "axios";
 import { Alert } from "react-alert";
+import JSAlert from "js-alert";
 
 import pdfMake from "pdfmake/build/pdfmake.js";
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
@@ -300,7 +301,7 @@ class OneCourse extends Component {
       {alert => (
         this.botonStandard(
           "Delete",
-          () => this.eliminarAlumno(alert, estudiante),
+          () => this.confirmacionEliminarAlumno(alert,estudiante),
           "btn-danger btn-xs",
           "fa-close"
         )
@@ -450,6 +451,19 @@ class OneCourse extends Component {
     this.props.onCancel();
   }
 
+confirmacionEliminarAlumno(alert,estudiante){
+  let self = this;
+  return(
+    JSAlert.confirm("Are you sure you want to delete he student " + estudiante.surname + " "+estudiante.name +  "?").then(function(result) {
+      if (!result)
+      return;
+      self.eliminarAlumno(alert, estudiante)
+  })
+  )
+}
+
+
+
   eliminarAlumno(alert, estudiante) {
 
     let self = this;
@@ -462,7 +476,7 @@ class OneCourse extends Component {
       .put("/studentCourse/deleteById/", idCS)
       .then(function (res) {
         console.log("The student has been successfully removed from the course!");
-        alert.success("The student " + estudiante.surname + " has been successfully removed from the course!");
+        alert.success("The student " + estudiante.surname + " "+estudiante.name + " has been successfully deleted from the course!");
       })
       .then(function (res) {
         self.recargado();
