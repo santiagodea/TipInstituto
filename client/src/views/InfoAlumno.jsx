@@ -6,7 +6,7 @@ import { Alert } from "react-alert";
 import JSAlert from "js-alert";
 
 
-const titulosMarks = ["Unit", "Calification", "Date", " "];
+const titulosMarks = ["Unit", "Mark", "Date", " "];
 const titulosPayments = ["Month", "Amount", "Date", " "];
 
 
@@ -82,7 +82,7 @@ class InfoAlumno extends React.Component {
     confirmacionEliminarMark(alert, mark) {
         let self = this;
         return (
-            JSAlert.confirm("Are you sure you want to remove this qualification?").then(function (result) {
+            JSAlert.confirm("Are you sure you want to remove this Mark?").then(function (result) {
                 if (!result)
                     return;
                 self.borrarM(alert, mark)
@@ -107,8 +107,8 @@ class InfoAlumno extends React.Component {
         axios
             .put("/mark/deleteById/" + mark.id)
             .then(function (res) {
-                console.log("The qualification has been deleted successfully!");
-                alert.success("The qualification has been deleted successfully!");
+                console.log("The Mark has been deleted successfully!");
+                alert.success("The Mark has been deleted successfully!");
             })
             .then(function (res) {
                 self.props.recargado(self.props.data);

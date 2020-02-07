@@ -25,7 +25,7 @@ class AddPayment extends React.Component {
     generarPDFPago(newPayment) {
         console.log(newPayment)
 
-        var fecha = newPayment.date_payment.toString().slice(0, 25);
+        var fecha = newPayment.date_payment.toString().slice(0, 15);
         console.log(fecha);
 
         var student = this.state.alumno;
@@ -34,8 +34,11 @@ class AddPayment extends React.Component {
             pageSize: 'A6',
             pageOrientation: 'landscape',
             content: [
+
+                { text: ['English Language Centre - Gral. Belgrano'], color: 'gray', italics: true, alignment: 'center',fontSize: 15 },
+                { text: ' ', style: 'header' },
                 {
-                    text: 'Proof of payment',
+                    text: 'I received:',
                     style: 'header', bold: true, alignment: 'center',
                 },
                 {
@@ -43,41 +46,28 @@ class AddPayment extends React.Component {
                     style: 'subheader', bold: true, alignment: 'center', fontSize: 20
                 },
                 { text: ' ', style: 'header' },
-                {
-                    text: 'I make the following payment:',
-                    style: 'header', bold: true, alignment: 'center',
-                },
-                { text: ' ', style: 'header' },
 
                 {
-                    text: 'Month: ' + newPayment.month + ', Amount: ' + newPayment.amount,
+                    text: 'Amount: '  + newPayment.amount,
                     style: 'subheader',
                     bold: true,
                     alignment: 'center',
                     fontSize: 20
                 },
+                { text: ' ', style: 'header' },
+                { text: ' ', style: 'header' },
                 {
-                    text: ' ',
-                    style: 'header'
+                    text: 'for: ' + newPayment.month,
+                    style: 'subheader', bold: true, alignment: 'center', fontSize: 20
                 },
+                { text: ' ', style: 'header' },
                 {
                     text: 'Date: ' + fecha,
                     style: 'subheader',
                     bold: true,
                     alignment: 'center',
                     fontSize: 10
-                },
-                { text: ' ', style: 'header' },
-
-                {
-                    text: 'Signature of the person in charge:__________________________',
-                    style: 'header', bold: true, alignment: 'center',
-                },
-                { text: ' ', style: 'header' },
-                { text: ' ', style: 'header' },
-                { text: ' ', style: 'header' },
-
-                { text: ['English Language Centre - Gral. Belgrano'], color: 'gray', italics: true, alignment: 'center', },
+                }
             ]
         };
         pdfMake.createPdf(docDefinition).open();

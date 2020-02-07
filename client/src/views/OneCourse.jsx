@@ -105,6 +105,20 @@ class OneCourse extends Component {
       });
   }
 
+  ordenarMarks(marks) {
+    marks.sort(function (a, b) {
+        if (a.unit > b.unit) {
+            return 1;
+        }
+        if (a.unit < b.unit) {
+            return -1;
+        }
+        return 0;
+    });
+
+    return marks;
+}
+
 
   generarPDFAssist() {
     var cuerpo = [];
@@ -164,35 +178,47 @@ class OneCourse extends Component {
   }
 
   generarPDFMarks() {
+    var self = this;
     var cuerpo = [];
     var titulos = [
       { text: 'Surname', bold: true, alignment: 'center' },
       { text: 'Name', bold: true, alignment: 'center' },
       { text: 'DNI', bold: true, alignment: 'center' },
-      { text: 'Assists', bold: true, alignment: 'center' },
+      { text: 'Unit 1', bold: true, alignment: 'center' },
+      { text: 'Unit 2', bold: true, alignment: 'center' },
+      { text: 'Unit 3', bold: true, alignment: 'center' },
+      { text: 'Unit 4', bold: true, alignment: 'center' },
+      { text: 'Unit 5', bold: true, alignment: 'center' },
+      { text: 'Unit 6', bold: true, alignment: 'center' },
+      { text: 'Unit 7', bold: true, alignment: 'center' },
+      { text: 'Unit 8', bold: true, alignment: 'center' },
+      { text: 'Unit 9', bold: true, alignment: 'center' },
+      { text: 'Unit 10', bold: true, alignment: 'center' },
     ];
 
-    var lAgregados = this.ordernarStudent(this.state.students);
+    var lAgregados = self.ordernarStudent(this.state.students);
+    console.log(lAgregados)
     cuerpo.push(titulos);
     lAgregados.map(agregado => {
       var fila = [];
       fila.push(agregado.surname);
       fila.push(agregado.name);
       fila.push(agregado.dni);
-      fila.push([
-        {
-          table: {
-            headerRows: 1,
-            alignment: 'center',
-            widths: [70, 70, 70, 70, 70],
-            body: [
-              ['_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _'],
-              ['_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _']
-            ],
-          },
-          layout: 'noBorders'
+
+      let notas = this.ordenarMarks(agregado.marks);
+
+
+      for (let index = 0; index < 10; index++) {
+        var markAct = notas.find(n => n.unit == (index + 1) )
+        console.log(markAct)
+        if (markAct){
+          fila.push(markAct.calification)
         }
-      ])
+        else{
+          fila.push(" - ")
+        }
+      }
+
       return cuerpo.push(fila);
     });
 
@@ -218,7 +244,7 @@ class OneCourse extends Component {
           table: {
             headerRows: 2,
             alignment: 'center',
-            widths: ['auto', 'auto', 'auto', 'auto'],
+            widths: ['auto', 'auto', 'auto', 'auto','auto', 'auto','auto','auto', 'auto','auto','auto', 'auto','auto'],
             body: cuerpo
           }
         },
@@ -465,13 +491,11 @@ confirmacionEliminarAlumno(alert,estudiante){
 
 
   eliminarAlumno(alert, estudiante) {
-
     let self = this;
     const idCS = {
       idCourse: self.curso.id,
       idStudent: estudiante.id
     }
-    console.log(idCS)
     return axios
       .put("/studentCourse/deleteById/", idCS)
       .then(function (res) {
@@ -486,7 +510,7 @@ confirmacionEliminarAlumno(alert,estudiante){
       });
   }
   mostrarDatosAlumno(estudiante) {
-    this.getDataCourse();
+    this.recargadoMarks(estudiante);
     this.setState({
       mostrarPanelDeAlumno: true,
       alumnoActual: estudiante,
