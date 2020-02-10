@@ -1,3 +1,4 @@
+rama HEROKU
 _Como yo no conozco la arquitectura que propone Swing (que parece incluir controllers, DTO, servicios y repositorios), te pido que hagas una lista de tareas necesarias para tener andando la persistencia de cursos hasta la API. O sea, qué clases tenés que tocar o agregar, y de qué se encarga cada una. Así puedo tener una idea del avance, y de qué mirar._
 
 ## Spring utiliza un modelo de capas, las cuales serian las siguiente:
@@ -32,11 +33,11 @@ _Como yo no conozco la arquitectura que propone Swing (que parece incluir contro
 * creado e implentado Controllers ✔
 
 * CREADO DE TEST, pegandole directamente a los service para student (hice algunas consultas  rest)✔
-* CREADO DE TEST, pegandole directamente a los service para mark ❌
-* CREADO DE TEST, pegandole directamente a los service para payment ❌
-* CREADO DE TEST, pegandole directamente a los service para studentCourse ❌
+* CREADO DE TEST, pegandole directamente a los service para mark ✔
+* CREADO DE TEST, pegandole directamente a los service para payment ✔
+* CREADO DE TEST, pegandole directamente a los service para studentCourse ✔
 
-* Agregado en el frontend de las clases necesarias para poder pegarle a la API para STUDENT❌
-* Agregado en el frontend de las clases necesarias para poder pegarle a la API para MARK❌
-* Agregado en el frontend de las clases necesarias para poder pegarle a la API para PAYMENT❌
-* Agregado en el frontend de las clases necesarias para poder pegarle a la API para SC❌
+* Agregado en el frontend de las clases necesarias para poder pegarle a la API para STUDENT✔
+* Agregado en el frontend de las clases necesarias para poder pegarle a la API para MARK✔
+* Agregado en el frontend de las clases necesarias para poder pegarle a la API para PAYMENT✔
+* Agregado en el frontend de las clases necesarias para poder pegarle a la API para SC✔
